@@ -8,6 +8,6 @@ namespace Restaurante.DB
 {
     public  class Conexion
     {
-//holaohlajdjjd
+        
     }
 }
