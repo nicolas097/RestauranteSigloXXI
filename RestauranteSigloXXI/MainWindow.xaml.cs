@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Restaurante.DB;
+using RestauranteInterfaz;
 
 namespace RestauranteSigloXXI
 {
@@ -22,10 +23,13 @@ namespace RestauranteSigloXXI
     public partial class MainWindow : Window
     {
         private readonly Conexion con = new();
+
+        public int modo;
        
-        public MainWindow()
+        public MainWindow(int Modo)
         {
             InitializeComponent();
+            modo = Modo;
         }
 
         private void btnConexion_Click(object sender, RoutedEventArgs e)
@@ -38,6 +42,14 @@ namespace RestauranteSigloXXI
             else
             {
                 MessageBox.Show("No se ha podido conectar con la base de datos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (modo == 3)
+            {
+                ContenedorPrincipal.Navigate(new LoginGeneral());
             }
         }
     }
