@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls;
+﻿
 using RestauranteSigloXXI;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace RestauranteInterfaz
     /// <summary>
     /// Lógica de interacción para RestaLauncher.xaml
     /// </summary>
-    public partial class RestaLauncher : MetroWindow
+    public partial class RestaLauncher : Window
     {
         public RestaLauncher()
         {
@@ -31,6 +31,22 @@ namespace RestauranteInterfaz
             MainWindow mv = new MainWindow(3);
             mv.Show();
             Close();
+        }
+
+        private void btnSalir_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btnMinimizar_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void spBarra_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
         }
     }
 }

@@ -18,11 +18,18 @@ namespace RestauranteInterfaz
     /// <summary>
     /// Lógica de interacción para LoginGeneral.xaml
     /// </summary>
+    /// 
+
     public partial class LoginGeneral : Page
     {
+            
         public LoginGeneral()
         {
+            
             InitializeComponent();
         }
+
+
+      
     }
 }
