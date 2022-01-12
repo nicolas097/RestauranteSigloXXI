@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Restaurante.DB\Restaurante.DB.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
