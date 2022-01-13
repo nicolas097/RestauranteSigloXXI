@@ -113,8 +113,6 @@ namespace Restaurante.DB
             {
                 OracleCommand.CommandText = sqlcommand;
                 OracleCommand.ExecuteNonQuery();
-
-
             }
 
 

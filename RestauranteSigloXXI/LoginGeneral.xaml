@@ -14,9 +14,10 @@
     <Grid Background="White">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
             <StackPanel>
+                <TextBox x:Name="txtUsuario">
+                    
+                </TextBox>
 
-                <TextBox x:Name="txtUsuario" Width="200" />
-                
             </StackPanel>
         </StackPanel>
     </Grid>
