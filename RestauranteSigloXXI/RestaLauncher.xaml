@@ -13,7 +13,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="RestaLauncher" Height="275" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="RestaLauncher" Height="275" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -26,14 +26,34 @@
             <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnMinimizar" Content="{materialDesign:PackIcon Kind=MinusCircle ,Size=20}" Style="{StaticResource MaterialDesignIconButton}" Width="40" HorizontalAlignment="Right" Height="35" Click="btnMinimizar_Click"/>
            
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button  x:Name="btnModoCliente" Content="Modo Cliente" Height="50"  Margin="20"/>
-            <Button  x:Name="btnModoCocina" Content="Modo Cocina" Height="50"  Margin="20"/>
-            <Button  x:Name="btnModoTotem" Content="Modo Tótem" Height="50"  Margin="20"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button  x:Name="btnModoCliente"  Height="50"  Margin="20">
+               
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Modo Cliente" Foreground="Black"/>
+                    <Label Content="{materialDesign:PackIcon Kind=AccountGroup}"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnModoCocina" Height="50" Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Modo Cocina" Foreground="Black"/>
+                    <Label Content="{materialDesign:PackIcon Kind=Cook}"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnModoTotem"  Height="50"  Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Modo tótem" Foreground="Black"/>
+                    <Label Content="{materialDesign:PackIcon Kind=TableChair}"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Row="2" >
-            <Button  x:Name="btnModoOtros" Content="Modo Finanzas-Administrador-Bodega" Height="50" Margin="20" Click="btnModoOtros_Click"/>
-
+            <Button  x:Name="btnModoOtros"  Height="50" Margin="20" Click="btnModoOtros_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Modo Administrador-Cocina-Finanzas" Foreground="Black"/>
+                    <Label Content="{materialDesign:PackIcon Kind=Restaurant}"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
