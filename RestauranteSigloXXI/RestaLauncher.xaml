@@ -31,27 +31,27 @@
                
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Modo Cliente" Foreground="Black"/>
-                    <Label Content="{materialDesign:PackIcon Kind=AccountGroup}"/>
+                    <Label Content="{materialDesign:PackIcon Kind=AccountGroup}" Foreground="Black"/>
                 </StackPanel>
             </Button>
             <Button x:Name="btnModoCocina" Height="50" Margin="20">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Modo Cocina" Foreground="Black"/>
-                    <Label Content="{materialDesign:PackIcon Kind=Cook}"/>
+                    <Label Content="{materialDesign:PackIcon Kind=Cook}" Foreground="Black"/>
                 </StackPanel>
             </Button>
             <Button x:Name="btnModoTotem"  Height="50"  Margin="20">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Modo tótem" Foreground="Black"/>
-                    <Label Content="{materialDesign:PackIcon Kind=TableChair}"/>
+                    <Label Content="{materialDesign:PackIcon Kind=TableChair}" Foreground="Black"/>
                 </StackPanel>
             </Button>
         </StackPanel>
-        <StackPanel Grid.Row="2" >
-            <Button  x:Name="btnModoOtros"  Height="50" Margin="20" Click="btnModoOtros_Click">
+        <StackPanel Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button  x:Name="btnModoOtros"  Height="50"  Click="btnModoOtros_Click" Width="515">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Modo Administrador-Cocina-Finanzas" Foreground="Black"/>
-                    <Label Content="{materialDesign:PackIcon Kind=Restaurant}"/>
+                    <Label Content="Modo Administrador-Bodega-Finanzas" Foreground="Black"/>
+                    <Label Content="{materialDesign:PackIcon Kind=Restaurant}"  Foreground="Black"/>
                 </StackPanel>
             </Button>
         </StackPanel>

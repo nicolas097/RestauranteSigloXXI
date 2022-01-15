@@ -29,7 +29,7 @@
                 <Label  Content="Bienvenido" HorizontalAlignment="Center" FontSize="30" Margin="0,20,0,0"/>
                 <TextBox x:Name="txtUsuaio" Width="205" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" materialDesign:HintAssist.Hint="Usuario" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="25"/>
                 <PasswordBox x:Name="txtPassword" Width="205" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="15" materialDesign:HintAssist.Hint="Contraseña" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="25"/>
-                <Button x:Name="btnIngresar" Width="150" FontSize="15" Content="Ingresar" Margin="20"/>
+                <Button x:Name="btnIngresar" Width="150" FontSize="15" Content="Ingresar" Margin="20" Click="btnIngresar_Click"/>
             </StackPanel>
         </Border>
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">

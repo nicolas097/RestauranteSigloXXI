@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Restaurante.DB;
 using RestauranteInterfaz;
+using Restaurant.Negocio;
 
 namespace RestauranteInterfaz
 {
@@ -25,6 +26,8 @@ namespace RestauranteInterfaz
     public partial class LoginGeneral : Page
     {
         private readonly Conexion con = new();
+
+        private MetodoNegocio mn = new MetodoNegocio(); 
         public LoginGeneral()
         {
             
@@ -41,6 +44,49 @@ namespace RestauranteInterfaz
             else
             {
                 MessageBox.Show("No se ha podido conectar con la base de datos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnIngresar_Click(object sender, RoutedEventArgs e)
+        {
+            ingresar(txtUsuaio.Text, txtPassword.Password);
+            
+        }
+
+
+
+        public void ingresar(string user, string pass)
+        {
+            if (!(string.IsNullOrEmpty(user) && string.IsNullOrEmpty(pass)))
+            {
+                switch(mn.Login(user, pass))
+                {
+                    case 0:
+                        MessageBox.Show("La cuenta no existe, Ingrse datos diferentes..", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case 2:
+                        MessageBox.Show("La contraseña es incorrecta..", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case 6:
+                        Administrador mainAdminPage = new();
+                        NavigationService.Navigate(mainAdminPage);
+                       
+                        break;
+                    case 7:
+                        Finanzas mainFinanPage = new();
+                        NavigationService.Navigate(mainFinanPage);
+                        break;
+                    case 8:
+                        Bodega mainPageBodega = new();
+                        NavigationService.Navigate(mainPageBodega);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese Usuario y contraseña en los campos de textos", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
