@@ -51,6 +51,18 @@ namespace RestauranteSigloXXI
             {
                 ContenedorPrincipal.Navigate(new LoginGeneral());
             }
+            else if (modo == 1)
+            {
+                ContenedorPrincipal.Navigate(new Cocina());
+            }
+            else if (modo == 0)
+            {
+                ContenedorPrincipal.Navigate(new Cliente());
+            }
+            else if (modo == 2)
+            {
+                ContenedorPrincipal.Navigate(new Totem());
+            }
         }
     }
 }

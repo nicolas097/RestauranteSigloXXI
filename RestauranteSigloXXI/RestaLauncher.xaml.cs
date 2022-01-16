@@ -48,5 +48,28 @@ namespace RestauranteInterfaz
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
         }
+
+        private void btnModoCocina_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mvc = new MainWindow(1);
+            mvc.Show();
+            Close();
+            
+            
+        }
+
+        private void btnModoCliente_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mv = new MainWindow(0);
+            mv.Show();
+            Close();
+        }
+
+        private void btnModoTotem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mv = new MainWindow(2);
+            mv.Show();
+            Close();
+        }
     }
 }

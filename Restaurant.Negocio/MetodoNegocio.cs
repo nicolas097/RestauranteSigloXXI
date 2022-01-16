@@ -65,11 +65,8 @@ namespace Restaurant.Negocio
                     {
                         TipoLogin = 2;
                     }
-                }
-              
+                }   
             }
-
-
             return TipoLogin;
         }
 

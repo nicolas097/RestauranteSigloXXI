@@ -27,20 +27,20 @@
            
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button  x:Name="btnModoCliente"  Height="50"  Margin="20">
+            <Button  x:Name="btnModoCliente"  Height="50"  Margin="20" Click="btnModoCliente_Click">
                
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Modo Cliente" Foreground="Black"/>
                     <Label Content="{materialDesign:PackIcon Kind=AccountGroup}" Foreground="Black"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="btnModoCocina" Height="50" Margin="20">
+            <Button x:Name="btnModoCocina" Height="50" Margin="20" Click="btnModoCocina_Click">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Modo Cocina" Foreground="Black"/>
                     <Label Content="{materialDesign:PackIcon Kind=Cook}" Foreground="Black"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="btnModoTotem"  Height="50"  Margin="20">
+            <Button x:Name="btnModoTotem"  Height="50"  Margin="20" Click="btnModoTotem_Click">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Modo tótem" Foreground="Black"/>
                     <Label Content="{materialDesign:PackIcon Kind=TableChair}" Foreground="Black"/>
