@@ -42,17 +42,17 @@ namespace RestauranteInterfaz
 
         private void tabMantInvetario_Loaded(object sender, RoutedEventArgs e)
         {
-
+            InventarioFrame.NavigationService.Navigate(new MantenedorInventario());
         }
 
         private void tabMantMesas_Loaded(object sender, RoutedEventArgs e)
         {
-
+            MesasFrame.NavigationService.Navigate(new MesasAdmin());
         }
 
         private void tabMantCliente_Loaded(object sender, RoutedEventArgs e)
         {
-
+            ClienteFrame.NavigationService.Navigate(new AdmCliente());
         }
 
         private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
