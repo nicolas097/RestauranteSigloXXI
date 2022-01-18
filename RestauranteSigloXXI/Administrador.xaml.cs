@@ -57,7 +57,7 @@ namespace RestauranteInterfaz
 
         private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("¿ Desea cerrar sesión ?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("¿Desea cerrar sesión?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 LoginGeneral lg = new LoginGeneral();
                 NavigationService.Navigate(lg);

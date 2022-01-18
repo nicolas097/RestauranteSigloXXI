@@ -89,5 +89,10 @@ namespace RestauranteInterfaz
                 MessageBox.Show("Ingrese Usuario y contraseña en los campos de textos", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+        private void txtUsuaio_KeyDown(object sender, KeyEventArgs e)
+        {
+          
+        }
     }
 }
