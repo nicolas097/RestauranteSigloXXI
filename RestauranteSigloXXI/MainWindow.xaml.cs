@@ -47,21 +47,40 @@ namespace RestauranteSigloXXI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (modo == 3)
+            //if (modo == 3)
+            //{
+            //    ContenedorPrincipal.Navigate(new LoginGeneral());
+            //}
+            //else if (modo == 1)
+            //{
+            //    ContenedorPrincipal.Navigate(new Cocina());
+            //}
+            //else if (modo == 0)
+            //{
+            //    ContenedorPrincipal.Navigate(new Cliente());
+            //}
+            //else if (modo == 2)
+            //{
+            //    ContenedorPrincipal.Navigate(new Totem());
+            //}
+
+
+            switch (modo)
             {
-                ContenedorPrincipal.Navigate(new LoginGeneral());
-            }
-            else if (modo == 1)
-            {
-                ContenedorPrincipal.Navigate(new Cocina());
-            }
-            else if (modo == 0)
-            {
-                ContenedorPrincipal.Navigate(new Cliente());
-            }
-            else if (modo == 2)
-            {
-                ContenedorPrincipal.Navigate(new Totem());
+                case 0:
+                    ContenedorPrincipal.Navigate(new Cliente());
+                    break;
+                case 1:
+                    ContenedorPrincipal.Navigate(new Cocina());
+                    break;
+                case 2:
+                    ContenedorPrincipal.Navigate(new Totem());
+                    break;
+                case 3:
+                    ContenedorPrincipal.Navigate(new LoginGeneral());
+                    break;
+                default:
+                    break;
             }
         }
     }
