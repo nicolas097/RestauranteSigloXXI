@@ -10,6 +10,17 @@
       Title="MantenedorInventario" >
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
-        <Label Content="Inventario y que pasa " HorizontalAlignment="Center" FontSize="40"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="sp_barra" VerticalAlignment="Top">
+            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnAddInsumo" Content="{materialDesign:PackIcon Kind=PlusCircle,Size=30}" Style="{StaticResource MaterialDesignIconButton }" Height="50" Margin="20"/>
+            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnUpdateInsumo" Content="{materialDesign:PackIcon Kind=PencilCircle,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
+            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnDeleteInsumo" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
+            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnRefresh" Content="{materialDesign:PackIcon Kind=Refresh,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
+            <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+            <ComboBox x:Name="cbFilOrdenar" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Ordenar" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+        </StackPanel>
     </Grid>
 </Page>
