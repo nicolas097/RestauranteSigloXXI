@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +71,27 @@ namespace Restaurant.Negocio
             return TipoLogin;
         }
 
+
+
+        public List<Insumo> GetInsumoList()
+        {
+            List<Insumo> listaInsumo = new List<Insumo>();
+
+            string sqlCommand = $"SELECT I.IDINSUMO AS IDINSUMO, I.IDCATEGORIA AS IDCATEGORIA, CAT.DESCRIPCION AS NOMBRECATEGORIA, I.NOMBREINSUMO AS NOMBREINSUMO, I.PRECIOUNITARIO AS PRECIOUNITARIO, I.EXISTENCIA AS EXISTENCIA FROM INSUMO I INNER JOIN categoriainsumo CAT ON cat.idcategoria = i.idcategoria ORDER BY 1 ASC ";
+
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Insumo insumo = new Insumo();
+                insumo.IdInsumo = Convert.ToInt32(dr["IDINSUMO"]);
+                insumo.IdCategoria = Convert.ToInt32(dr["IDCATEGORIA"]);
+                insumo.precio = Convert.ToInt32(dr["PRECIOUNITARIO"]);
+                insumo.Existencia = Convert.ToInt32(dr["EXISTENCIA"]);
+                listaInsumo.Add(insumo);
+            }
+
+            return listaInsumo;
+            
+        }
         
     }
 }

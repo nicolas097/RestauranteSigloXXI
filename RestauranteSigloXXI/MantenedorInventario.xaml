@@ -22,5 +22,18 @@
             <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
             <ComboBox x:Name="cbFilOrdenar" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Ordenar" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
         </StackPanel>
+        <StackPanel Grid.Row="1">
+            <ListView x:Name="lvInventario" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" Loaded="lvInventario_Loaded" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" Width="125" DisplayMemberBinding="{Binding IdInsumo}"/>
+                        <GridViewColumn Header="Categoría" DisplayMemberBinding="{Binding descripCategoria}"/>
+                        <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding NombreInsumo}"/>
+                        <GridViewColumn Header="Precio" DisplayMemberBinding="{Binding precio}"/>
+                        <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Existencia}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Page>

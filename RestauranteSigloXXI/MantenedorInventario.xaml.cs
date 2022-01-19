@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,16 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class MantenedorInventario : Page
     {
+        private MetodoNegocio MN = new();
         public MantenedorInventario()
         {
             InitializeComponent();
+        }
+
+        private void lvInventario_Loaded(object sender, RoutedEventArgs e)
+        {
+             lvInventario.ItemsSource =  MN.GetInsumoList();
+           
         }
     }
 }
