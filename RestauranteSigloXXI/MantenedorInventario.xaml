@@ -15,10 +15,40 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="sp_barra" VerticalAlignment="Top">
-            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnAddInsumo" Content="{materialDesign:PackIcon Kind=PlusCircle,Size=30}" Style="{StaticResource MaterialDesignIconButton }" Height="50" Margin="20"/>
-            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnUpdateInsumo" Content="{materialDesign:PackIcon Kind=PencilCircle,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
-            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnDeleteInsumo" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
-            <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnRefresh" Content="{materialDesign:PackIcon Kind=Refresh,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
+            <materialDesign:PopupBox StaysOpen="True">
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="AddCircle" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20"/>
+                </materialDesign:PopupBox.ToggleContent>
+                <Grid Background="{StaticResource MaterialDesignDarkBackground}" Height="400" Width="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox x:Name="txtNombreInsumo" Width="250" Margin="10" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nombre" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                        <ComboBox x:Name="cbCategoria" Width="250" Margin="10" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <TextBox x:Name="txtPrecio" Width="115" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Precio" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
+                            <TextBox x:Name="txtStock" Width="115" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Stock" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button  x:Name="btnGuardar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Guardar" Width="250" Margin="10"/>
+                        <Button x:Name="btnCancelar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Width="250" Margin="10"/>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:PopupBox>
+            <materialDesign:PopupBox>
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="PencilCircle" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20" />
+                </materialDesign:PopupBox.ToggleContent>
+            </materialDesign:PopupBox>
+            <materialDesign:PopupBox>
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="Delete" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20"/>
+                </materialDesign:PopupBox.ToggleContent>
+            </materialDesign:PopupBox>
+            <Button x:Name="btnRefresh" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
             <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoria_SelectionChanged" Loaded="cbFilCategoria_Loaded"/>
             <ComboBox x:Name="cbFilOrdenar" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Ordenar" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
         </StackPanel>
