@@ -19,18 +19,18 @@
             <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnUpdateInsumo" Content="{materialDesign:PackIcon Kind=PencilCircle,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
             <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnDeleteInsumo" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
             <Button Foreground="{StaticResource MaterialDesignLightBackground}" x:Name="btnRefresh" Content="{materialDesign:PackIcon Kind=Refresh,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Height="50" Margin="20"/>
-            <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+            <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoria_SelectionChanged" Loaded="cbFilCategoria_Loaded"/>
             <ComboBox x:Name="cbFilOrdenar" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Ordenar" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <ListView x:Name="lvInventario" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" Loaded="lvInventario_Loaded" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" >
+            <ListView x:Name="lvInventario" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" Loaded="lvInventario_Loaded" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Collection}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Id" Width="125" DisplayMemberBinding="{Binding IdInsumo}"/>
-                        <GridViewColumn Header="Categoría" DisplayMemberBinding="{Binding descripCategoria}"/>
-                        <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding NombreInsumo}"/>
-                        <GridViewColumn Header="Precio" DisplayMemberBinding="{Binding precio}"/>
-                        <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Existencia}"/>
+                        <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding IdInsumo}"/>
+                        <GridViewColumn Header="Categoría" Width="150" DisplayMemberBinding="{Binding descripCategoria}"/>
+                        <GridViewColumn Header="Nombre" Width="150" DisplayMemberBinding="{Binding NombreInsumo}"/>
+                        <GridViewColumn Header="Precio" Width="150" DisplayMemberBinding="{Binding precio}"/>
+                        <GridViewColumn Header="Stock" Width="100" DisplayMemberBinding="{Binding Existencia}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

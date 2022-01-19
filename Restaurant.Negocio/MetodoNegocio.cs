@@ -77,7 +77,7 @@ namespace Restaurant.Negocio
         {
             List<Insumo> listaInsumo = new List<Insumo>();
 
-            string sqlCommand = $"SELECT I.IDINSUMO AS IDINSUMO, I.IDCATEGORIA AS IDCATEGORIA, CAT.DESCRIPCION AS NOMBRECATEGORIA, I.NOMBREINSUMO AS NOMBREINSUMO, I.PRECIOUNITARIO AS PRECIOUNITARIO, I.EXISTENCIA AS EXISTENCIA FROM INSUMO I INNER JOIN categoriainsumo CAT ON cat.idcategoria = i.idcategoria ORDER BY 1 ASC ";
+            string sqlCommand = "SELECT I.IDINSUMO AS IDINSUMO, I.IDCATEGORIA AS IDCATEGORIA, CAT.DESCRIPCION AS NOMBRECATEGORIA, I.NOMBREINSUMO AS NOMBREINSUMO, I.PRECIOUNITARIO AS PRECIOUNITARIO, I.EXISTENCIA AS EXISTENCIA FROM INSUMO I INNER JOIN categoriainsumo CAT ON cat.idcategoria = i.idcategoria ORDER BY 1 ASC ";
 
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
@@ -92,6 +92,17 @@ namespace Restaurant.Negocio
             return listaInsumo;
             
         }
+
+
+       public List<string> GetCategoriaStrings()
+       {
+
+            string sqlCommand = "select descripcion from categoriaInsumo";
+            List<string> listaCategoria = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
+            listaCategoria.Insert(0, "Todos");
+            return listaCategoria;
+
+        } 
         
     }
 }
