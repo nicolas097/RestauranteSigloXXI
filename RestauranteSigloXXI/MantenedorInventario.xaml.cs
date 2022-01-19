@@ -29,6 +29,7 @@ namespace RestauranteInterfaz
             InitializeComponent();
 
             cbFilCategoria.ItemsSource = MN.GetCategoriaStrings();
+            cbCategoria.ItemsSource = MN.GetCategoriaStrings();
             cbFilCategoria.SelectedIndex = 0;
 
         }
@@ -45,11 +46,17 @@ namespace RestauranteInterfaz
             if (cbFilCategoria.SelectedIndex != 0)
             {
 
-                lvInventario.ItemsSource =  null;
+                lvInventario.ItemsSource = null;
                 lvInventario.ItemsSource = MN.GetInsumoList().Where(s => s.IdCategoria == cbFilCategoria.SelectedIndex).ToList();
 
-                
             }
+            else
+            {
+                Refresh();
+            }
+            //} else if (cbCategoria.SelectedIndex.ToString() == "Todos"){
+            //    Refresh();
+            //}
 
         }
 
@@ -60,12 +67,23 @@ namespace RestauranteInterfaz
 
         private void Refresh()
         {
-
+            lvInventario.ItemsSource = MN.GetInsumoList();
+            cbFilCategoria.Text = "Todos";
         }
 
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            popBoxCrear.IsPopupOpen = false;
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();  
         }
     }
 }
