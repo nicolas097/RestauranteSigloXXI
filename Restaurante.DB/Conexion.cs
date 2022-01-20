@@ -14,13 +14,12 @@ namespace Restaurante.DB
             string _pwd = File.ReadAllLines(filepath)[1].Split('=')[1].Trim();
             string _db = File.ReadAllLines(filepath)[2].Split('=')[1].Trim();
 
-
             return (_user, _pwd, _db);
         }
 
         static string user = CredencialesBD().Item1;
         static string pwd = CredencialesBD().Item2;
-        static string db = CredencialesBD().Item3;
+        static string db = CredencialesBD().Item3;    
 
         static OracleConnection oracleConnection = new("User Id=" + user + ";Password=" + pwd + ";Data Source=" + db + ";");
         static OracleCommand oracleCommand = oracleConnection.CreateCommand();
@@ -117,6 +116,8 @@ namespace Restaurante.DB
 
 
         }
+
+
 
 
     }

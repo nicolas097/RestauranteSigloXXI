@@ -26,14 +26,14 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical">
                         <TextBox x:Name="txtNombreInsumo" Width="250" Margin="10" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nombre" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
-                        <ComboBox x:Name="cbCategoria" Width="250" Margin="10" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                        <ComboBox x:Name="cbCategoria" Width="250" Margin="10" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignLightBackground}" SelectionChanged="cbCategoria_SelectionChanged" Loaded="cbCategoria_Loaded"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                             <TextBox x:Name="txtPrecio" Width="115" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Precio" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
                             <TextBox x:Name="txtStock" Width="115" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Stock" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button  x:Name="btnGuardar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Guardar" Width="250" Margin="10"/>
+                        <Button  x:Name="btnGuardar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Guardar" Width="250" Margin="10" Click="btnGuardar_Click"/>
                         <Button x:Name="btnCancelar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Width="250" Margin="10" Click="btnCancelar_Click"/>
                     </StackPanel>
                 </Grid>
@@ -57,9 +57,9 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding IdInsumo}"/>
-                        <GridViewColumn Header="Categoría" Width="150" DisplayMemberBinding="{Binding descripCategoria}"/>
+                        <GridViewColumn Header="Categoría" Width="150" DisplayMemberBinding="{Binding DescripCategoria}"/>
                         <GridViewColumn Header="Nombre" Width="150" DisplayMemberBinding="{Binding NombreInsumo}"/>
-                        <GridViewColumn Header="Precio" Width="150" DisplayMemberBinding="{Binding precio}"/>
+                        <GridViewColumn Header="Precio" Width="150" DisplayMemberBinding="{Binding Precio}"/>
                         <GridViewColumn Header="Stock" Width="100" DisplayMemberBinding="{Binding Existencia}"/>
                     </GridView>
                 </ListView.View>

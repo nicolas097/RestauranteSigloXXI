@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Restaurant.Core;
 using Restaurante.DB;
+using System.IO;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Restaurant.Negocio
 {
@@ -77,14 +79,14 @@ namespace Restaurant.Negocio
         {
             List<Insumo> listaInsumo = new List<Insumo>();
 
-            string sqlCommand = "SELECT I.IDINSUMO AS IDINSUMO, I.IDCATEGORIA AS IDCATEGORIA, CAT.DESCRIPCION AS NOMBRECATEGORIA, I.NOMBREINSUMO AS NOMBREINSUMO, I.PRECIOUNITARIO AS PRECIOUNITARIO, I.EXISTENCIA AS EXISTENCIA FROM INSUMO I INNER JOIN categoriainsumo CAT ON cat.idcategoria = i.idcategoria ORDER BY 1 ASC ";
+            string sqlCommand = "SELECT I.IDINSUMO AS IDINSUMO, I.IDCATEGORIA AS IDCATEGORIA, CAT.DESCRIPCION AS NOMBRECATEGORIA, I.NOMBREINSUMO AS NOMBREINSUMO, I.PRECIOUNITARIO AS PRECIOUNITARIO, I.EXISTENCIA AS EXISTENCIA FROM INSUMO I INNER JOIN categoriainsumo CAT ON cat.idcategoria = i.idcategoria ORDER BY 1 ASC";
 
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
                 Insumo insumo = new Insumo();
                 insumo.IdInsumo = Convert.ToInt32(dr["IDINSUMO"]);
                 insumo.IdCategoria = Convert.ToInt32(dr["IDCATEGORIA"]);
-                insumo.precio = Convert.ToInt32(dr["PRECIOUNITARIO"]);
+                insumo.Precio = Convert.ToInt32(dr["PRECIOUNITARIO"]);
                 insumo.Existencia = Convert.ToInt32(dr["EXISTENCIA"]);
                 listaInsumo.Add(insumo);
             }
@@ -96,12 +98,66 @@ namespace Restaurant.Negocio
 
        public List<string> GetCategoriaStrings()
        {
-
             string sqlCommand = "select descripcion from categoriaInsumo";
             List<string> listaCategoria = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
-            listaCategoria.Insert(0, "Todos");
+            //listaCategoria.Insert(0, "Todos");
             return listaCategoria;
+        } 
 
+
+        public int GenerateId(string IdColumn, string TableName)
+        {
+            List<int> idS = new();
+            string sqlCommand = $"SELECT {IdColumn} FROM {TableName}";
+
+
+            foreach (DataRow dataRow in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                idS.Add(Convert.ToInt32(dataRow[IdColumn]));
+            }
+
+
+            idS.Sort();
+
+            int  IdSequence = 1;
+
+            foreach (var item in idS)
+            {
+                if (IdSequence == item)
+                {
+                    IdSequence++;
+                }
+                else
+                {
+                    return IdSequence;
+                }
+            }
+
+            return IdSequence;
+        }
+
+
+        public bool CrearInsumo(Insumo insumo)
+        {
+           insumo.IdInsumo = GenerateId("IDINSUMO", "INSUMO");
+           OracleCommand cmd = new("SP_CREARINSUMO", con.OracleConnection);
+           cmd.CommandType = CommandType.StoredProcedure;
+           cmd.Parameters.Add("@P_IDINSUMO", insumo.IdInsumo);
+           cmd.Parameters.Add("@P_IDCATEGORIA", insumo.IdCategoria);
+           cmd.Parameters.Add("@P_NOMBREINSUMO", insumo.nombreInsumo);
+           cmd.Parameters.Add("@P_PRECIOUNITARIO", insumo.Precio);
+           cmd.Parameters.Add("@P_EXISTENCIA", insumo.Existencia);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         } 
         
     }
