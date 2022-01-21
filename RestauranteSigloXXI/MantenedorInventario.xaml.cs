@@ -26,16 +26,26 @@ namespace RestauranteInterfaz
     {
         private MetodoNegocio MN = new();
 
-        List<string> hola = new();
+        List<string> categoriaListado = new();
+
+        
 
         public MantenedorInventario()
         {
             InitializeComponent();
-   
-            cbFilCategoria.ItemsSource = MN.GetCategoriaStrings();
+            categoriaListado = MN.GetCategoriaStrings();
+            categoriaListado.Insert(0, "Todos");
+            cbFilCategoria.ItemsSource = categoriaListado;
             cbCategoria.ItemsSource = MN.GetCategoriaStrings();
+            popBoxActualizar.IsEnabled = false;
+            cbCategoriaBtnUpdate.ItemsSource= MN.GetCategoriaStrings(); 
         }
 
+
+
+
+
+      
 
 
 
@@ -64,11 +74,7 @@ namespace RestauranteInterfaz
 
         }
 
-        private void cbFilCategoria_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-           
-        }
+ 
 
 
 
@@ -79,7 +85,7 @@ namespace RestauranteInterfaz
             lvInventario.ItemsSource = null;
             lvInventario.ItemsSource = MN.GetInsumoList();
             cbFilCategoria.SelectedIndex = 0;
-            
+
         }
 
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
@@ -103,7 +109,7 @@ namespace RestauranteInterfaz
             {
                 Insumo insu = new ();
                 insu.nombreInsumo = txtNombreInsumo.Text;
-                insu.IdCategoria = Convert.ToInt32(cbCategoria.SelectedIndex);
+                insu.IdCategoria = Convert.ToInt32(cbCategoria.SelectedIndex + 1);
                 insu.Precio = Convert.ToInt32(txtPrecio.Text);
                 insu.Existencia = Convert.ToInt32(txtStock.Text);
                 if (MN.CrearInsumo(insu))
@@ -147,14 +153,73 @@ namespace RestauranteInterfaz
             return false;
         }
 
-        private void cbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnGuardarUpdate_Click(object sender, RoutedEventArgs e)
         {
-             
+
+                int IdInsumo = ((Insumo)lvInventario.SelectedItem).IdInsumo;
+
+                Insumo insu = new Insumo();
+                insu.IdInsumo = IdInsumo;
+                insu.nombreInsumo = txtNombreInsumoBtnUpdate.Text;
+                insu.IdCategoria = Convert.ToInt32(cbCategoriaBtnUpdate.SelectedIndex + 1);
+                insu.Precio = Convert.ToInt32(txtPrecioBtnUpdate.Text);
+                insu.Existencia = Convert.ToInt32(txtStockBtnUpdate.Text);
+                if (MessageBox.Show("¿Está seguro que que quieres Actualizar " + insu.NombreInsumo + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    if (MN.ActualizarInsumo(insu))
+                    {
+                        MessageBox.Show($"Se ha modificado el insumo a {insu.NombreInsumo}", "Informacion", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha modificado nada recuerde rellenar Todos los campos" , "Avertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+            
+           
+          
+            
+            
         }
 
-        private void cbCategoria_Loaded(object sender, RoutedEventArgs e)
+        private void lvInventario_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            if (lvInventario.SelectedItem != null)
+            {
+                popBoxActualizar.IsEnabled = true;
+                var InsumoEditar = (Insumo)lvInventario.SelectedItem;
+                txtNombreInsumoBtnUpdate.Text = InsumoEditar.NombreInsumo;
+                cbCategoriaBtnUpdate.SelectedIndex = InsumoEditar.IdCategoria - 1;
+                txtPrecioBtnUpdate.Text = InsumoEditar.Precio.ToString();
+                txtStockBtnUpdate.Text = InsumoEditar.Existencia.ToString();
+
+            }
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvInventario.SelectedItem != null)
+            {
+                var InsumoEliminar = (Insumo)lvInventario.SelectedItem;
+
+                if (MessageBox.Show("¿Está seguro que que quieres Eliminar " + InsumoEliminar.NombreInsumo + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    if (MN.EliminarInsumo(InsumoEliminar.IdInsumo))
+                    {
+                        MessageBox.Show("Se ha eliminado el insumo");
+                        Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podiod eliminar");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione alguna fila");
+            }
         }
     }
 }

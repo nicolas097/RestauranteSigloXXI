@@ -26,7 +26,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical">
                         <TextBox x:Name="txtNombreInsumo" Width="250" Margin="10" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nombre" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
-                        <ComboBox x:Name="cbCategoria" Width="250" Margin="10" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignLightBackground}" SelectionChanged="cbCategoria_SelectionChanged" Loaded="cbCategoria_Loaded"/>
+                        <ComboBox x:Name="cbCategoria" Width="250" Margin="10" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignLightBackground}" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                             <TextBox x:Name="txtPrecio" Width="115" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Precio" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
                             <TextBox x:Name="txtStock" Width="115" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Stock" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
@@ -38,22 +38,35 @@
                     </StackPanel>
                 </Grid>
             </materialDesign:PopupBox>
-            <materialDesign:PopupBox>
+            <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxActualizar">
                 <materialDesign:PopupBox.ToggleContent>
                     <materialDesign:PackIcon Kind="PencilCircle" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20" />
                 </materialDesign:PopupBox.ToggleContent>
+                <Grid Background="{StaticResource MaterialDesignDarkBackground}" Height="400" Width="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="txtNombreInsumoBtnUpdate" Width="250" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nombre" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                    <ComboBox Grid.Row="1" x:Name="cbCategoriaBtnUpdate" Width="250" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox x:Name="txtPrecioBtnUpdate" Width="100" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Precio" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
+                        <TextBox x:Name="txtStockBtnUpdate" Width="100" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Stock" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
+                    </StackPanel>
+                    <Button Grid.Row="3" x:Name="btnGuardarUpdate" Content="Actualizar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10" Click="btnGuardarUpdate_Click"/>
+                    <Button Grid.Row="4" x:Name="btnCancelarUpdate" Content="Cancelar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10"/>
+                </Grid>
             </materialDesign:PopupBox>
-            <materialDesign:PopupBox>
-                <materialDesign:PopupBox.ToggleContent>
-                    <materialDesign:PackIcon Kind="Delete" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20"/>
-                </materialDesign:PopupBox.ToggleContent>
-            </materialDesign:PopupBox>
+            <Button x:Name="btnEliminar" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnEliminar_Click"/>
             <Button x:Name="btnRefresh" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnRefresh_Click"/>
-            <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoria_SelectionChanged" Loaded="cbFilCategoria_Loaded"/>
+            <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoria_SelectionChanged" />
             <ComboBox x:Name="cbFilOrdenar" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Ordenar" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <ListView x:Name="lvInventario" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" Loaded="lvInventario_Loaded" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Collection}">
+            <ListView x:Name="lvInventario" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" Loaded="lvInventario_Loaded" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Collection}" SelectionChanged="lvInventario_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding IdInsumo}"/>

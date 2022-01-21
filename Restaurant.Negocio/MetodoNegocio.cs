@@ -100,7 +100,6 @@ namespace Restaurant.Negocio
        {
             string sqlCommand = "select descripcion from categoriaInsumo";
             List<string> listaCategoria = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
-            //listaCategoria.Insert(0, "Todos");
             return listaCategoria;
         } 
 
@@ -159,6 +158,47 @@ namespace Restaurant.Negocio
                 return false;
             }
         } 
+
+
+        public bool EliminarInsumo(int idInsumo)
+        {
+            string sqlCommand = ($"DELETE FROM INSUMO WHERE IDINSUMO = {idInsumo}");
+            try
+            {
+                con.RunOracleNonQuery(sqlCommand);
+                return true;
+            }
+            catch 
+            {
+
+                return false;
+            }
+        }
+
+
+
+        public bool ActualizarInsumo(Insumo ins)
+        {
+            OracleCommand cmd = new("SP_ACTUALIZARINSUMO", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDINSUMO", ins.IdInsumo);
+            cmd.Parameters.Add("@P_IDCATEGORIA", ins.IdCategoria);
+            cmd.Parameters.Add("@P_NOMBREINSUMO", ins.nombreInsumo);
+            cmd.Parameters.Add("@P_PRECIOUNITARIO", ins.Precio);
+            cmd.Parameters.Add("@P_EXISTENCIA", ins.Existencia);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch 
+            {
+
+                return false;
+            }
+        }
         
     }
 }
