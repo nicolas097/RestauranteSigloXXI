@@ -195,23 +195,23 @@ namespace Restaurant.Negocio
         }
 
 
-        public bool EliminarMesa(int IdMesa)
-        {
-            OracleCommand cmd = new("SP_ELIMINARMESA", con.OracleConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("P_IDMESA", IdMesa);
+        //public bool EliminarMesa(int IdMesa)
+        //{
+        //    OracleCommand cmd = new("SP_ELIMINARMESA", con.OracleConnection);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Parameters.Add("P_IDMESA", IdMesa);
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch
-            {
+        //    try
+        //    {
+        //        cmd.ExecuteNonQuery();
+        //        return true;
+        //    }
+        //    catch
+        //    {
 
-                return false;
-            }
-        }
+        //        return false;
+        //    }
+        //}
 
 
         public bool EliminarInsumo(int idInsumo)
@@ -280,22 +280,22 @@ namespace Restaurant.Negocio
         }
 
 
-        //public bool EliminarMesa(int idMesa)
-        //{
-        //    string sqlCommand = ($"DELETE FROM MESA WHERE IDMESA = {idMesa}");
+        public bool EliminarMesa(int idMesa)
+        {
+            string sqlCommand = ($"DELETE FROM MESA WHERE IDMESA = {idMesa}");
 
-        //    try
-        //    {
-        //        con.RunOracleNonQuery(sqlCommand);  
-        //        return true;    
-        //    }
-        //    catch 
-        //    {
+            try
+            {
+                con.RunOracleNonQuery(sqlCommand);
+                return true;
+            }
+            catch
+            {
 
-        //        return false;
-        //    }
+                return false;
+            }
 
-        //}
+        }
 
 
         public bool ActualizarMesa(Mesa mesa)

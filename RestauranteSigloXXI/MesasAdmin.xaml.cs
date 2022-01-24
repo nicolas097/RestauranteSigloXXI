@@ -221,9 +221,9 @@ namespace RestauranteInterfaz
             if (lvMesas.SelectedItem != null)
             {
                 var MesasEliminar = (Mesa)lvMesas.SelectedItem;
-                if (MessageBox.Show("¿Está seguro que que quieres Eliminar " + MesasEliminar.IdMesa + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                if (MessageBox.Show("¿Está seguro que que quieres las mesa número " + MesasEliminar.IdMesa + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    if (metNegocio.EliminarInsumo(MesasEliminar.IdMesa))
+                    if (metNegocio.EliminarMesa(MesasEliminar.IdMesa))
                     {
                         MessageBox.Show("Se ha eliminado la mesa");
                         Refresh();
