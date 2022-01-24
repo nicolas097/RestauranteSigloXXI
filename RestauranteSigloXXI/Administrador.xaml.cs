@@ -21,6 +21,7 @@ namespace RestauranteInterfaz
     public partial class Administrador : Page
     {
         public Administrador()
+        
         {
             InitializeComponent();
         }

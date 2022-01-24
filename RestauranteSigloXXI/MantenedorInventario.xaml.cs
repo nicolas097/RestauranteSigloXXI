@@ -173,7 +173,7 @@ namespace RestauranteInterfaz
                     }
                     else
                     {
-                        MessageBox.Show("No se ha modificado nada recuerde rellenar Todos los campos" , "Avertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("No se ha modificado nada recuerde rellenar Todos los campos" , "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             

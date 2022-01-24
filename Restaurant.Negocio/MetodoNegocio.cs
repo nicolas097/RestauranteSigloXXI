@@ -17,13 +17,25 @@ namespace Restaurant.Negocio
 
         public int Login (string usuario, string contrasena)
         {
+            //Verifica si existe el usuario
             string ExisteCuenta = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}'";
+            //verifica sí el tipo usuario es de tipo adsministrador
             string ExisteCuentaAdministrador = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'ADM'";
+            //verifica si el tipo de usuario es de finanza
             string ExisteCuentaFinanza = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'FIN'";
+          
             string ExisteCuentaBod = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'BOD'";
             string ExistePwdCuentaAdm = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'ADM'";
             string ExistePwdCuentaFin = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'FIN'";
             string ExistePwdCuentaBod = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'BOD'";
+
+            //0.-Existe cuenta de usuario
+
+            //1.-Existe cuenta de administrador 
+
+            //2.-No existe la cuenta con el usuario y la contraseña 
+
+            //6.-
 
             int TipoLogin;
 
@@ -96,6 +108,23 @@ namespace Restaurant.Negocio
         }
 
 
+        public List<Mesa> GetMesaList()
+        {
+            List<Mesa> listaMesa = new();
+            string sqlCommand = "select m.idMesa as NúmeroMesa , m.cantidadSilla as CantidadSilla, m.idEstado as idEstadoMesa ,estMesa.estado as EstadoMesa FROM MESA m inner join estadoMesa estMesa on estmesa.idEstado = m.idestado ORDER BY 1 ASC";
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Mesa mesa = new Mesa();
+                mesa.IdMesa = Convert.ToInt32(dr["NúmeroMesa"]);
+                mesa.CantSilla = Convert.ToInt32(dr["CantidadSilla"]);
+                mesa.idEstado = Convert.ToChar(dr["idEstadoMesa"]);
+                listaMesa.Add(mesa);    
+                
+            }
+            return listaMesa;
+        }
+
+
        public List<string> GetCategoriaStrings()
        {
             string sqlCommand = "select descripcion from categoriaInsumo";
@@ -103,6 +132,12 @@ namespace Restaurant.Negocio
             return listaCategoria;
         } 
 
+        public List<string> GetTipoEstado()
+        {
+            string sqlCommand = "SELECT estado FROM estadoMesa";
+            List<string> listaEstado = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
+            return listaEstado;
+        }
 
         public int GenerateId(string IdColumn, string TableName)
         {
@@ -157,7 +192,26 @@ namespace Restaurant.Negocio
 
                 return false;
             }
-        } 
+        }
+
+
+        //public bool EliminarInsumo(int IdInusmo)
+        //{
+        //    OracleCommand cmd = new("SP_ELIMINARINSUMO", con.OracleConnection);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Parameters.Add("P_IDINSUMO", IdInusmo);
+
+        //    try
+        //    {
+        //        cmd.ExecuteNonQuery();
+        //        return true;
+        //    }
+        //    catch
+        //    {
+
+        //        return false;
+        //    }
+        //}
 
 
         public bool EliminarInsumo(int idInsumo)
@@ -168,7 +222,7 @@ namespace Restaurant.Negocio
                 con.RunOracleNonQuery(sqlCommand);
                 return true;
             }
-            catch 
+            catch
             {
 
                 return false;
@@ -193,12 +247,42 @@ namespace Restaurant.Negocio
                 return true;
 
             }
+            catch
+            {
+
+                return false;
+            }
+        }
+
+
+
+        public bool CrearMesa(Mesa mes)
+        {
+            mes.IdMesa = GenerateId("IDMESA", "MESA");
+            OracleCommand cmd = new("SP_CREARMESA", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDMESA", mes.IdMesa);
+            cmd.Parameters.Add("@P_CANTIDADSILLA", mes.CantSilla);
+            cmd.Parameters.Add("@P_IDESTADO", mes.idEstado);
+
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
             catch 
             {
 
                 return false;
             }
         }
+
+
+
+
+
         
     }
 }
