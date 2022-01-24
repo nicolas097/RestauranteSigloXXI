@@ -195,23 +195,23 @@ namespace Restaurant.Negocio
         }
 
 
-        //public bool EliminarInsumo(int IdInusmo)
-        //{
-        //    OracleCommand cmd = new("SP_ELIMINARINSUMO", con.OracleConnection);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.Parameters.Add("P_IDINSUMO", IdInusmo);
+        public bool EliminarMesa(int IdMesa)
+        {
+            OracleCommand cmd = new("SP_ELIMINARMESA", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("P_IDMESA", IdMesa);
 
-        //    try
-        //    {
-        //        cmd.ExecuteNonQuery();
-        //        return true;
-        //    }
-        //    catch
-        //    {
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
 
-        //        return false;
-        //    }
-        //}
+                return false;
+            }
+        }
 
 
         public bool EliminarInsumo(int idInsumo)
@@ -280,7 +280,43 @@ namespace Restaurant.Negocio
         }
 
 
+        //public bool EliminarMesa(int idMesa)
+        //{
+        //    string sqlCommand = ($"DELETE FROM MESA WHERE IDMESA = {idMesa}");
 
+        //    try
+        //    {
+        //        con.RunOracleNonQuery(sqlCommand);  
+        //        return true;    
+        //    }
+        //    catch 
+        //    {
+
+        //        return false;
+        //    }
+
+        //}
+
+
+        public bool ActualizarMesa(Mesa mesa)
+        {
+            OracleCommand cmd = new ("SP_ACTUALIZARMESA", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDMESA", mesa.IdMesa);
+            cmd.Parameters.Add("@P_CANTIDADSILLA", mesa.CantSilla);
+            cmd.Parameters.Add("@P_IDESTADO", mesa.idEstado);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
+            {
+
+                return false;
+            }
+        }
 
 
         

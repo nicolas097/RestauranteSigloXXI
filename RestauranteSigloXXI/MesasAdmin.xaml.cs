@@ -35,7 +35,8 @@ namespace RestauranteInterfaz
             listaMesa = metNegocio.GetTipoEstado();
             listaMesa.Insert(0, "Todos");
             cbFilEstado.ItemsSource = listaMesa;
-            popBoxActualizarMesa.IsEnabled = true;
+            popBoxActualizarMesa.IsEnabled = false;
+            cbEstadoActualizar.ItemsSource = metNegocio.GetTipoEstado();
             
         }
 
@@ -58,10 +59,7 @@ namespace RestauranteInterfaz
         }
    
 
-        private void btnGuardar_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+  
 
         private bool sePuedeAgregar()
         {
@@ -69,7 +67,7 @@ namespace RestauranteInterfaz
             {
                 MessageBox.Show("Ingrese la cantidad de silla a la nueva mesa");
             }
-            else if (cbEstadoMesa.Text == string.Empty)
+            else if (cbEstado.Text == string.Empty)
             {
                 MessageBox.Show("Seleccione el estado de la mesa agregagada");
             }
@@ -85,19 +83,46 @@ namespace RestauranteInterfaz
 
         }
 
-        private void btnEliminar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        //private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (lvMesas.SelectedItem != null)
+        //    {
+        //        var MesasEliminar = (Mesa)lvMesas.SelectedItem;
+        //        if (MessageBox.Show("¿Está seguro que que quieres Eliminar " + MesasEliminar.IdMesa + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+        //        {
+        //            if (metNegocio.EliminarInsumo(MesasEliminar.IdMesa))
+        //            {
+        //                MessageBox.Show("Se ha eliminado la mesa");
+        //                Refresh();
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("No se ha eliminado nada");
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Seleccione alguna fila");
+        //    }
+        //}
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void cbFilEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (cbFilEstado.SelectedIndex != 0)
+            {
+                lvMesas.ItemsSource = null;
+                lvMesas.ItemsSource = metNegocio.GetMesaList().Where(s => s.idEstado == comoBoxChar(cbFilEstado.SelectedIndex)).ToList();
+            }
+            else
+            {
+                Refresh();
+            }
         }
 
 
@@ -114,6 +139,21 @@ namespace RestauranteInterfaz
                     break;
             }
             return ' ';
+        }
+
+
+        public int ComboBoxActualizarMesa(char idEstado)
+        {
+            switch (idEstado)
+            {
+                case 'D':
+                    return 1;
+                case 'O':
+                    return 2;
+                default:
+                    break;
+            }
+            return 0;
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -135,9 +175,69 @@ namespace RestauranteInterfaz
             }
         }
 
-        private void btnCancelar_Click_1(object sender, RoutedEventArgs e)
-        {
 
+        private void btnCancelarPopBoxCrear_Click(object sender, RoutedEventArgs e)
+        {
+            popBoxCrearMesa.IsPopupOpen = false;
+        }
+
+        private void lvMesas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvMesas.SelectedItem != null)
+            {
+                popBoxActualizarMesa.IsEnabled = true;
+                var MesaEditar = (Mesa)lvMesas.SelectedItem;
+                txtCantSillaUpdate.Text = MesaEditar.CantSilla.ToString();
+                cbEstadoActualizar.SelectedIndex = ComboBoxActualizarMesa(MesaEditar.idEstado)-1;
+
+            }
+        }
+
+        private void btnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            int IdMesa = ((Mesa)lvMesas.SelectedItem).IdMesa;
+            Mesa mesa = new();
+            mesa.IdMesa = IdMesa;
+            mesa.CantSilla = Convert.ToInt32(txtCantSillaUpdate.Text);
+            mesa.idEstado = comoBoxChar(cbEstadoActualizar.SelectedIndex + 1);
+            if (metNegocio.ActualizarMesa(mesa))
+            {
+                MessageBox.Show("Se ha actualizado la mesa");
+                Refresh();
+            }
+            else
+            {
+                MessageBox.Show("No se ha logrado actualizar la mesa");
+            }
+        }
+
+        private void btnCancelarPopBoxActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            popBoxActualizarMesa.IsPopupOpen = false;
+        }
+
+        private void btnEliminarMesa_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvMesas.SelectedItem != null)
+            {
+                var MesasEliminar = (Mesa)lvMesas.SelectedItem;
+                if (MessageBox.Show("¿Está seguro que que quieres Eliminar " + MesasEliminar.IdMesa + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    if (metNegocio.EliminarInsumo(MesasEliminar.IdMesa))
+                    {
+                        MessageBox.Show("Se ha eliminado la mesa");
+                        Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha eliminado nada");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione alguna fila");
+            }
         }
     }
 }

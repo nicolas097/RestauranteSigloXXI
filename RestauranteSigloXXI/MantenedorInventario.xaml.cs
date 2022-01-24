@@ -175,12 +175,7 @@ namespace RestauranteInterfaz
                     {
                         MessageBox.Show("No se ha modificado nada recuerde rellenar Todos los campos" , "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                }
-            
-           
-          
-            
-            
+                }           
         }
 
         private void lvInventario_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -212,7 +207,7 @@ namespace RestauranteInterfaz
                     }
                     else
                     {
-                        MessageBox.Show("No se ha podiod eliminar");
+                        MessageBox.Show("No se ha podido eliminar");
                     }
                 }
             }
