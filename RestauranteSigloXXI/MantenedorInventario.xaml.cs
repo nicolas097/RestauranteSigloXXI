@@ -112,10 +112,12 @@ namespace RestauranteInterfaz
                 insu.IdCategoria = Convert.ToInt32(cbCategoria.SelectedIndex + 1);
                 insu.Precio = Convert.ToInt32(txtPrecio.Text);
                 insu.Existencia = Convert.ToInt32(txtStock.Text);
+                insu.Estado = 1;
                 if (MN.CrearInsumo(insu))
                 {
                     MessageBox.Show("Se agregó el insumo", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     Refresh();
+                    //LimpiarPopBoxCrear();
                 }
                 else
                 {
@@ -124,6 +126,9 @@ namespace RestauranteInterfaz
               
             }
         }
+
+
+   
 
 
         private bool SePuedeAgregarInsumo()
@@ -197,10 +202,13 @@ namespace RestauranteInterfaz
             if (lvInventario.SelectedItem != null)
             {
                 var InsumoEliminar = (Insumo)lvInventario.SelectedItem;
+                Insumo insu = new ();
+                insu.IdInsumo = Convert.ToInt32(InsumoEliminar.IdInsumo);
+ 
 
                 if (MessageBox.Show("¿Está seguro que que quieres Eliminar " + InsumoEliminar.NombreInsumo + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    if (MN.EliminarInsumo(InsumoEliminar.IdInsumo))
+                    if (MN.EliminarInsumo(insu))
                     {
                         MessageBox.Show("Se ha eliminado el insumo");
                         Refresh();

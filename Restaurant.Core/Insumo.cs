@@ -25,6 +25,8 @@ namespace Restaurant.Core
 
         public int Existencia { get; set; }
 
+        public int Estado  { get; set; }
+
 
     }
 }

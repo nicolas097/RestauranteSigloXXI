@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:RestauranteInterfaz"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1160"
-      Title="MantenedorInventario" >
+      Title="MantenedorInventario">
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid.RowDefinitions>
@@ -63,7 +63,6 @@
             <Button x:Name="btnEliminar" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnEliminar_Click"/>
             <Button x:Name="btnRefresh" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnRefresh_Click"/>
             <ComboBox x:Name="cbFilCategoria" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoria_SelectionChanged" />
-            <ComboBox x:Name="cbFilOrdenar" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Ordenar" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <ListView x:Name="lvInventario" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" Loaded="lvInventario_Loaded" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Collection}" SelectionChanged="lvInventario_SelectionChanged">

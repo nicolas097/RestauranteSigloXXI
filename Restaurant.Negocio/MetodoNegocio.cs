@@ -15,7 +15,7 @@ namespace Restaurant.Negocio
     {
         public Conexion con = new Conexion();
 
-        public int Login (string usuario, string contrasena)
+        public int Login(string usuario, string contrasena)
         {
             //Verifica si existe el usuario
             string ExisteCuenta = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}'";
@@ -23,7 +23,7 @@ namespace Restaurant.Negocio
             string ExisteCuentaAdministrador = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'ADM'";
             //verifica si el tipo de usuario es de finanza
             string ExisteCuentaFinanza = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'FIN'";
-          
+
             string ExisteCuentaBod = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'BOD'";
             string ExistePwdCuentaAdm = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'ADM'";
             string ExistePwdCuentaFin = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'FIN'";
@@ -45,11 +45,11 @@ namespace Restaurant.Negocio
             }
             else
             {
-                 TipoLogin = 1;
-                 if(con.RunOracleExecuteScalar(ExisteCuentaAdministrador) != null)
-                 {
+                TipoLogin = 1;
+                if (con.RunOracleExecuteScalar(ExisteCuentaAdministrador) != null)
+                {
 
-                    
+
                     if (con.RunOracleExecuteScalar(ExistePwdCuentaAdm) != null)
                     {
                         TipoLogin = 6;
@@ -58,9 +58,9 @@ namespace Restaurant.Negocio
                     {
                         TipoLogin = 2;
                     }
-                 }
-                 if (con.RunOracleExecuteScalar(ExisteCuentaFinanza) != null)
-                 {
+                }
+                if (con.RunOracleExecuteScalar(ExisteCuentaFinanza) != null)
+                {
                     if (con.RunOracleExecuteScalar(ExistePwdCuentaFin) != null)
                     {
                         TipoLogin = 7;
@@ -69,7 +69,7 @@ namespace Restaurant.Negocio
                     {
                         TipoLogin = 2;
                     }
-                 }
+                }
                 if (con.RunOracleExecuteScalar(ExisteCuentaBod) != null)
                 {
                     if (con.RunOracleExecuteScalar(ExistePwdCuentaBod) != null)
@@ -80,7 +80,7 @@ namespace Restaurant.Negocio
                     {
                         TipoLogin = 2;
                     }
-                }   
+                }
             }
             return TipoLogin;
         }
@@ -91,7 +91,7 @@ namespace Restaurant.Negocio
         {
             List<Insumo> listaInsumo = new List<Insumo>();
 
-            string sqlCommand = "SELECT I.IDINSUMO AS IDINSUMO, I.IDCATEGORIA AS IDCATEGORIA, CAT.DESCRIPCION AS NOMBRECATEGORIA, I.NOMBREINSUMO AS NOMBREINSUMO, I.PRECIOUNITARIO AS PRECIOUNITARIO, I.EXISTENCIA AS EXISTENCIA FROM INSUMO I INNER JOIN categoriainsumo CAT ON cat.idcategoria = i.idcategoria ORDER BY 1 ASC";
+            string sqlCommand = "SELECT I.IDINSUMO AS IDINSUMO, I.IDCATEGORIA AS IDCATEGORIA, CAT.DESCRIPCION AS NOMBRECATEGORIA, I.NOMBREINSUMO AS NOMBREINSUMO, I.PRECIOUNITARIO AS PRECIOUNITARIO, I.EXISTENCIA AS EXISTENCIA, I.ESTADO AS ESTADO FROM INSUMO I INNER JOIN categoriainsumo CAT ON cat.idcategoria = i.idcategoria  WHERE ESTADO = 1 ORDER BY 1 ASC";
 
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
@@ -100,11 +100,12 @@ namespace Restaurant.Negocio
                 insumo.IdCategoria = Convert.ToInt32(dr["IDCATEGORIA"]);
                 insumo.Precio = Convert.ToInt32(dr["PRECIOUNITARIO"]);
                 insumo.Existencia = Convert.ToInt32(dr["EXISTENCIA"]);
+                insumo.Estado = Convert.ToInt32(dr["ESTADO"]);
                 listaInsumo.Add(insumo);
             }
 
             return listaInsumo;
-            
+
         }
 
 
@@ -118,19 +119,19 @@ namespace Restaurant.Negocio
                 mesa.IdMesa = Convert.ToInt32(dr["NúmeroMesa"]);
                 mesa.CantSilla = Convert.ToInt32(dr["CantidadSilla"]);
                 mesa.idEstado = Convert.ToChar(dr["idEstadoMesa"]);
-                listaMesa.Add(mesa);    
-                
+                listaMesa.Add(mesa);
+
             }
             return listaMesa;
         }
 
 
-       public List<string> GetCategoriaStrings()
-       {
-            string sqlCommand = "select descripcion from categoriaInsumo";
+        public List<string> GetCategoriaStrings()
+        {
+            string sqlCommand = "select descripcion from categoriaInsumo Order by idCategoria";
             List<string> listaCategoria = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
             return listaCategoria;
-        } 
+        }
 
         public List<string> GetTipoEstado()
         {
@@ -153,7 +154,7 @@ namespace Restaurant.Negocio
 
             idS.Sort();
 
-            int  IdSequence = 1;
+            int IdSequence = 1;
 
             foreach (var item in idS)
             {
@@ -173,14 +174,15 @@ namespace Restaurant.Negocio
 
         public bool CrearInsumo(Insumo insumo)
         {
-           insumo.IdInsumo = GenerateId("IDINSUMO", "INSUMO");
-           OracleCommand cmd = new("SP_CREARINSUMO", con.OracleConnection);
-           cmd.CommandType = CommandType.StoredProcedure;
-           cmd.Parameters.Add("@P_IDINSUMO", insumo.IdInsumo);
-           cmd.Parameters.Add("@P_IDCATEGORIA", insumo.IdCategoria);
-           cmd.Parameters.Add("@P_NOMBREINSUMO", insumo.nombreInsumo);
-           cmd.Parameters.Add("@P_PRECIOUNITARIO", insumo.Precio);
-           cmd.Parameters.Add("@P_EXISTENCIA", insumo.Existencia);
+            insumo.IdInsumo = GenerateId("IDINSUMO", "INSUMO");
+            OracleCommand cmd = new("SP_CREARINSUMO", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDINSUMO", insumo.IdInsumo);
+            cmd.Parameters.Add("@P_IDCATEGORIA", insumo.IdCategoria);
+            cmd.Parameters.Add("@P_NOMBREINSUMO", insumo.nombreInsumo);
+            cmd.Parameters.Add("@P_PRECIOUNITARIO", insumo.Precio);
+            cmd.Parameters.Add("@P_EXISTENCIA", insumo.Existencia);
+            cmd.Parameters.Add("@P_ESTADO", insumo.Estado);
 
             try
             {
@@ -214,20 +216,20 @@ namespace Restaurant.Negocio
         //}
 
 
-        public bool EliminarInsumo(int idInsumo)
-        {
-            string sqlCommand = ($"DELETE FROM INSUMO WHERE IDINSUMO = {idInsumo}");
-            try
-            {
-                con.RunOracleNonQuery(sqlCommand);
-                return true;
-            }
-            catch
-            {
+        //public bool EliminarInsumo(int idInsumo)
+        //{
+        //    string sqlCommand = ($"DELETE FROM INSUMO WHERE IDINSUMO = {idInsumo}");
+        //    try
+        //    {
+        //        con.RunOracleNonQuery(sqlCommand);
+        //        return true;
+        //    }
+        //    catch
+        //    {
 
-                return false;
-            }
-        }
+        //        return false;
+        //    }
+        //}
 
 
 
@@ -248,6 +250,25 @@ namespace Restaurant.Negocio
 
             }
             catch
+            {
+
+                return false;
+            }
+        }
+
+
+        public bool EliminarInsumo(Insumo insumo)
+        {
+            OracleCommand cmd = new("SP_ELIMINARINSUMO", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDINSUMO", insumo.IdInsumo);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
             {
 
                 return false;
