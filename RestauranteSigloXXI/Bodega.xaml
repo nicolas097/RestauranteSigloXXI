@@ -2,14 +2,44 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:RestauranteInterfaz"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="Bodega">
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
-        <Label Content="Bodega" FontSize="100" HorizontalContentAlignment="Center"/>
-        <Frame x:Name="MainBodega" NavigationUIVisibility="Hidden"></Frame>
+        <Label x:Name="LbType" Content="Modo :" FontSize="12" Panel.ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00000000" Visibility="Hidden"/>
+        <Button x:Name="btnCerrarSesion" Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" FontSize="10" Style="{DynamicResource MaterialDesignIconButton}" Content="{materialDesign:PackIcon Kind=Logout}"/>
+
+        <TabControl TabStripPlacement="Left" x:Name="TabBodega" Background="{x:Null}" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
+            <TabItem Height="60" Width="120" x:Name="TabItemBodega" Loaded="TabItemBodega_Loaded" FocusableChanged="TabItemBodega_FocusableChanged"  >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Inicio" FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>
+                        <Label Content="{materialDesign:PackIcon Kind=Home}"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Height="60" Width="120" x:Name="tabMantIngresoInsumo">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Reponer Insumo" FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center" />
+                        <Label Content="{materialDesign:PackIcon Kind=HumanDolly}"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="ReponerInsumoFrame"/>
+            </TabItem>
+            <TabItem Height="60" Width="120" x:Name="tabSolicitarInsumo">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Solicitar Insumo"  FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>
+                        <Label Content="{materialDesign:PackIcon Kind=NotebookCheck}" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Page>

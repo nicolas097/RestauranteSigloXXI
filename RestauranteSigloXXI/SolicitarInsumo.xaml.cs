@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace RestauranteInterfaz
 {
     /// <summary>
-    /// Lógica de interacción para Bodega.xaml
+    /// Lógica de interacción para SolicitarInsumo.xaml
     /// </summary>
-    public partial class Bodega : Page
+    public partial class SolicitarInsumo : Page
     {
-        public Bodega()
+        public SolicitarInsumo()
         {
             InitializeComponent();
-        }
-
-        private void TabItemBodega_Loaded(object sender, RoutedEventArgs e)
-        {
-            ReponerInsumoFrame.NavigationService.Navigate(new ReponerInsumos()); 
-        }
-
-        private void TabItemBodega_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
         }
     }
 }
