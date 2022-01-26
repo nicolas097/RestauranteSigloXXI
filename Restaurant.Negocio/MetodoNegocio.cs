@@ -18,24 +18,17 @@ namespace Restaurant.Negocio
         public int Login(string usuario, string contrasena)
         {
             //Verifica si existe el usuario
-            string ExisteCuenta = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}'";
+            string ExisteCuenta = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{usuario}'";
             //verifica sí el tipo usuario es de tipo adsministrador
-            string ExisteCuentaAdministrador = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'ADM'";
+            string ExisteCuentaAdministrador = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{usuario}' AND idtipousuario = 'ADM'";
             //verifica si el tipo de usuario es de finanza
-            string ExisteCuentaFinanza = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'FIN'";
+            string ExisteCuentaFinanza = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{usuario}' AND idtipousuario = 'FIN'";
 
-            string ExisteCuentaBod = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND idtipousuario = 'BOD'";
-            string ExistePwdCuentaAdm = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'ADM'";
-            string ExistePwdCuentaFin = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'FIN'";
-            string ExistePwdCuentaBod = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBRE = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'BOD'";
+            string ExisteCuentaBod = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{usuario}' AND idtipousuario = 'BOD'";
+            string ExistePwdCuentaAdm = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'ADM'";
+            string ExistePwdCuentaFin = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'FIN'";
+            string ExistePwdCuentaBod = $"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{usuario}' AND contrasena = '{contrasena}' AND idtipousuario = 'BOD'";
 
-            //0.-Existe cuenta de usuario
-
-            //1.-Existe cuenta de administrador 
-
-            //2.-No existe la cuenta con el usuario y la contraseña 
-
-            //6.-
 
             int TipoLogin;
 
@@ -48,7 +41,7 @@ namespace Restaurant.Negocio
                 TipoLogin = 1;
                 if (con.RunOracleExecuteScalar(ExisteCuentaAdministrador) != null)
                 {
-
+                   
 
                     if (con.RunOracleExecuteScalar(ExistePwdCuentaAdm) != null)
                     {
@@ -57,6 +50,8 @@ namespace Restaurant.Negocio
                     else
                     {
                         TipoLogin = 2;
+                        
+
                     }
                 }
                 if (con.RunOracleExecuteScalar(ExisteCuentaFinanza) != null)
@@ -74,7 +69,8 @@ namespace Restaurant.Negocio
                 {
                     if (con.RunOracleExecuteScalar(ExistePwdCuentaBod) != null)
                     {
-                        TipoLogin = 8;
+                       
+                        TipoLogin = 8 ;
                     }
                     else
                     {

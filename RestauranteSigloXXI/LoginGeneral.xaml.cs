@@ -49,6 +49,7 @@ namespace RestauranteInterfaz
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
+         
             ingresar(txtUsuaio.Text, txtPassword.Password);
             
         }
@@ -69,8 +70,7 @@ namespace RestauranteInterfaz
                         break;
                     case 6:
                         Administrador mainAdminPage = new();
-                        NavigationService.Navigate(mainAdminPage);
-                       
+                        NavigationService.Navigate(mainAdminPage);                     
                         break;
                     case 7:
                         Finanzas mainFinanPage = new();
@@ -79,6 +79,7 @@ namespace RestauranteInterfaz
                     case 8:
                         Bodega mainPageBodega = new();
                         NavigationService.Navigate(mainPageBodega);
+                       
                         break;
                     default:
                         break;

@@ -10,6 +10,25 @@
       Title="ReponerInsumos">
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
-        <Label Content="Reponer Insumo" HorizontalAlignment="Center" FontSize="40"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="sp_barra" VerticalAlignment="Top">
+            <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxIngresarInsumo">
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="PackageVariantAdd" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20"/>
+                </materialDesign:PopupBox.ToggleContent>
+            </materialDesign:PopupBox>
+            <materialDesign:PopupBox>
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="Pencil" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20" />
+                </materialDesign:PopupBox.ToggleContent>
+            </materialDesign:PopupBox>
+            <ComboBox x:Name="cbFilCategoriaInsumo" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" />
+            <Label x:Name="lbNombreUsuario" Height="40" Width="150" Margin="20"/>
+            <Label x:Name="lbTipoUsuario" Height="40" Width="150" Margin="20"/>
+
+        </StackPanel>
     </Grid>
 </Page>

@@ -11,10 +11,10 @@
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Label x:Name="LbType" Content="Modo :" FontSize="12" Panel.ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00000000" Visibility="Hidden"/>
-        <Button x:Name="btnCerrarSesion" Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" FontSize="10" Style="{DynamicResource MaterialDesignIconButton}" Content="{materialDesign:PackIcon Kind=Logout}"/>
+        <Button x:Name="btnCerrarSesion" Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" FontSize="10" Style="{DynamicResource MaterialDesignIconButton}" Content="{materialDesign:PackIcon Kind=Logout}" Click="btnCerrarSesion_Click"/>
 
         <TabControl TabStripPlacement="Left" x:Name="TabBodega" Background="{x:Null}" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
-            <TabItem Height="60" Width="120" x:Name="TabItemBodega" Loaded="TabItemBodega_Loaded" FocusableChanged="TabItemBodega_FocusableChanged"  >
+            <TabItem Height="60" Width="120" x:Name="TabItemBodega" Loaded="TabItemBodega_Loaded" FocusableChanged="TabItemBodega_FocusableChanged">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Inicio" FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,16 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class Bodega : Page
     {
-        public Bodega()
+        private Usuario user;
+        public Bodega(Usuario usuario)
         {
             InitializeComponent();
+            user = usuario; 
         }
+
+
+
+     
 
         private void TabItemBodega_Loaded(object sender, RoutedEventArgs e)
         {
@@ -33,6 +40,15 @@ namespace RestauranteInterfaz
         private void TabItemBodega_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
 
+        }
+
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("¿Desea cerrar sesión?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                LoginGeneral lg = new LoginGeneral();
+                NavigationService.Navigate(lg);
+            }
         }
     }
 }
