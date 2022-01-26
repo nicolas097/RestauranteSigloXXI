@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Restaurante.DB;
 using RestauranteInterfaz;
 using Restaurant.Negocio;
+using Restaurant.Core;
 
 namespace RestauranteInterfaz
 {
@@ -77,9 +78,8 @@ namespace RestauranteInterfaz
                         NavigationService.Navigate(mainFinanPage);
                         break;
                     case 8:
-                        Bodega mainPageBodega = new();
+                        Bodega mainPageBodega = new(new Usuario() {  NombreUsuario = txtUsuaio.Text});
                         NavigationService.Navigate(mainPageBodega);
-                       
                         break;
                     default:
                         break;

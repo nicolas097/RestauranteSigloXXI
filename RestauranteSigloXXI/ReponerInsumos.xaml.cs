@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Restaurant.Core;
 using Restaurant.Negocio;
 
 namespace RestauranteInterfaz
@@ -21,20 +22,22 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class ReponerInsumos : Page
     {
-        private MetodoNegocio mb = new(); 
-        public ReponerInsumos()
+        private Usuario user;
+        public ReponerInsumos(Usuario usuario)
         {
             InitializeComponent();
-            MostrarNombreTipoUsuario();
+            user = usuario;
+            MostrarIdUsuarioYNombreusuario();
+          
+          
         }
 
-
-
-        public void MostrarNombreTipoUsuario()
+        private void MostrarIdUsuarioYNombreusuario()
         {
+            lbNombreUsuario.Content = user.nombre;
+            lbIdUsuario.Content = user.idUsuario;
 
-            LoginGeneral lg = new LoginGeneral();
-            lg.txtUsuaio.Text = lbNombreUsuario.Visibility.ToString();
         }
+         
     }
 }

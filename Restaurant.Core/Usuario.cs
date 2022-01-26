@@ -14,14 +14,18 @@ namespace Restaurant.Core
 
         public string IdTipoUsuario { get; set; }
 
-        
+        public int idUsuario => Convert.ToInt32(con.RunOracleExecuteScalar($"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{NombreUsuario}'"));
         
         public string Correo { get; set; }
 
         public string Contrasena { get; set; }
 
 
-        public string? Nombre { get; set; }
+        public string Nombre { get; set; }
+
+        public string NombreUsuario { get; set; }
+
+        public string nombre => con.RunOracleExecuteScalar($"SELECT NOMBRE FROM USUARIO WHERE NOMBREUSUARIO = '{NombreUsuario}'").ToString();
 
         public string? Apellido { get; set; }
 

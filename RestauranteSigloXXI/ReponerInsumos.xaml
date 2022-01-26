@@ -26,9 +26,9 @@
                 </materialDesign:PopupBox.ToggleContent>
             </materialDesign:PopupBox>
             <ComboBox x:Name="cbFilCategoriaInsumo" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" />
-            <Label x:Name="lbNombreUsuario" Height="40" Width="150" Margin="20"/>
-            <Label x:Name="lbTipoUsuario" Height="40" Width="150" Margin="20"/>
-
-        </StackPanel>
+            <Label x:Name="lbBienvenido" Content="Bienvenido :" Margin="20" Height="35" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}"/>
+            <Label x:Name="lbNombreUsuario" Height="30" Width="150"  FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}"/>
+           <Label x:Name="lbIdUsuario" Height="30" Width="150" Margin="20" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Visibility="Hidden"/>
+           </StackPanel>
     </Grid>
 </Page>

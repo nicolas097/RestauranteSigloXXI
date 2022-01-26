@@ -21,7 +21,7 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class Bodega : Page
     {
-        private Usuario user;
+        public Usuario user;
         public Bodega(Usuario usuario)
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace RestauranteInterfaz
 
         private void TabItemBodega_Loaded(object sender, RoutedEventArgs e)
         {
-            ReponerInsumoFrame.NavigationService.Navigate(new ReponerInsumos()); 
+            ReponerInsumoFrame.NavigationService.Navigate(new ReponerInsumos(new Usuario() { NombreUsuario = user.NombreUsuario })); 
         }
 
         private void TabItemBodega_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
