@@ -124,7 +124,7 @@ namespace Restaurant.Negocio
 
         public List<string> GetCategoriaStrings()
         {
-            string sqlCommand = "select descripcion from categoriaInsumo Order by idCategoria";
+            string sqlCommand = "select descripcion from categoriaInsumo Order by idCategoria asc";
             List<string> listaCategoria = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
             return listaCategoria;
         }
