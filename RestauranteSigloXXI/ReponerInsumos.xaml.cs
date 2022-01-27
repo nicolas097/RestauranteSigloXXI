@@ -42,15 +42,9 @@ namespace RestauranteInterfaz
             ListaCategoria.Insert(0, "Todos");
             cbFilCategoriaInsumo.ItemsSource = ListaCategoria;   
             cbCategInsumoEntra.ItemsSource = metNeg.GetCategoriaStrings();  
-            PopuBoxActuliazarEntrada.IsEnabled = false; 
-            //cbCategInumoEntraActualizar.ItemsSource = metNeg.GetCategoriaStrings();
-            
-          
-
-            
-
-            
-          
+            PopuBoxActuliazarEntrada.IsEnabled = false;
+            cbProveedorEntra.ItemsSource = metNeg.GetProveedor();
+                    
           
         }
 
@@ -74,6 +68,52 @@ namespace RestauranteInterfaz
          
             cbInsumo.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex + 1).Select( s => s.NombreInsumo).ToList();
             
+        }
+
+       
+
+        private void ingresarDetalleCompra()
+        {
+            DetalleCompra detCompra = new DetalleCompra();
+            detCompra.cantidad = Convert.ToInt32(txtCantidadReponer.Text);
+            detCompra.IdCategoria = Convert.ToInt32(cbCategInsumoEntra.SelectedIndex + 1);
+            detCompra.IdInsumo = Convert.ToInt32(cbCategInsumoEntra.SelectedIndex + 1);
+            detCompra.IdProveedor = Convert.ToInt32(cbProveedorEntra.SelectedIndex + 1);
+            if (metNeg.CrearDetalleCompra(detCompra))
+            {
+                //metNeg.ActualizarExistencia(detCompra.IdCompra, detCompra.cantidad);
+                MessageBox.Show("Se ingresó a detalle Compra");
+            }
+            else
+            {
+                MessageBox.Show("No se ingresó a detalle compra");
+            }
+
+            
+        }
+
+
+        private void ingresarCompra()
+        {
+            CompraInsumo compraInsumo = new();
+            compraInsumo.ValorBruto = Convert.ToInt32(metNeg.traerPrecioUnitario(cbInsumo.SelectedIndex + 1));
+            compraInsumo.ValorIva = Convert.ToInt32(metNeg.traerPrecioUnitario(cbInsumo.SelectedIndex) * 0.19);
+            compraInsumo.IdUsuario = user.idUsuario;
+            if (metNeg.CrearCompraInsumo(compraInsumo))
+            {
+
+                MessageBox.Show("Se Ingreso algo");
+            }
+            else
+            {
+                MessageBox.Show("No se ingreso nada");
+            }
+        }
+
+        private void btnIngresarInsumo_Click(object sender, RoutedEventArgs e)
+        {
+            ingresarCompra();
+            ingresarDetalleCompra();
         }
     }
 }

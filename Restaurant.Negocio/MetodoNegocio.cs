@@ -136,6 +136,17 @@ namespace Restaurant.Negocio
             return listaEstado;
         }
 
+        public List<string> GetProveedor()
+        {
+            string sqlCommnand = "SELECT nombreProveedor FROM proveedor";
+            List<string> listadoProveedor = con.OracleToDataTable(sqlCommnand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
+            return listadoProveedor;
+        }
+
+
+
+
+
         public int GenerateId(string IdColumn, string TableName)
         {
             List<int> idS = new();
@@ -336,6 +347,74 @@ namespace Restaurant.Negocio
         }
 
 
-        
+        public bool CrearCompraInsumo(CompraInsumo compraInsumo)
+        {
+            DateTime fecha = DateTime.Now;  
+            compraInsumo.IdCompra = GenerateId("idCompra","CompraInsumo");
+            OracleCommand cmd = new("SP_CREARCOMPRAINSUMO", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDCOMPRA", compraInsumo.IdCompra);
+            cmd.Parameters.Add("@P_FECHA", fecha.ToString("dd/MM/yy"));
+            cmd.Parameters.Add("@P_VALORBRUTO", compraInsumo.ValorBruto);
+            cmd.Parameters.Add("@P_IVA", compraInsumo.ValorIva);
+            cmd.Parameters.Add("@P_TOTAL", compraInsumo.ValorTotal);
+            cmd.Parameters.Add("@P_IDUSUARIO", compraInsumo.IdUsuario);
+            cmd.Parameters.Add("@P_IDTIPOUSUARIO", compraInsumo.IdTipoUsuario);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
+            {
+
+                return false;
+            }
+        }
+
+        public bool CrearDetalleCompra(DetalleCompra detCompra)
+        {
+            detCompra.IdCompra = GenerateId("idCompra","DETALLECOMPRA");
+            OracleCommand cmd = new("SP_CREARDETALLECOMPRA", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_CANTIDAD", detCompra.cantidad);
+            cmd.Parameters.Add("@P_IDCATEGORIA", detCompra.IdCategoria);
+            cmd.Parameters.Add("@P_IDINSUMO", detCompra.IdInsumo);
+            cmd.Parameters.Add("@P_IDCOMPRA",detCompra.IdCompra);
+            cmd.Parameters.Add("@P_IDPROVEEDOR", detCompra.IdProveedor);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public int traerStockInsumo (int idInsumo)
+        {
+            string sqlCommand = $"SELECT existencia FROM inusumo WHERE idInsumo = {idInsumo}";
+            return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
+        } 
+
+
+        public void ActualizarExistencia(int idInsumo, int cantidadEntrada)
+        {
+            string sqlCommnad = $"UPDATE insumo SET existencia = existencia + {cantidadEntrada} WHERE idInsumo = {idInsumo}";
+            con.RunOracleNonQuery(sqlCommnad);        
+        }
+
+        public int traerPrecioUnitario(int IdInsumo)
+        {
+            int precioInsumo = 0;   
+            string sqlCommand = $"SELECT precioUnitario FROM insumo WHERE idInsumo = {IdInsumo}";
+            precioInsumo = Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
+            return precioInsumo;
+        }
+
     }
 }

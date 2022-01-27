@@ -8,6 +8,7 @@ namespace Restaurant.Core
 {
     public class Proveedor
     {
+        public int idProveedor { get; set; }
         public string RutProveedor { get; set; }
 
         public string NombreProveedor { get; set; }

@@ -26,12 +26,14 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <ComboBox x:Name="cbCategInsumoEntra" Width="250" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría Insumo" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" SelectionChanged="cbCategInsumoEntra_SelectionChanged"/>
                     <ComboBox Grid.Row="1" Width="250" x:Name="cbInsumo" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Insumo" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
-                    <TextBox Grid.Row="2" Width="250" x:Name="txtCantidadReponer" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Cantidad"/>
-                    <Button x:Name="btnIngresarInsumo" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Reponer Insumo" Width="250" Grid.Row="3"/>
-                    <Button x:Name="btnCancelar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Grid.Row="4" Width="250"/>
+                    <ComboBox Grid.Row="2" x:Name="cbProveedorEntra" Width="250" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Proveedor" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                    <TextBox Grid.Row="3" Width="250" x:Name="txtCantidadReponer" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Cantidad"/>
+                    <Button x:Name="btnIngresarInsumo" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Reponer Insumo" Width="250" Grid.Row="4" Click="btnIngresarInsumo_Click"/>
+                    <Button x:Name="btnCancelar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Grid.Row="5" Width="250"/>
                 </Grid>
             </materialDesign:PopupBox>
             <materialDesign:PopupBox x:Name="PopuBoxActuliazarEntrada" StaysOpen="True">
