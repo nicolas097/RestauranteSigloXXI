@@ -428,13 +428,13 @@ namespace Restaurant.Negocio
         public List<Usuario> GetUsuariosList()
         {
             List<Usuario> listaUsuario = new();
-            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO, TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRES AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
+            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO,TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRES AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
                 Usuario usuario = new Usuario
                 {
                    IdUsuario = Convert.ToInt32(dr["IDUSUARIO"]),
-                   IdTipoUsuario = dr["TIPOUSUARIO"].ToString(),
+                   DescripcionTipoUsuario = dr["TIPOUSUARIO"].ToString(),
                    Correo = dr["CORREO"].ToString(),
                    Contrasena = dr["CONTRASENA"].ToString(),
                    Nombre = dr["NOMBRES"].ToString(),

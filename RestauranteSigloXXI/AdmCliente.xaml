@@ -49,14 +49,14 @@
             </materialDesign:PopupBox>
             <Button x:Name="btnEliminarUsuario" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
             <Button x:Name="btnRefreshUsuarios" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
-            <ComboBox x:Name="cbFilCliente" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar Por cliente" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+            <ComboBox x:Name="cbFilCliente" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar Por cliente" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCliente_SelectionChanged"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <ListView x:Name="lvUsuarios" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Colleciotion}" Loaded="lvUsuarios_Loaded">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="idUsuario" Width="120" DisplayMemberBinding="{Binding IdUsuario}"/>
-                        <GridViewColumn Header="Tipo Usuario" Width="145" DisplayMemberBinding="{Binding IdTipoUsuario}"/>
+                        <GridViewColumn Header="Tipo Usuario" Width="145" DisplayMemberBinding="{Binding DescripcionTipoUsuario}"/>
                         <GridViewColumn Header="Correo" Width="160" DisplayMemberBinding="{Binding Correo}"/>
                         <GridViewColumn Header="Contraseña" Width="150" DisplayMemberBinding="{Binding Contrasena}"/>
                         <GridViewColumn Header="Nombres" Width="149" DisplayMemberBinding="{Binding Nombre}"/>

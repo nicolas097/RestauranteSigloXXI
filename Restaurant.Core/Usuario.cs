@@ -22,6 +22,7 @@ namespace Restaurant.Core
 
         public string Contrasena { get; set; }
 
+        public string DescripcionTipoUsuario { get; set; } 
 
         public string Nombre { get; set; }
 

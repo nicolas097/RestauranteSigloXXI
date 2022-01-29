@@ -70,5 +70,55 @@ namespace RestauranteInterfaz
                 }
             }
         }
+
+        private void cbFilCliente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbFilCliente.SelectedIndex != 0)
+            {
+                lvUsuarios.ItemsSource = null;
+                if (cbFilCliente.Text != " ")
+                {
+                    lvUsuarios.ItemsSource = metNegocio.GetUsuariosList().Where(s => s.DescripcionTipoUsuario == cbFilCliente.SelectedItem.ToString()).ToList();
+
+                }
+            }
+            else
+            {
+                Refresh();
+            }
+        }
+
+
+        private void Refresh()
+        {
+            lvUsuarios.ItemsSource = null;
+            lvUsuarios.ItemsSource = metNegocio.GetUsuariosList();
+            cbFilCliente.SelectedIndex = 0;
+        }
+
+
+        //public string comboBoxIdTipoUsuario(int indice)
+        //{
+        //    switch (indice)
+        //    {
+        //        case 1:
+        //            return "ADM";
+        //        case 2:
+        //            return "CLI";
+        //        case 3:
+        //            return "BOD";
+        //        case 4:
+        //            return "REC";
+        //        case 5:
+        //            return "COC";
+        //        case 6:
+        //            return "SIS";
+        //        case 7:
+        //            return "FIN";
+        //        default:
+        //            break;
+        //    }
+        //    return " ";
+        //}
     }
 }
