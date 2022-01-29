@@ -428,7 +428,7 @@ namespace Restaurant.Negocio
         public List<Usuario> GetUsuariosList()
         {
             List<Usuario> listaUsuario = new();
-            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO,TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRES AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
+            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO,TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRES AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.RUN AS RUN ,USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
                 Usuario usuario = new Usuario
@@ -440,6 +440,7 @@ namespace Restaurant.Negocio
                    Nombre = dr["NOMBRES"].ToString(),
                    Apellido = dr["APELLIDOS"].ToString(),
                    Direccion = dr["DIRECCION"].ToString(),
+                   Run = dr["RUN"].ToString(),
                    NombreUsuario = dr["NOMBREUSUARIO"].ToString()
                 };
                 listaUsuario.Add(usuario);
@@ -480,6 +481,34 @@ namespace Restaurant.Negocio
         {
             string sqlCommand = $"SELECT IDTIPOUSUARIO FROM TIPOUSUARIO WHERE DESCRIPCION = '{nombreTipoUsuario}'";
             return con.RunOracleExecuteScalar(sqlCommand).ToString();
+        }
+
+
+
+        public bool ActulizarUsuario(Usuario usuario)
+        {
+            OracleCommand cmd = new("SP_ACTUALIZARUSUARIO", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("P_IDUSUARIO", usuario.IdUsuario);
+            cmd.Parameters.Add("P_IDTIPOUSUARIO", usuario.IdTipoUsuario);
+            cmd.Parameters.Add("P_CORREO", usuario.Correo);
+            cmd.Parameters.Add("P_CONTRASENA", usuario.Contrasena);
+            cmd.Parameters.Add("P_NOMBRES", usuario.Nombre);
+            cmd.Parameters.Add("P_APELLIDOS", usuario.Apellido);
+            cmd.Parameters.Add("P_DIRECCION", usuario.Direccion);
+            cmd.Parameters.Add("P_RUN", usuario.Run);
+            cmd.Parameters.Add("P_NOMBREUSUARIO", usuario.NombreUsuario);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
+            {
+
+                return false;   
+            }
         }
     }
 }

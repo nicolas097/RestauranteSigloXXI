@@ -33,7 +33,8 @@ namespace RestauranteInterfaz
             listaTipoCliente.Insert(0, "Todos");
             cbFilCliente.ItemsSource = listaTipoCliente;
             cbIdTipoUsuarioIngreso.ItemsSource = metNegocio.GetTipoUsuario();
-            popBoxActualizarUsuario.IsEnabled = false;  
+            popBoxActualizarUsuario.IsEnabled = false;
+            cbIdTipoUsuarioActualizar.ItemsSource = metNegocio.GetTipoUsuario();
 
         }
 
@@ -63,6 +64,7 @@ namespace RestauranteInterfaz
                 if (metNegocio.CrearUsuario(user))
                 {
                     MessageBox.Show("Se ingreso el usuario correctamente");
+                    Refresh();
                 }
                 else
                 {
@@ -94,6 +96,48 @@ namespace RestauranteInterfaz
             lvUsuarios.ItemsSource = null;
             lvUsuarios.ItemsSource = metNegocio.GetUsuariosList();
             cbFilCliente.SelectedIndex = 0;
+        }
+
+        private void lvUsuarios_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvUsuarios.SelectedItem != null)
+            {
+                popBoxActualizarUsuario.IsEnabled = true;
+                var usuarioEditar = (Usuario)lvUsuarios.SelectedItem;
+                cbIdTipoUsuarioActualizar.Text = usuarioEditar.DescripcionTipoUsuario.ToString();
+                txtCorreoActualizar.Text = usuarioEditar.Correo;
+                txtContrasenaActualizar.Text = usuarioEditar.Contrasena;
+                txtNombresActualizar.Text = usuarioEditar.Nombre;
+                txtApellidoActualizar.Text = usuarioEditar.Apellido;
+                txtDireccionActualizar.Text = usuarioEditar.Direccion;
+                txtRunIngresoActualizar.Text = usuarioEditar.Run;
+                txtNombreUsuarioActualizar.Text = usuarioEditar.NombreUsuario;
+
+            }
+        }
+
+        private void btnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            int idUser = ((Usuario)lvUsuarios.SelectedItem).IdUsuario;
+            Usuario usuario = new Usuario();
+            usuario.IdUsuario = idUser;
+            usuario.IdTipoUsuario = metNegocio.GetTipoUsuarioFromDescripcion(cbIdTipoUsuarioActualizar.Text);
+            usuario.Correo = txtCorreoActualizar.Text;
+            usuario.Contrasena = txtContrasenaActualizar.Text;  
+            usuario.Nombre = txtNombresActualizar.Text;
+            usuario.Apellido = txtApellidoActualizar.Text;
+            usuario.Direccion = txtDireccionActualizar.Text;
+            usuario.Run = txtRunIngresoActualizar.Text;
+            usuario.NombreUsuario = txtNombreUsuarioActualizar.Text;
+            if (metNegocio.ActulizarUsuario(usuario))
+            {
+                MessageBox.Show("Se ha actualizado el usuario");
+                Refresh();
+            }
+            else
+            {
+                MessageBox.Show("No se ha actualizado nada");
+            }
         }
 
 

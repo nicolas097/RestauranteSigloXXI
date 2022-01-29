@@ -45,14 +45,40 @@
                 </Grid>
             </materialDesign:PopupBox>
             <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxActualizarUsuario">
-
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="Pencil" Height="30" Width="30" Foreground="{StaticResource  MaterialDesignLightBackground}" Margin="20"/>
+                </materialDesign:PopupBox.ToggleContent>
+                <Grid Background="{StaticResource MaterialDesignDarkBackground}" Height="600" Width="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox x:Name="cbIdTipoUsuarioActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Tipo Usuario" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                    <TextBox Grid.Row="1" x:Name="txtCorreoActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"  materialDesign:HintAssist.Hint="Correo"/>
+                    <TextBox Grid.Row="2" x:Name="txtContrasenaActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Contraseña"/>
+                    <TextBox Grid.Row="3" x:Name="txtNombresActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Nombres"/>
+                    <TextBox Grid.Row="4" x:Name="txtApellidoActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Apellidos"/>
+                    <TextBox Grid.Row="5" x:Name="txtDireccionActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Dirección"/>
+                    <TextBox Grid.Row="6" x:Name="txtRunIngresoActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Run"/>
+                    <TextBox Grid.Row="7" x:Name="txtNombreUsuarioActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Nombre de Usuario"/>
+                    <Button Grid.Row="8" x:Name="btnActualizar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Actualizar Usuario" Click="btnActualizar_Click"/>
+                    <Button Grid.Row="9" x:Name="btnCancelarActualizar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Cancelar"/>
+                </Grid>
             </materialDesign:PopupBox>
             <Button x:Name="btnEliminarUsuario" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
             <Button x:Name="btnRefreshUsuarios" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
             <ComboBox x:Name="cbFilCliente" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar Por cliente" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCliente_SelectionChanged"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <ListView x:Name="lvUsuarios" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Colleciotion}" Loaded="lvUsuarios_Loaded">
+            <ListView x:Name="lvUsuarios" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Colleciotion}" Loaded="lvUsuarios_Loaded" SelectionChanged="lvUsuarios_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="idUsuario" Width="120" DisplayMemberBinding="{Binding IdUsuario}"/>
@@ -62,6 +88,7 @@
                         <GridViewColumn Header="Nombres" Width="149" DisplayMemberBinding="{Binding Nombre}"/>
                         <GridViewColumn Header="Apellidos" Width="150" DisplayMemberBinding="{Binding Apellido}"/>
                         <GridViewColumn Header="Direccion" Width="150" DisplayMemberBinding="{Binding Direccion}"/>
+                        <GridViewColumn Header="Run" Width="150" DisplayMemberBinding="{Binding Run}"/>
                         <GridViewColumn Header="Nombre Usuario" Width="161" DisplayMemberBinding="{Binding NombreUsuario}"/>
                     </GridView>
                 </ListView.View>
