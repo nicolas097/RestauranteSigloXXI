@@ -80,7 +80,15 @@ namespace RestauranteInterfaz
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
+            popBoxCrearMesa.IsPopupOpen = false;
+        }
 
+
+
+        private void limpiarCrerMesaPopuBox()
+        {
+            txtCantSilla.Text = string.Empty;
+            cbEstado.SelectedItem = null;
         }
 
         //private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -167,6 +175,7 @@ namespace RestauranteInterfaz
                 {
                     MessageBox.Show("Se agregó mesa");
                     Refresh();
+                    limpiarCrerMesaPopuBox();
                 }
                 else
                 {

@@ -67,6 +67,7 @@ namespace RestauranteInterfaz
                 {
                     MessageBox.Show("Se ingreso el usuario correctamente");
                     Refresh();
+                    limpiarPopBoxCrearUsuario();
                 }
                 else
                 {
@@ -92,6 +93,18 @@ namespace RestauranteInterfaz
             }
         }
 
+
+        public void limpiarPopBoxCrearUsuario()
+        {
+            cbIdTipoUsuarioIngreso.SelectedItem = null;
+            txtCorreoIngreso.Text = string.Empty;
+            txtContrasenaIngreso.Text = string.Empty;
+            txtNombresIngreso.Text = string.Empty;
+            txtApellidoIngreso.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+            txtRunIngreso.Text = string.Empty;
+            txtNombreUsuarioIngreso.Text = string.Empty;
+        }
 
         private void Refresh()
         {

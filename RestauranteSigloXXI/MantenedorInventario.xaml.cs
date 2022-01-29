@@ -118,6 +118,7 @@ namespace RestauranteInterfaz
                     MessageBox.Show("Se agregó el insumo", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     Refresh();
                     //LimpiarPopBoxCrear();
+                    limpiarpopBoxCrearInsumo();
                 }
                 else
                 {
@@ -195,6 +196,16 @@ namespace RestauranteInterfaz
                 txtStockBtnUpdate.Text = InsumoEditar.Existencia.ToString();
 
             }
+        }
+
+
+        public void limpiarpopBoxCrearInsumo()
+        {
+            txtNombreInsumo.Text = string.Empty;
+            cbCategoria.SelectedItem = null;
+            txtPrecio.Text = string.Empty;
+            txtStock.Text = string.Empty;   
+
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
