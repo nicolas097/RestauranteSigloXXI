@@ -387,9 +387,9 @@ namespace Restaurant.Negocio
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@P_CANTIDAD", detCompra.cantidad);
             cmd.Parameters.Add("@P_IDCATEGORIA", detCompra.IdCategoria);
+            cmd.Parameters.Add("@P_IDPROVEEDOR", detCompra.IdProveedor);
             cmd.Parameters.Add("@P_IDINSUMO", detCompra.IdInsumo);
             cmd.Parameters.Add("@P_IDCOMPRA",detCompra.IdCompra);
-            cmd.Parameters.Add("@P_IDPROVEEDOR", detCompra.IdProveedor);
 
             try
             {
@@ -481,6 +481,14 @@ namespace Restaurant.Negocio
         {
             string sqlCommand = $"SELECT IDTIPOUSUARIO FROM TIPOUSUARIO WHERE DESCRIPCION = '{nombreTipoUsuario}'";
             return con.RunOracleExecuteScalar(sqlCommand).ToString();
+        }
+
+
+
+        public int GetInsumoFromNombreInsumo (string nombreInsumo)
+        {
+            string sqlCommand = $"SELECT IDINSUMO FROM INSUMO WHERE NOMBREINSUMO = '{nombreInsumo}'";
+            return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
         }
 
 

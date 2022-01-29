@@ -53,8 +53,8 @@ namespace RestauranteInterfaz
 
         private void MostrarIdUsuarioYNombreusuario()
         {
-            lbNombreUsuario.Content = user.nombre;
-            lbIdUsuario.Content = user.idUsuario;
+            lbNombreUsuario.Content = user.NombreUsuario;
+            lbIdUsuario.Content = user.IdUsuario;
 
         }
 
@@ -83,9 +83,9 @@ namespace RestauranteInterfaz
         {
             DetalleCompra detCompra = new DetalleCompra();
             detCompra.cantidad = Convert.ToInt32(txtCantidadReponer.Text);
-            detCompra.IdCategoria = insumo.IdCategoria;
-            detCompra.IdInsumo = insumo.IdInsumo;
+            detCompra.IdCategoria = Convert.ToInt32(cbCategInsumoEntra.SelectedIndex + 1);
             detCompra.IdProveedor = Convert.ToInt32(cbProveedorEntra.SelectedIndex + 1);
+            detCompra.IdInsumo = Convert.ToInt32(metNeg.GetInsumoFromNombreInsumo(cbInsumo.Text));
             if (metNeg.CrearDetalleCompra(detCompra))
             {
                 //metNeg.ActualizarExistencia(detCompra.IdCompra, detCompra.cantidad);
