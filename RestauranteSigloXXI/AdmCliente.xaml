@@ -41,14 +41,14 @@
                     <TextBox Grid.Row="6" x:Name="txtRunIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Run"/>
                     <TextBox Grid.Row="7" x:Name="txtNombreUsuarioIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Nombre de Usuario"/>
                     <Button Grid.Row="8" x:Name="btnIngresarUsuario" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Ingresar Usuario" Click="btnIngresarUsuario_Click"/>
-                    <Button Grid.Row="9" x:Name="btnCancelar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Cancelar"/>
+                    <Button Grid.Row="9" x:Name="btnCancelar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Cancelar" Click="btnCancelar_Click"/>
                 </Grid>
             </materialDesign:PopupBox>
             <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxActualizarUsuario">
                 <materialDesign:PopupBox.ToggleContent>
                     <materialDesign:PackIcon Kind="Pencil" Height="30" Width="30" Foreground="{StaticResource  MaterialDesignLightBackground}" Margin="20"/>
                 </materialDesign:PopupBox.ToggleContent>
-                <Grid Background="{StaticResource MaterialDesignDarkBackground}" Height="600" Width="300">
+                <Grid Background="{StaticResource MaterialDesignDarkBackground}" Height="550" Width="300">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -70,11 +70,11 @@
                     <TextBox Grid.Row="6" x:Name="txtRunIngresoActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Run"/>
                     <TextBox Grid.Row="7" x:Name="txtNombreUsuarioActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Nombre de Usuario"/>
                     <Button Grid.Row="8" x:Name="btnActualizar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Actualizar Usuario" Click="btnActualizar_Click"/>
-                    <Button Grid.Row="9" x:Name="btnCancelarActualizar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Cancelar"/>
+                    <Button Grid.Row="9" x:Name="btnCancelarActualizar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Cancelar" Click="btnCancelarActualizar_Click"/>
                 </Grid>
             </materialDesign:PopupBox>
-            <Button x:Name="btnEliminarUsuario" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
-            <Button x:Name="btnRefreshUsuarios" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
+            <Button x:Name="btnEliminarUsuario" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnEliminarUsuario_Click"/>
+            <Button x:Name="btnRefreshUsuarios" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnRefreshUsuarios_Click"/>
             <ComboBox x:Name="cbFilCliente" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar Por cliente" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCliente_SelectionChanged"/>
         </StackPanel>
         <StackPanel Grid.Row="1">

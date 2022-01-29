@@ -45,7 +45,7 @@
             <TabItem Height="60" Width="120" x:Name="tabMantCliente" Loaded="tabMantCliente_Loaded" >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="Clientes"  FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>
+                        <Label Content="Usuario"  FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>
                         <Label Content="{materialDesign:PackIcon Kind=AccountGroup}"/>
                     </StackPanel>
                 </TabItem.Header>

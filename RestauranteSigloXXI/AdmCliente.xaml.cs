@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Restaurant.Negocio;
 using Restaurant.Core;
+using MessageBox = System.Windows.MessageBox;
+using SelectionMode = System.Windows.Controls.SelectionMode;
 
 namespace RestauranteInterfaz
 {
@@ -138,6 +140,50 @@ namespace RestauranteInterfaz
             {
                 MessageBox.Show("No se ha actualizado nada");
             }
+        }
+
+        private void btnEliminarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvUsuarios.SelectedItem != null)
+            {
+                var usuarioEliminar = (Usuario)lvUsuarios.SelectedItem;
+                Usuario usuario = new Usuario();
+                usuario.IdUsuario = Convert.ToInt32(usuarioEliminar.IdUsuario);
+
+                if (MessageBox.Show("Estas seguro que quieres eliminar al usuario:" + usuarioEliminar.NombreUsuario + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    if (metNegocio.EliminarUsuario(usuario))
+                    {
+                        MessageBox.Show("El usuario ha sido eliminado");
+                        Refresh();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha logrado eliminar el usuario");
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Seleccione algun Item");
+            }
+        }
+
+        private void btnRefreshUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void btnCancelarActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            popBoxActualizarUsuario.IsPopupOpen = false; 
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            popBoxCrearUsuario.IsPopupOpen = false;   
         }
 
 

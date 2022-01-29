@@ -57,7 +57,7 @@
                         <TextBox x:Name="txtStockBtnUpdate" Width="100" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Stock" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" Margin="10" />
                     </StackPanel>
                     <Button Grid.Row="3" x:Name="btnGuardarUpdate" Content="Actualizar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10" Click="btnGuardarUpdate_Click"/>
-                    <Button Grid.Row="4" x:Name="btnCancelarUpdate" Content="Cancelar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10"/>
+                    <Button Grid.Row="4" x:Name="btnCancelarUpdate" Content="Cancelar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="10" Click="btnCancelarUpdate_Click"/>
                 </Grid>
             </materialDesign:PopupBox>
             <Button x:Name="btnEliminar" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnEliminar_Click"/>

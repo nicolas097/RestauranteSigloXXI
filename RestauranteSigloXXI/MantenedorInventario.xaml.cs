@@ -224,5 +224,10 @@ namespace RestauranteInterfaz
                 MessageBox.Show("Seleccione alguna fila");
             }
         }
+
+        private void btnCancelarUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            popBoxActualizar.IsPopupOpen = false;   
+        }
     }
 }

@@ -510,5 +510,23 @@ namespace Restaurant.Negocio
                 return false;   
             }
         }
+
+
+        public bool EliminarUsuario(Usuario usuario)
+        {
+            OracleCommand cmd = new("SP_ELIMINARUSUARIO", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("P_IDUSUARIO", usuario.IdUsuario);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
     }
 }
