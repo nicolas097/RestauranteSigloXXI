@@ -3,12 +3,70 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:RestauranteInterfaz"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1120"
       Title="AdmCliente">
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
-        <Label Content="Clientes" HorizontalAlignment="Center" FontSize="40"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="spBarra" VerticalAlignment="Top">
+            <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxCrearUsuario">
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="AddCircle" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20"/>
+                </materialDesign:PopupBox.ToggleContent>
+                <Grid Background="{StaticResource MaterialDesignDarkBackground}" Height="550" Width="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox x:Name="cbIdTipoUsuarioIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Tipo Usuario" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
+                    <TextBox Grid.Row="1" x:Name="txtCorreoIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45"  materialDesign:HintAssist.Hint="Correo"/>
+                    <TextBox Grid.Row="2" x:Name="txtContrasenaIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Contraseña"/>
+                    <TextBox Grid.Row="3" x:Name="txtNombresIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Nombres"/>
+                    <TextBox Grid.Row="4" x:Name="txtApellidoIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Apellidos"/>
+                    <TextBox Grid.Row="5" x:Name="txtDireccion" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Dirección"/>
+                    <TextBox Grid.Row="6" x:Name="txtRunIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Run"/>
+                    <TextBox Grid.Row="7" x:Name="txtNombreUsuarioIngreso" Width="250" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Height="45" materialDesign:HintAssist.Hint="Nombre de Usuario"/>
+                    <Button Grid.Row="8" x:Name="btnIngresarUsuario" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Ingresar Usuario" Click="btnIngresarUsuario_Click"/>
+                    <Button Grid.Row="9" x:Name="btnCancelar" Width="250" Style="{StaticResource MaterialDesignOutlinedButton}" FontSize="15"  Height="40" Content="Cancelar"/>
+                </Grid>
+            </materialDesign:PopupBox>
+            <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxActualizarUsuario">
+
+            </materialDesign:PopupBox>
+            <Button x:Name="btnEliminarUsuario" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
+            <Button x:Name="btnRefreshUsuarios" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}"/>
+            <ComboBox x:Name="cbFilCliente" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar Por cliente" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <ListView x:Name="lvUsuarios" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Colleciotion}" Loaded="lvUsuarios_Loaded">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="idUsuario" Width="120" DisplayMemberBinding="{Binding IdUsuario}"/>
+                        <GridViewColumn Header="Tipo Usuario" Width="145" DisplayMemberBinding="{Binding IdTipoUsuario}"/>
+                        <GridViewColumn Header="Correo" Width="160" DisplayMemberBinding="{Binding Correo}"/>
+                        <GridViewColumn Header="Contraseña" Width="150" DisplayMemberBinding="{Binding Contrasena}"/>
+                        <GridViewColumn Header="Nombres" Width="149" DisplayMemberBinding="{Binding Nombre}"/>
+                        <GridViewColumn Header="Apellidos" Width="150" DisplayMemberBinding="{Binding Apellido}"/>
+                        <GridViewColumn Header="Direccion" Width="150" DisplayMemberBinding="{Binding Direccion}"/>
+                        <GridViewColumn Header="Nombre Usuario" Width="161" DisplayMemberBinding="{Binding NombreUsuario}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+
     </Grid>
 </Page>

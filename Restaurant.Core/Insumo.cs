@@ -23,6 +23,8 @@ namespace Restaurant.Core
 
         public string nombreInsumo { get; set; }
 
+        public int idInsumo => Convert.ToInt32(con.RunOracleExecuteScalar($"SELECT IDINSUMO FROM INSUMO WHERE IDCATEGORIA = {IdCategoria} and NOMBREINSUMO = {NombreInsumo}"));
+
         public int Existencia { get; set; }
 
         public int Estado  { get; set; }

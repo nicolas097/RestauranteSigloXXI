@@ -15,6 +15,8 @@ namespace Restaurant.Core
         public string IdTipoUsuario { get; set; }
 
         public int idUsuario => Convert.ToInt32(con.RunOracleExecuteScalar($"SELECT IDUSUARIO FROM USUARIO WHERE NOMBREUSUARIO = '{NombreUsuario}'"));
+
+        public string idTipoUsuario => con.RunOracleExecuteScalar($"SELECT DESCRIPCION FROM TIPOUSUARIO WHERE IDTIPOUSUARIO = {idTipoUsuario}").ToString();
         
         public string Correo { get; set; }
 

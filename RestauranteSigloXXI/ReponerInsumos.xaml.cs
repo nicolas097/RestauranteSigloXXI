@@ -25,6 +25,8 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class ReponerInsumos : Page
     {
+        public Insumo insumo = new();
+
         private Usuario user;
 
         private MetodoNegocio metNeg = new ();
@@ -44,6 +46,7 @@ namespace RestauranteInterfaz
             cbCategInsumoEntra.ItemsSource = metNeg.GetCategoriaStrings();  
             PopuBoxActuliazarEntrada.IsEnabled = false;
             cbProveedorEntra.ItemsSource = metNeg.GetProveedor();
+            //cbInsumo.ItemsSource = metNeg.GetInsumoList();
                     
           
         }
@@ -63,12 +66,16 @@ namespace RestauranteInterfaz
             //}
         }
 
+
+
         private void cbCategInsumoEntra_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-         
-            cbInsumo.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex + 1).Select( s => s.NombreInsumo).ToList();
+
             
+            cbInsumo.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex + 1).Select(s => s.NombreInsumo).ToList();
+
         }
+
 
        
 
@@ -76,8 +83,8 @@ namespace RestauranteInterfaz
         {
             DetalleCompra detCompra = new DetalleCompra();
             detCompra.cantidad = Convert.ToInt32(txtCantidadReponer.Text);
-            detCompra.IdCategoria = Convert.ToInt32(cbCategInsumoEntra.SelectedIndex + 1);
-            detCompra.IdInsumo = Convert.ToInt32(cbCategInsumoEntra.SelectedIndex + 1);
+            detCompra.IdCategoria = insumo.IdCategoria;
+            detCompra.IdInsumo = insumo.IdInsumo;
             detCompra.IdProveedor = Convert.ToInt32(cbProveedorEntra.SelectedIndex + 1);
             if (metNeg.CrearDetalleCompra(detCompra))
             {
@@ -112,8 +119,19 @@ namespace RestauranteInterfaz
 
         private void btnIngresarInsumo_Click(object sender, RoutedEventArgs e)
         {
-            ingresarCompra();
-            ingresarDetalleCompra();
+            //if (cbInsumo.SelectedIndex !=-1  && cbCategInsumoEntra.SelectedIndex !=-1)
+            //{
+            //    insumo = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex + 1 && s.NombreInsumo == cbInsumo.Text).FirstOrDefault();
+
+                ingresarCompra();
+                ingresarDetalleCompra(); 
+            //}
+            
+        }
+
+        private void cbInsumo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

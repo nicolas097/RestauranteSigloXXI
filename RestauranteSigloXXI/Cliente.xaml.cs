@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class Cliente : Page
     {
+        private MetodoNegocio metN = new();
         public Cliente()
         {
             InitializeComponent();
+        }
+
+        private void lvUsuarios_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

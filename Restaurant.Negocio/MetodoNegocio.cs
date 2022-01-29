@@ -143,7 +143,12 @@ namespace Restaurant.Negocio
             return listadoProveedor;
         }
 
-
+        public List<string> GetTipoUsuario()
+        {
+            string sqlCommand = "SELECT DESCRIPCION FROM TIPOUSUARIO";
+            List<string> listaTipoUsuario = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
+            return listaTipoUsuario;
+        }
 
 
 
@@ -283,6 +288,8 @@ namespace Restaurant.Negocio
         }
 
 
+    
+
 
         public bool CrearMesa(Mesa mes)
         {
@@ -416,5 +423,63 @@ namespace Restaurant.Negocio
             return precioInsumo;
         }
 
+
+
+        public List<Usuario> GetUsuariosList()
+        {
+            List<Usuario> listaUsuario = new();
+            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO, TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRES AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Usuario usuario = new Usuario
+                {
+                   IdUsuario = Convert.ToInt32(dr["IDUSUARIO"]),
+                   IdTipoUsuario = dr["TIPOUSUARIO"].ToString(),
+                   Correo = dr["CORREO"].ToString(),
+                   Contrasena = dr["CONTRASENA"].ToString(),
+                   Nombre = dr["NOMBRES"].ToString(),
+                   Apellido = dr["APELLIDOS"].ToString(),
+                   Direccion = dr["DIRECCION"].ToString(),
+                   NombreUsuario = dr["NOMBREUSUARIO"].ToString()
+                };
+                listaUsuario.Add(usuario);
+            }
+            return listaUsuario;
+        }
+
+
+
+
+        public bool CrearUsuario(Usuario user)
+        {
+            OracleCommand cmd = new("SP_CREARUSUARIO", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDTIPOUSUARIO", user.IdTipoUsuario);
+            cmd.Parameters.Add("@P_CORREO", user.Correo);
+            cmd.Parameters.Add("@P_CONTRASENA", user.Contrasena);
+            cmd.Parameters.Add("@P_NOMBRE", user.Nombre);
+            cmd.Parameters.Add("@P_APELLIDO", user.Apellido);
+            cmd.Parameters.Add("@P_DIRECCION", user.Direccion);
+            cmd.Parameters.Add("@P_RUN", user.Run);
+            cmd.Parameters.Add("@P_NOMBREUSUARIO", user.NombreUsuario);
+
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public string GetTipoUsuarioFromDescripcion(string nombreTipoUsuario)
+        {
+            string sqlCommand = $"SELECT IDTIPOUSUARIO FROM TIPOUSUARIO WHERE DESCRIPCION = '{nombreTipoUsuario}'";
+            return con.RunOracleExecuteScalar(sqlCommand).ToString();
+        }
     }
 }
