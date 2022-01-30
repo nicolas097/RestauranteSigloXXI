@@ -36,29 +36,23 @@
                     <Button x:Name="btnCancelar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Grid.Row="5" Width="250"/>
                 </Grid>
             </materialDesign:PopupBox>
-            <materialDesign:PopupBox x:Name="PopuBoxActuliazarEntrada" StaysOpen="True">
-                <materialDesign:PopupBox.ToggleContent>
-                    <materialDesign:PackIcon Kind="Pencil" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20" />
-                </materialDesign:PopupBox.ToggleContent>
-                <Grid Background="{StaticResource MaterialDesignDarkBackground}" Height="400" Width="300">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <ComboBox x:Name="cbCategInumoEntraActualizar" Width="250" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Categoría Insumo" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
-                    <ComboBox Grid.Row="1" Width="250" x:Name="cbInsumoActualizar" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Insumo" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" SelectionChanged="cbInsumoActualizar_SelectionChanged"/>
-                    <TextBox Grid.Row="2" Width="250" x:Name="txtCantidadReponerActualizar" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Cantidad"/>
-                    <Button x:Name="btnIngresarInsumoActualizar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Actualizar Entrada" Width="250" Grid.Row="3"/>
-                    <Button x:Name="btnCancelarInsumoActualizar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Grid.Row="4" Width="250"/>
-                </Grid>
-            </materialDesign:PopupBox>
-            <ComboBox x:Name="cbFilCategoriaInsumo" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar por categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" />
+            <Button x:Name="btnRefresh" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnRefresh_Click" />
+            <ComboBox x:Name="cbFilCategoriaInsumo" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar por categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoriaInsumo_SelectionChanged" />
             <Label x:Name="lbBienvenido" Content="Bienvenido:" Margin="20" Height="35" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}"/>
             <Label x:Name="lbNombreUsuario" Height="30" Width="150"  FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}"/>
-            <Label x:Name="lbIdUsuario" Height="30" Width="150" Margin="20" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Visibility="Hidden"/>
+            <Label x:Name="lbIdUsuario" Height="30" Width="150" Margin="20" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Visibility="Collapsed"/>
            </StackPanel>
+        <StackPanel Grid.Row="1">
+            <ListView x:Name="lvInventarioReponer" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Collection}" Loaded="lvInventarioReponer_Loaded" SelectionChanged="lvInventarioReponer_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id Insumo" Width="150" DisplayMemberBinding="{Binding IdInsumo}"/>
+                        <GridViewColumn Header="Categoría Insumo" Width="170" DisplayMemberBinding="{Binding DescripCategoria}"/>
+                        <GridViewColumn Header="Nombre insumo" Width="160" DisplayMemberBinding="{Binding NombreInsumo}"/>
+                        <GridViewColumn Header="Stock" Width="110" DisplayMemberBinding="{Binding Existencia}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Page>

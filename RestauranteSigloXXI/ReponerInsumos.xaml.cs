@@ -44,7 +44,6 @@ namespace RestauranteInterfaz
             ListaCategoria.Insert(0, "Todos");
             cbFilCategoriaInsumo.ItemsSource = ListaCategoria;   
             cbCategInsumoEntra.ItemsSource = metNeg.GetCategoriaStrings();  
-            PopuBoxActuliazarEntrada.IsEnabled = false;
             cbProveedorEntra.ItemsSource = metNeg.GetProveedor();
             //cbInsumo.ItemsSource = metNeg.GetInsumoList();
                     
@@ -72,7 +71,7 @@ namespace RestauranteInterfaz
         {
 
             
-            cbInsumo.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex + 1).Select(s => s.NombreInsumo).ToList();
+            cbInsumo.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex).Select(s => s.NombreInsumo).ToList();
 
         }
 
@@ -88,8 +87,9 @@ namespace RestauranteInterfaz
             detCompra.IdInsumo = Convert.ToInt32(metNeg.GetInsumoFromNombreInsumo(cbInsumo.Text));
             if (metNeg.CrearDetalleCompra(detCompra))
             {
-                //metNeg.ActualizarExistencia(detCompra.IdCompra, detCompra.cantidad);
+                metNeg.ActualizarExistencia(detCompra.IdInsumo, detCompra.cantidad);
                 MessageBox.Show("Se ingresó a detalle Compra");
+                
             }
             else
             {
@@ -124,7 +124,9 @@ namespace RestauranteInterfaz
             //    insumo = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex + 1 && s.NombreInsumo == cbInsumo.Text).FirstOrDefault();
 
                 ingresarCompra();
-                ingresarDetalleCompra(); 
+                ingresarDetalleCompra();
+                Refresh();
+
             //}
             
         }
@@ -132,6 +134,42 @@ namespace RestauranteInterfaz
         private void cbInsumo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+
+        private void Refresh()
+        {
+            lvInventarioReponer.ItemsSource = null;
+            lvInventarioReponer.ItemsSource = metNeg.GetInsumoList();
+            cbFilCategoriaInsumo.SelectedIndex = 0;
+        }
+
+        private void lvInventarioReponer_Loaded(object sender, RoutedEventArgs e)
+        {
+            lvInventarioReponer.ItemsSource = metNeg.GetInsumoList();
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void lvInventarioReponer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          
+        }
+
+        private void cbFilCategoriaInsumo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbFilCategoriaInsumo.SelectedIndex != 0)
+            {
+                lvInventarioReponer.ItemsSource = null;
+                lvInventarioReponer.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbFilCategoriaInsumo.SelectedIndex).ToList();
+            }
+            else
+            {
+                Refresh();
+            }
         }
     }
 }

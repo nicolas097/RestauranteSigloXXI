@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Restaurante.DB;
+using System.Windows.Media;
+
 
 namespace Restaurant.Core
 {
@@ -28,6 +31,12 @@ namespace Restaurant.Core
         public int Existencia { get; set; }
 
         public int Estado  { get; set; }
+
+
+
+
+
+      
 
 
     }

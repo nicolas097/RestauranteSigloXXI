@@ -72,7 +72,13 @@
                         <GridViewColumn Header="Categoría" Width="150" DisplayMemberBinding="{Binding DescripCategoria}"/>
                         <GridViewColumn Header="Nombre" Width="150" DisplayMemberBinding="{Binding NombreInsumo}"/>
                         <GridViewColumn Header="Precio" Width="150" DisplayMemberBinding="{Binding Precio}"/>
-                        <GridViewColumn Header="Stock" Width="100" DisplayMemberBinding="{Binding Existencia}"/>
+                        <GridViewColumn Header="Stock" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Existencia}" Background="{Binding ColorProducto}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
