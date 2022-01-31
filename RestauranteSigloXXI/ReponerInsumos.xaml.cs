@@ -71,7 +71,7 @@ namespace RestauranteInterfaz
         {
 
             
-            cbInsumo.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex).Select(s => s.NombreInsumo).ToList();
+            cbInsumo.ItemsSource = metNeg.GetInsumoList().Where(s => s.IdCategoria == cbCategInsumoEntra.SelectedIndex + 1).Select(s => s.NombreInsumo).ToList();
 
         }
 
@@ -103,8 +103,9 @@ namespace RestauranteInterfaz
         private void ingresarCompra()
         {
             CompraInsumo compraInsumo = new();
-            compraInsumo.ValorBruto = Convert.ToInt32(metNeg.traerPrecioUnitario(cbInsumo.SelectedIndex + 1));
-            compraInsumo.ValorIva = Convert.ToInt32(metNeg.traerPrecioUnitario(cbInsumo.SelectedIndex) * 0.19);
+            compraInsumo.ValorBruto = metNeg.traerPrecioUnitario(cbInsumo.Text);
+            compraInsumo.ValorIva = (int)Math.Round(compraInsumo.ValorBruto * 0.19);
+            
             compraInsumo.IdUsuario = user.idUsuario;
             if (metNeg.CrearCompraInsumo(compraInsumo))
             {

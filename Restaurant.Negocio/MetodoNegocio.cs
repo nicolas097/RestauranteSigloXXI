@@ -415,12 +415,12 @@ namespace Restaurant.Negocio
             con.RunOracleNonQuery(sqlCommnad);        
         }
 
-        public int traerPrecioUnitario(int IdInsumo)
+        public int traerPrecioUnitario( string nombreInsumo)
         {
-            int precioInsumo = 0;   
-            string sqlCommand = $"SELECT precioUnitario FROM insumo WHERE idInsumo = {IdInsumo}";
-            precioInsumo = Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
-            return precioInsumo;
+            
+            string sqlCommand = $"SELECT PRECIOUNITARIO FROM insumo WHERE  NOMBREINSUMO = '{nombreInsumo}'";
+            return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
+            
         }
 
 
@@ -428,7 +428,7 @@ namespace Restaurant.Negocio
         public List<Usuario> GetUsuariosList()
         {
             List<Usuario> listaUsuario = new();
-            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO,TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRES AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.RUN AS RUN ,USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
+            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO,TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRE AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.RUN AS RUN ,USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
                 Usuario usuario = new Usuario
@@ -490,6 +490,9 @@ namespace Restaurant.Negocio
             string sqlCommand = $"SELECT IDINSUMO FROM INSUMO WHERE NOMBREINSUMO = '{nombreInsumo}'";
             return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
         }
+
+
+    
 
 
 

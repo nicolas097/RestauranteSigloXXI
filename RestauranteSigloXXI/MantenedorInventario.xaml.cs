@@ -240,5 +240,7 @@ namespace RestauranteInterfaz
         {
             popBoxActualizar.IsPopupOpen = false;   
         }
+
+      
     }
 }

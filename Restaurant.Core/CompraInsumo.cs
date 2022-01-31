@@ -9,7 +9,8 @@ namespace Restaurant.Core
 {
     public  class CompraInsumo
     {
-        private Conexion con = new();
+
+       private Conexion con = new();
        public int IdCompra { get; set; }
 
        public DateTime FechaCompra { get; set; }
@@ -18,8 +19,7 @@ namespace Restaurant.Core
 
 
        public int IdUsuario { get; set; }
-
-      
+       
 
         public int ValorIva { get; set; }
 
