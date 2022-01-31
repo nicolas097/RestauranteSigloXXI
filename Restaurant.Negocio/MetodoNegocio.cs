@@ -357,6 +357,7 @@ namespace Restaurant.Negocio
         public bool CrearCompraInsumo(CompraInsumo compraInsumo)
         {
             DateTime fecha = DateTime.Now;  
+           
             compraInsumo.IdCompra = GenerateId("idCompra","CompraInsumo");
             OracleCommand cmd = new("SP_CREARCOMPRAINSUMO", con.OracleConnection);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -380,6 +381,13 @@ namespace Restaurant.Negocio
             }
         }
 
+
+        public int ValorTotalFromCompraInsumo( int idCompra)
+        {
+            string sqlCommand = $"SELECT CANTIDAD FROM DETALLECOMPRA WHERE IDCOMPRA = {idCompra}";
+            return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
+        }
+
         public bool CrearDetalleCompra(DetalleCompra detCompra)
         {
             detCompra.IdCompra = GenerateId("idCompra","DETALLECOMPRA");
@@ -401,6 +409,8 @@ namespace Restaurant.Negocio
                 return false;
             }
         }
+
+
 
         public int traerStockInsumo (int idInsumo)
         {

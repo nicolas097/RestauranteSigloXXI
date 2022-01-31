@@ -105,7 +105,7 @@ namespace RestauranteInterfaz
             CompraInsumo compraInsumo = new();
             compraInsumo.ValorBruto = metNeg.traerPrecioUnitario(cbInsumo.Text);
             compraInsumo.ValorIva = (int)Math.Round(compraInsumo.ValorBruto * 0.19);
-            
+           
             compraInsumo.IdUsuario = user.idUsuario;
             if (metNeg.CrearCompraInsumo(compraInsumo))
             {
