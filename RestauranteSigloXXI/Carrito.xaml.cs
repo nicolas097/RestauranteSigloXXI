@@ -1,5 +1,4 @@
-﻿using Restaurant.Negocio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Restaurant.Core;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -17,22 +17,19 @@ using System.Windows.Shapes;
 namespace RestauranteInterfaz
 {
     /// <summary>
-    /// Lógica de interacción para Cliente.xaml
+    /// Lógica de interacción para Carrito.xaml
     /// </summary>
-    public partial class Cliente : Page
+    public partial class Carrito : Page
     {
-
-        
-        public Cliente()
+        public Carrito(Restaurant.Core.Carrito ca)
         {
             InitializeComponent();
-            FrameMenu.Navigate(new MenuCliente());
+            lvCarrito.ItemsSource = ca.GetCarritos();
         }
 
-        private void btnCarrito_Click(object sender, RoutedEventArgs e)
+        private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
-            
-            NavigationService.Navigate(new Carrito());
+            NavigationService.GoBack();
         }
     }
 }

@@ -172,5 +172,10 @@ namespace RestauranteInterfaz
                 Refresh();
             }
         }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            popBoxIngresarInsumo.IsPopupOpen = false;
+        }
     }
 }

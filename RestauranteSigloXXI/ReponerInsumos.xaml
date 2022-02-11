@@ -33,13 +33,12 @@
                     <ComboBox Grid.Row="2" x:Name="cbProveedorEntra" Width="250" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Proveedor" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50"/>
                     <TextBox Grid.Row="3" Width="250" x:Name="txtCantidadReponer" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="{StaticResource MaterialDesignLightBackground}" Height="50" materialDesign:HintAssist.Hint="Cantidad"/>
                     <Button x:Name="btnIngresarInsumo" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Reponer Insumo" Width="250" Grid.Row="4" Click="btnIngresarInsumo_Click"/>
-                    <Button x:Name="btnCancelar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Grid.Row="5" Width="250"/>
+                    <Button x:Name="btnCancelar" Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Cancelar" Grid.Row="5" Width="250" Click="btnCancelar_Click"/>
                 </Grid>
             </materialDesign:PopupBox>
             <Button x:Name="btnRefresh" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Refresh, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Click="btnRefresh_Click" />
             <ComboBox x:Name="cbFilCategoriaInsumo" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar por categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoriaInsumo_SelectionChanged" />
-            <Label x:Name="lbBienvenido" Content="Bienvenido:" Margin="20" Height="35" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}"/>
-            <Label x:Name="lbNombreUsuario" Height="30" Width="150"  FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}"/>
+            <materialDesign:Chip x:Name="lbNombreUsuario"  Width="150" Content="" Icon="A" Foreground="{StaticResource MaterialDesignDarkForeground}" />
             <Label x:Name="lbIdUsuario" Height="30" Width="150" Margin="20" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Visibility="Collapsed"/>
            </StackPanel>
         <StackPanel Grid.Row="1">

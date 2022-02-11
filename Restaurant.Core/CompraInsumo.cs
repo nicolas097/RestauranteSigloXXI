@@ -18,7 +18,7 @@ namespace Restaurant.Core
        public int ValorBruto { get; set; }
 
 
-       public int IdUsuario { get; set; }
+        public int IdUsuario { get; set; }
        
 
         public int ValorIva { get; set; }
