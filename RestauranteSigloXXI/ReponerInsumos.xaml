@@ -40,14 +40,15 @@
             <ComboBox x:Name="cbFilCategoriaInsumo" Height="40" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="20" materialDesign:HintAssist.Hint="Filtrar por categoría" Foreground="{StaticResource MaterialDesignDarkForeground}" SelectionChanged="cbFilCategoriaInsumo_SelectionChanged" />
             <materialDesign:Chip x:Name="lbNombreUsuario"  Width="150" Content="" Icon="A" Foreground="{StaticResource MaterialDesignDarkForeground}" />
             <Label x:Name="lbIdUsuario" Height="30" Width="150" Margin="20" FontSize="15" Foreground="{StaticResource MaterialDesignLightBackground}" Visibility="Collapsed"/>
-           </StackPanel>
+           
+        </StackPanel>
         <StackPanel Grid.Row="1">
-            <ListView x:Name="lvInventarioReponer" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Collection}" Loaded="lvInventarioReponer_Loaded" SelectionChanged="lvInventarioReponer_SelectionChanged">
+            <ListView x:Name="lvInventarioReponer" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="30" VerticalAlignment="Center" Height="500" ItemsSource="{Binding Path=Collection}" Loaded="lvInventarioReponer_Loaded" SelectionChanged="lvInventarioReponer_SelectionChanged" DataContextChanged="lvInventarioReponer_DataContextChanged" LayoutUpdated="lvInventarioReponer_LayoutUpdated">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id Insumo" Width="150" DisplayMemberBinding="{Binding IdInsumo}"/>
                         <GridViewColumn Header="Categoría Insumo" Width="170" DisplayMemberBinding="{Binding DescripCategoria}"/>
-                        <GridViewColumn Header="Nombre insumo" Width="160" DisplayMemberBinding="{Binding NombreInsumo}"/>
+                        <GridViewColumn Header="Nombre insumo" Width="170" DisplayMemberBinding="{Binding NombreInsumo}"/>
                         <GridViewColumn Header="Stock" Width="110" DisplayMemberBinding="{Binding Existencia}"/>
                     </GridView>
                 </ListView.View>

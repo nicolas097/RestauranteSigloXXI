@@ -562,7 +562,7 @@ namespace Restaurant.Negocio
                 plato.IdPlato = Convert.ToInt32(dr["IDPLATO"]);
                 plato.Descripcion = dr["DESCRIPCION"].ToString();
                 plato.Precio = Convert.ToInt32(dr["PRECIO"]);
-                plato.ImagenPlato =(byte[])dr["IMAGEN"];
+                plato.ImagenPlato = (byte[])dr["IMAGEN"];
                 pla.Add(plato);
             }
             return pla; 

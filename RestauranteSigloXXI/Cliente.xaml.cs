@@ -1,4 +1,5 @@
-﻿using Restaurant.Negocio;
+﻿using Restaurant.Core;
+using Restaurant.Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,17 +23,22 @@ namespace RestauranteInterfaz
     public partial class Cliente : Page
     {
 
-        
+        private Carrito car = new ();
+
         public Cliente()
         {
             InitializeComponent();
             FrameMenu.Navigate(new MenuCliente());
+            
         }
 
         private void btnCarrito_Click(object sender, RoutedEventArgs e)
         {
-            
-            NavigationService.Navigate(new Carrito());
+           
+            NavigationService.Navigate(new PageCarrito(new Carrito()));
         }
+
+       
+       
     }
 }

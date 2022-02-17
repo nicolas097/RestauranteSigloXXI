@@ -19,13 +19,19 @@ namespace RestauranteInterfaz
     /// <summary>
     /// Lógica de interacción para Carrito.xaml
     /// </summary>
-    public partial class Carrito : Page
+    public partial class PageCarrito : Page
     {
-        public Carrito(Restaurant.Core.Carrito ca)
+     
+
+        public PageCarrito(Restaurant.Core.Carrito ca)
         {
+
             InitializeComponent();
             lvCarrito.ItemsSource = ca.GetCarritos();
+
         }
+
+       
 
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
