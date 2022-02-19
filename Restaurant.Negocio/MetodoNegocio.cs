@@ -105,21 +105,21 @@ namespace Restaurant.Negocio
         }
 
 
-        public List<Mesa> GetMesaList()
-        {
-            List<Mesa> listaMesa = new();
-            string sqlCommand = "select m.idMesa as NúmeroMesa , m.cantidadSilla as CantidadSilla, m.idEstado as idEstadoMesa ,estMesa.estado as EstadoMesa FROM MESA m inner join estadoMesa estMesa on estmesa.idEstado = m.idestado ORDER BY 1 ASC";
-            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
-            {
-                Mesa mesa = new Mesa();
-                mesa.IdMesa = Convert.ToInt32(dr["NúmeroMesa"]);
-                mesa.CantSilla = Convert.ToInt32(dr["CantidadSilla"]);
-                mesa.idEstado = Convert.ToChar(dr["idEstadoMesa"]);
-                listaMesa.Add(mesa);
+        //public List<Mesa> GetMesaList()
+        //{
+        //    List<Mesa> listaMesa = new();
+        //    string sqlCommand = "select m.idMesa as NúmeroMesa , m.cantidadSilla as CantidadSilla, m.idEstado as idEstadoMesa ,estMesa.estado as EstadoMesa FROM MESA m inner join estadoMesa estMesa on estmesa.idEstado = m.idestado ORDER BY 1 ASC";
+        //    foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+        //    {
+        //        Mesa mesa = new Mesa();
+        //        mesa.IdMesa = Convert.ToInt32(dr["NúmeroMesa"]);
+        //        mesa.CantSilla = Convert.ToInt32(dr["CantidadSilla"]);
+        //        mesa.idEstado = Convert.ToChar(dr["idEstadoMesa"]);
+        //        listaMesa.Add(mesa);
 
-            }
-            return listaMesa;
-        }
+        //    }
+        //    return listaMesa;
+        //}
 
 
         public List<string> GetCategoriaStrings()
@@ -129,12 +129,12 @@ namespace Restaurant.Negocio
             return listaCategoria;
         }
 
-        public List<string> GetTipoEstado()
-        {
-            string sqlCommand = "SELECT estado FROM estadoMesa";
-            List<string> listaEstado = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
-            return listaEstado;
-        }
+        //public List<string> GetTipoEstado()
+        //{
+        //    string sqlCommand = "SELECT estado FROM estadoMesa";
+        //    List<string> listaEstado = con.OracleToDataTable(sqlCommand).AsEnumerable().Select(x => x.Field<string>(0)).ToList();
+        //    return listaEstado;
+        //}
 
         public List<string> GetProveedor()
         {
@@ -291,67 +291,67 @@ namespace Restaurant.Negocio
     
 
 
-        public bool CrearMesa(Mesa mes)
-        {
-            mes.IdMesa = GenerateId("IDMESA", "MESA");
-            OracleCommand cmd = new("SP_CREARMESA", con.OracleConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@P_IDMESA", mes.IdMesa);
-            cmd.Parameters.Add("@P_CANTIDADSILLA", mes.CantSilla);
-            cmd.Parameters.Add("@P_IDESTADO", mes.idEstado);
+        //public bool CrearMesa(Mesa mes)
+        //{
+        //    mes.IdMesa = GenerateId("IDMESA", "MESA");
+        //    OracleCommand cmd = new("SP_CREARMESA", con.OracleConnection);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Parameters.Add("@P_IDMESA", mes.IdMesa);
+        //    cmd.Parameters.Add("@P_CANTIDADSILLA", mes.CantSilla);
+        //    cmd.Parameters.Add("@P_IDESTADO", mes.idEstado);
 
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-                return true;
+        //    try
+        //    {
+        //        cmd.ExecuteNonQuery();
+        //        return true;
 
-            }
-            catch 
-            {
+        //    }
+        //    catch 
+        //    {
 
-                return false;
-            }
-        }
-
-
-        public bool EliminarMesa(int idMesa)
-        {
-            string sqlCommand = ($"DELETE FROM MESA WHERE IDMESA = {idMesa}");
-
-            try
-            {
-                con.RunOracleNonQuery(sqlCommand);
-                return true;
-            }
-            catch
-            {
-
-                return false;
-            }
-
-        }
+        //        return false;
+        //    }
+        //}
 
 
-        public bool ActualizarMesa(Mesa mesa)
-        {
-            OracleCommand cmd = new ("SP_ACTUALIZARMESA", con.OracleConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@P_IDMESA", mesa.IdMesa);
-            cmd.Parameters.Add("@P_CANTIDADSILLA", mesa.CantSilla);
-            cmd.Parameters.Add("@P_IDESTADO", mesa.idEstado);
+        //public bool EliminarMesa(int idMesa)
+        //{
+        //    string sqlCommand = ($"DELETE FROM MESA WHERE IDMESA = {idMesa}");
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch 
-            {
+        //    try
+        //    {
+        //        con.RunOracleNonQuery(sqlCommand);
+        //        return true;
+        //    }
+        //    catch
+        //    {
 
-                return false;
-            }
-        }
+        //        return false;
+        //    }
+
+        //}
+
+
+        //public bool ActualizarMesa(Mesa mesa)
+        //{
+        //    OracleCommand cmd = new ("SP_ACTUALIZARMESA", con.OracleConnection);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Parameters.Add("@P_IDMESA", mesa.IdMesa);
+        //    cmd.Parameters.Add("@P_CANTIDADSILLA", mesa.CantSilla);
+        //    cmd.Parameters.Add("@P_IDESTADO", mesa.idEstado);
+
+        //    try
+        //    {
+        //        cmd.ExecuteNonQuery();
+        //        return true;
+        //    }
+        //    catch 
+        //    {
+
+        //        return false;
+        //    }
+        //}
 
 
         public bool CrearCompraInsumo(CompraInsumo compraInsumo)

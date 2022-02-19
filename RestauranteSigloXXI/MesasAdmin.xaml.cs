@@ -24,25 +24,25 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class MesasAdmin : Page
     {
-        private MetodoNegocio metNegocio = new();
+        private MetodoMesa metodoMesa = new();
 
         List<string> listaMesa = new();
         public MesasAdmin()
         {
 
             InitializeComponent();
-            cbEstado.ItemsSource = metNegocio.GetTipoEstado();
-            listaMesa = metNegocio.GetTipoEstado();
+            cbEstado.ItemsSource = metodoMesa.GetTipoEstado();
+            listaMesa = metodoMesa.GetTipoEstado();
             listaMesa.Insert(0, "Todos");
             cbFilEstado.ItemsSource = listaMesa;
             popBoxActualizarMesa.IsEnabled = false;
-            cbEstadoActualizar.ItemsSource = metNegocio.GetTipoEstado();
+            cbEstadoActualizar.ItemsSource = metodoMesa.GetTipoEstado();
             
         }
 
         private void lvMesas_Loaded(object sender, RoutedEventArgs e)
         {
-            lvMesas.ItemsSource = metNegocio.GetMesaList();
+            lvMesas.ItemsSource = metodoMesa.GetMesaList();
         }
 
         private void btnGuardarUpdate_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,7 @@ namespace RestauranteInterfaz
         private void Refresh()
         {
             lvMesas.ItemsSource = null;
-            lvMesas.ItemsSource = metNegocio.GetMesaList();
+            lvMesas.ItemsSource = metodoMesa.GetMesaList();
             cbFilEstado.SelectedIndex = 0;
         }
    
@@ -125,7 +125,7 @@ namespace RestauranteInterfaz
             if (cbFilEstado.SelectedIndex != 0)
             {
                 lvMesas.ItemsSource = null;
-                lvMesas.ItemsSource = metNegocio.GetMesaList().Where(s => s.idEstado == comoBoxChar(cbFilEstado.SelectedIndex)).ToList();
+                lvMesas.ItemsSource = metodoMesa.GetMesaList().Where(s => s.idEstado == comoBoxChar(cbFilEstado.SelectedIndex)).ToList();
             }
             else
             {
@@ -171,7 +171,7 @@ namespace RestauranteInterfaz
                 Mesa mesa = new Mesa();
                 mesa.CantSilla = Convert.ToInt32(txtCantSilla.Text);
                 mesa.idEstado = comoBoxChar(cbEstado.SelectedIndex + 1);
-                if (metNegocio.CrearMesa(mesa))
+                if (metodoMesa.CrearMesa(mesa))
                 {
                     MessageBox.Show("Se agregó mesa");
                     Refresh();
@@ -197,7 +197,7 @@ namespace RestauranteInterfaz
                 popBoxActualizarMesa.IsEnabled = true;
                 var MesaEditar = (Mesa)lvMesas.SelectedItem;
                 txtCantSillaUpdate.Text = MesaEditar.CantSilla.ToString();
-                cbEstadoActualizar.SelectedIndex = ComboBoxActualizarMesa(MesaEditar.idEstado)-1;
+                cbEstadoActualizar.SelectedIndex = ComboBoxActualizarMesa(MesaEditar.idEstado);
 
             }
         }
@@ -209,7 +209,7 @@ namespace RestauranteInterfaz
             mesa.IdMesa = IdMesa;
             mesa.CantSilla = Convert.ToInt32(txtCantSillaUpdate.Text);
             mesa.idEstado = comoBoxChar(cbEstadoActualizar.SelectedIndex + 1);
-            if (metNegocio.ActualizarMesa(mesa))
+            if (metodoMesa.ActualizarMesa(mesa))
             {
                 MessageBox.Show("Se ha actualizado la mesa");
                 Refresh();
@@ -232,7 +232,7 @@ namespace RestauranteInterfaz
                 var MesasEliminar = (Mesa)lvMesas.SelectedItem;
                 if (MessageBox.Show("¿Está seguro que que quieres las mesa número " + MesasEliminar.IdMesa + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    if (metNegocio.EliminarMesa(MesasEliminar.IdMesa))
+                    if (metodoMesa.EliminarMesa(MesasEliminar.IdMesa))
                     {
                         MessageBox.Show("Se ha eliminado la mesa");
                         Refresh();

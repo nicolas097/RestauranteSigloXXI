@@ -10,6 +10,19 @@
       Title="Totem">
 
     <Grid Background="{DynamicResource MaterialDesignDarkBackground}">
-        <Label Content="Totem" HorizontalAlignment="Center" FontSize="40"/> 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            <Button x:Name="btnMesas" Content="Mesas" Margin="20" Click="btnMesas_Click"/>
+            <Button x:Name="btnReservas" Content="Reservas de mesa" Margin="20" />
+        </StackPanel>
     </Grid>
 </Page>

@@ -24,5 +24,12 @@ namespace RestauranteInterfaz
         {
             InitializeComponent();
         }
+
+      
+
+        private void btnMesas_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DisponibilidadMesas());
+        }
     }
 }

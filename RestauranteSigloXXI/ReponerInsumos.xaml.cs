@@ -45,7 +45,9 @@ namespace RestauranteInterfaz
             cbFilCategoriaInsumo.ItemsSource = ListaCategoria;   
             cbCategInsumoEntra.ItemsSource = metNeg.GetCategoriaStrings();  
             cbProveedorEntra.ItemsSource = metNeg.GetProveedor();
-            
+            lvInventarioReponer.ItemsSource = metNeg.GetInsumoList();
+
+
 
             //AlgoExtraño();
             //cbInsumo.ItemsSource = metNeg.GetInsumoList();
@@ -152,7 +154,7 @@ namespace RestauranteInterfaz
 
         private void lvInventarioReponer_Loaded(object sender, RoutedEventArgs e)
         {
-            lvInventarioReponer.ItemsSource = metNeg.GetInsumoList();
+
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -193,26 +195,15 @@ namespace RestauranteInterfaz
 
         private void lvInventarioReponer_LayoutUpdated(object sender, EventArgs e)
         {
-            updateLayout();
+
         }
 
 
 
-        private void updateLayout()
-        {
-            var converterBrush = new System.Windows.Media.BrushConverter();
-            var brush = (Brush)converterBrush.ConvertFromString("#FF0000");
+       
 
-            foreach (Insumo insumo in lvInventarioReponer.Items )
-            {
-                if (insumo.Existencia > 10)
-                {
-                    ListViewItem row = (ListViewItem)lvInventarioReponer.ItemContainerGenerator.ContainerFromItem(insumo);
-                    row.Foreground = brush;
 
-                }
-            }
-        }
+
 
         
     }
