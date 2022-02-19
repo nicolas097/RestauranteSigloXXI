@@ -118,6 +118,11 @@ namespace RestauranteInterfaz
             }
         }
 
+        private void btnVolverTotem_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
 
 
 

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Restaurante.DB;
 
 namespace Restaurant.Core
 {
     public class Reserva
     {
+        public Conexion con = new();
         public int IdReserva { get; set; }  
 
         public int CantidadPersona { get; set; }
@@ -17,6 +19,8 @@ namespace Restaurant.Core
         public int IdMesa { get; set; }
 
         public int IdUsuario { get; set; }
+
+        public string idUsuario => con.RunOracleExecuteScalar($"SELECT CORREO FROM USUARIO WHERE IDUSUARIO = {IdUsuario}").ToString();
 
         public string IdTipoUsuario { get; set; }
 

@@ -15,6 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnVolverTotem" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowLeftBoldOutline}" Style="{StaticResource MaterialDesignIconButton}" Click="btnVolverTotem_Click"/>
             <Label Content="Mesas" HorizontalAlignment="Center" Margin="10" FontSize="25"/>
             <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxActualizarEst">
                 <materialDesign:PopupBox.ToggleContent>

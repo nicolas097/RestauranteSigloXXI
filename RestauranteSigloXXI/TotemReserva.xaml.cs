@@ -12,29 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Restaurante.DB;
+using Restaurant.Negocio;
+using Restaurant.Core;
 
 namespace RestauranteInterfaz
 {
     /// <summary>
-    /// Lógica de interacción para Totem.xaml
+    /// Lógica de interacción para TotemReserva.xaml
     /// </summary>
-    public partial class Totem : Page
+    public partial class TotemReserva : Page
     {
-        public Totem()
+        MetodoNegocio metNeg = new MetodoNegocio(); 
+        public TotemReserva()
         {
             InitializeComponent();
-        }
-
-      
-
-        private void btnMesas_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new DisponibilidadMesas());
-        }
-
-        private void btnReservas_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new TotemReserva());
+            lvReserva.ItemsSource = metNeg.GetReserva();
         }
     }
 }

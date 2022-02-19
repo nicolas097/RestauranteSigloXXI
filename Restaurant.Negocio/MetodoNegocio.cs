@@ -105,6 +105,30 @@ namespace Restaurant.Negocio
         }
 
 
+        public List<Reserva> GetReserva()
+        {
+            List<Reserva> listaReserva = new List<Reserva>();
+
+            string sqlCommand = "select R.idreserva AS NUMERORESERVA, R.cantidadpersona as CANTIDADPERSONA, R.FECHA AS FECHA, R.IDMESA AS NUMEROMESA, R.IDUSUARIO AS NUMEROUSUARIO, u.correo AS CORREOUSUARIO from reserva R INNER JOIN USUARIO U ON u.idusuario = r.idusuario";
+
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Reserva r = new();
+                r.IdReserva = Convert.ToInt32(dr["NUMERORESERVA"]);
+                r.CantidadPersona = Convert.ToInt32(dr["CANTIDADPERSONA"]);
+                r.FechaReserva = Convert.ToDateTime(dr["FECHA"].ToString());
+                r.IdMesa = Convert.ToInt32(dr["NUMEROMESA"]);
+                r.IdUsuario = Convert.ToInt32(dr["NUMEROUSUARIO"]);
+                listaReserva.Add(r);
+                
+            }
+
+            return listaReserva;
+
+
+        }
+
+
         //public List<Mesa> GetMesaList()
         //{
         //    List<Mesa> listaMesa = new();

@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <Button x:Name="btnMesas" Content="Mesas" Margin="20" Click="btnMesas_Click"/>
-            <Button x:Name="btnReservas" Content="Reservas de mesa" Margin="20" />
+            <Button x:Name="btnReservas" Content="Reservas de mesa" Margin="20" Click="btnReservas_Click" />
         </StackPanel>
     </Grid>
 </Page>
