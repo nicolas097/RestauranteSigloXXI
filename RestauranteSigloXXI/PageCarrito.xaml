@@ -18,12 +18,12 @@
             <Button x:Name="btnVolver" Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Kind=ArrowBack}" Foreground="{StaticResource MaterialDesignDarkForeground}" Click="btnVolver_Click"/>
         </WrapPanel>
         <WrapPanel Grid.Row="1">
-            <ListView Width="600" x:Name="lvCarrito">
+            <ListView HorizontalAlignment="Center" x:Name="lvCarrito" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel Orientation="Horizontal">
                             <Label Content="{Binding IdPlatoCarrito}"/>
-                            <Image Source="{Binding Imagen}"/>
+                            <Image Source="{Binding Imagen}" Width="50" Height="50"/>
                             <Label Content="{Binding Cantidad}" ContentStringFormat="X {0}"/>
                             <Label Content="{Binding Nombre}"/>
                             <Label Content="{Binding Precio}"/>

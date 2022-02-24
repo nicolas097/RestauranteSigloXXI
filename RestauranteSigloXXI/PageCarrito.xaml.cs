@@ -23,10 +23,16 @@ namespace RestauranteInterfaz
     {
      
 
-        public PageCarrito(Restaurant.Core.Carrito ca)
+        public PageCarrito(Carrito ca)
         {
 
             InitializeComponent();
+
+            
+
+
+
+
             lvCarrito.ItemsSource = ca.GetCarritos();
 
         }

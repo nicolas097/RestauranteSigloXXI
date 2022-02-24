@@ -34,11 +34,35 @@ namespace RestauranteInterfaz
 
         private void btnCarrito_Click(object sender, RoutedEventArgs e)
         {
-           
-            NavigationService.Navigate(new PageCarrito(new Carrito()));
+
+            var CurrentWindow = Window.GetWindow(VisualParent);
+            var CurrentPageGrid = CurrentWindow.Content as Grid;
+            var FirstGridElement = CurrentPageGrid.Children[0] as Frame;
+
+            var NoSeSabe = FirstGridElement.Content;
+
+            //Grid -> Segundo StackPanel -> FrameMenu
+
+            var PageCliente = NoSeSabe as Cliente;
+
+            var ContenidoFrameMenu = PageCliente.FrameMenu.Content as MenuCliente;
+
+            if (ContenidoFrameMenu.car.GetPCCount() != 0)
+            {
+                NavigationService.Navigate(new PageCarrito(ContenidoFrameMenu.car));
+
+            }
+            else
+            {
+                NavigationService.Navigate(new PageCarrito(new Carrito()));
+
+            }
+
+
+
         }
 
-       
-       
+
+
     }
 }

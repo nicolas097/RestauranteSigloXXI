@@ -12,10 +12,9 @@ namespace RestauranteInterfaz
     public partial class MenuCliente : Page
     {
         private MetodoNegocio metN = new();
-        private int Contador = 0;
 
 
-        public Restaurant.Core.Carrito car = new();
+        public Carrito car = new();
         Plato p = new();
 
         public MenuCliente()
@@ -36,7 +35,7 @@ namespace RestauranteInterfaz
             Plato listaCarrito = (Plato)(sender as Button).DataContext;
 
             car.AddPlato(p.ToPlatoCarrito(listaCarrito));
-            ClientPage.BadgeCarrito.Badge = car.GetCarritos().Count;
+            ClientPage.BadgeCarrito.Badge = car.GetPCCount();
             //Plato p = (sender as Card) as Plato;
            
             //car.AddPlato(p.ToPlatoCarrito(p));

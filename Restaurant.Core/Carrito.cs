@@ -18,7 +18,16 @@ namespace Restaurant.Core
 
         public void AddPlato(PlatoCarrito pla)
         {
-           platos.Add(pla); 
+            if (platos.Exists(x => x.IdPlatoCarrito == pla.IdPlatoCarrito))
+            {
+                pla.Cantidad++;
+            }
+            else
+            {
+                platos.Add(pla);
+
+            }
+
         }
 
         public List<PlatoCarrito> GetCarritos()
@@ -31,5 +40,18 @@ namespace Restaurant.Core
         {
             platos.Remove(pla); 
         }
+
+        public int GetPCCount()
+        {
+            int Cantidad = 0;
+
+            foreach (var item in platos)
+            {
+                Cantidad =+ item.Cantidad;
+            }
+
+            return Cantidad;    
+        }
+
     }
 }
