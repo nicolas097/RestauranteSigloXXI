@@ -8,6 +8,7 @@ using Restaurant.Core;
 using Restaurante.DB;
 using System.IO;
 using Oracle.ManagedDataAccess.Client;
+using System.Reflection;
 
 namespace Restaurant.Negocio
 {
@@ -586,7 +587,16 @@ namespace Restaurant.Negocio
                 plato.IdPlato = Convert.ToInt32(dr["IDPLATO"]);
                 plato.Descripcion = dr["DESCRIPCION"].ToString();
                 plato.Precio = Convert.ToInt32(dr["PRECIO"]);
-                plato.ImagenPlato = (byte[])dr["IMAGEN"];
+                try
+                {
+                    plato.ImagenPlato = (byte[])dr["IMAGEN"];
+
+                }
+                catch
+                {
+                    string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Recursos\SinImagen.png");
+                    plato.ImagenPlato = File.ReadAllBytes(path);
+                }
                 pla.Add(plato);
             }
             return pla;
