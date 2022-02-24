@@ -8,13 +8,20 @@ namespace Restaurant.Core
 {
     public class Receta
     {
-        public int IdPlato { get; set; }
+        
+        public int IdReceta { get; set; }
 
-        public int IdMedida { get; set; }
+        public string NombreReceta { get; set; }
 
-        public int IdInsumo { get; set; }
+        public byte[]? Foto { get; set; }   
 
-        public int cantidadInsumo { get; set; }
+        public int Porciones { get; set; }
+
+        public string Descripcion { get; set; } 
+
+        public List<string> Pasos { get; set; } 
+
+        public List<string> Ingredientes { get; set; }
 
     }
 }

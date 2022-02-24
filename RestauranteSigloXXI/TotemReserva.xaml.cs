@@ -29,5 +29,15 @@ namespace RestauranteInterfaz
             InitializeComponent();
             lvReserva.ItemsSource = metNeg.GetReserva();
         }
+
+        private void btnVolverTotem_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void btnMesas_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DisponibilidadMesas());
+        }
     }
 }

@@ -24,5 +24,24 @@ namespace RestauranteInterfaz
         {
             InitializeComponent();
         }
+
+        private void tabReceta_Loaded(object sender, RoutedEventArgs e)
+        {
+            RecetaFrame.NavigationService.Navigate(new Receta());
+        }
+
+        private void tabOrdenes_Loaded(object sender, RoutedEventArgs e)
+        {
+            OrdenesFrame.NavigationService.Navigate(new Oredenes());
+        }
+
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("¿Desea cerrar sesión?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                LoginGeneral lg = new LoginGeneral();
+                NavigationService.Navigate(lg);
+            }
+        }
     }
 }
