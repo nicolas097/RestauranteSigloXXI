@@ -18,6 +18,7 @@ namespace Restaurant.Core
 
         public void AddPlato(PlatoCarrito pla)
         {
+
             bool isAmigo = platos.Exists(x=> x.Nombre == pla.Nombre);
             if (platos.Count != 0)
             {
@@ -35,11 +36,17 @@ namespace Restaurant.Core
                 {
                     platos.Add(pla);
                 }
+            if (platos.Exists(x => x.IdPlatoCarrito == pla.IdPlatoCarrito))
+            {
+                pla.Cantidad++;
             }
             else
             {
                 platos.Add(pla);
             }
+
+            }
+
         }
 
         public List<PlatoCarrito> GetCarritos()
@@ -69,6 +76,14 @@ namespace Restaurant.Core
 
 
             return CountPla;
+            int Cantidad = 0;
+
+            foreach (var item in platos)
+            {
+                Cantidad =+ item.Cantidad;
+            }
+
+            return Cantidad;    
         }
 
     }

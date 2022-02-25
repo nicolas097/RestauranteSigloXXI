@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,13 +25,15 @@ namespace RestauranteInterfaz
 
         public Carrito CurrentCarrito;
         public ResumenCarrito CurrentResumen = new();
+        public PageCarrito(Carrito ca)
+        {
 
         public PageCarrito(Carrito ca)
         {
             InitializeComponent();
             CurrentCarrito = ca;
             CurrentResumen._carrito = CurrentCarrito;
-
+            lvCarrito.ItemsSource = ca.GetCarritos();
             lvCarrito.ItemsSource = CurrentCarrito.GetCarritos();
 
 
