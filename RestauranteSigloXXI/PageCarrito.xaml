@@ -79,7 +79,7 @@
                                 <GridViewColumn Width="150">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="{materialDesign:PackIcon Kind=CartRemove}" Style="{StaticResource MaterialDesignIconButton}"/>
+                                            <Button Name="BtnBorrarItem" Content="{materialDesign:PackIcon Kind=CartRemove}" Style="{StaticResource MaterialDesignIconButton}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
