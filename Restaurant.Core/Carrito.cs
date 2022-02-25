@@ -18,6 +18,24 @@ namespace Restaurant.Core
 
         public void AddPlato(PlatoCarrito pla)
         {
+
+            bool isAmigo = platos.Exists(x=> x.Nombre == pla.Nombre);
+            if (platos.Count != 0)
+            {
+                if (isAmigo)
+                {
+                    for (int i = platos.Count - 1; i >= 0; i--)
+                    {
+                        if (platos[i].Nombre == pla.Nombre)
+                        {
+                            platos[i].Cantidad++;
+                        }
+                    }
+                }
+                else
+                {
+                    platos.Add(pla);
+                }
             if (platos.Exists(x => x.IdPlatoCarrito == pla.IdPlatoCarrito))
             {
                 pla.Cantidad++;
@@ -25,6 +43,7 @@ namespace Restaurant.Core
             else
             {
                 platos.Add(pla);
+            }
 
             }
 
@@ -43,6 +62,20 @@ namespace Restaurant.Core
 
         public int GetPCCount()
         {
+
+            int CountPla = 0;
+
+            if (platos.Count != 0)
+            {
+                for (int i = 0; i < platos.Count; i++)
+                {
+                    CountPla += platos[i].Cantidad;
+                }
+            }
+
+
+
+            return CountPla;
             int Cantidad = 0;
 
             foreach (var item in platos)
