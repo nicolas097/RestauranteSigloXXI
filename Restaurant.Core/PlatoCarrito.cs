@@ -8,13 +8,17 @@ namespace Restaurant.Core
 {
     public class PlatoCarrito
     {
-        public int IdPlatoCarrito { get; set; } 
+        public int IdPlatoCarrito { get; set; }
         public byte[]? Imagen { get; set; }
 
-        public int Cantidad { get; set; }   
+        public int Cantidad { get; set; }
 
         public string Nombre { get; set; }
-        
-        public int Precio { get; set; } 
+
+        public int Precio { get; set; }
+
+        public int PrecioTotal => Precio * Cantidad;
+
+    
     }
 }

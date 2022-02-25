@@ -4,33 +4,132 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RestauranteInterfaz" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1120"
 
       Title="Carrito">
-
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <WrapPanel>
-            <Button x:Name="btnVolver" Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Kind=ArrowBack}" Foreground="{StaticResource MaterialDesignDarkForeground}" Click="btnVolver_Click"/>
+            <Button x:Name="btnVolver" Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Kind=ArrowBack}" Foreground="{StaticResource MaterialDesignDarkForeground}" Click="btnVolver_Click" />
+            <Label Content="Volver a la tienda" VerticalAlignment="Center"/>
         </WrapPanel>
-        <WrapPanel Grid.Row="1">
-            <ListView HorizontalAlignment="Center" x:Name="lvCarrito" d:ItemsSource="{d:SampleData ItemCount=5}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel Orientation="Horizontal">
-                            <Label Content="{Binding IdPlatoCarrito}"/>
-                            <Image Source="{Binding Imagen}" Width="50" Height="50"/>
-                            <Label Content="{Binding Cantidad}" ContentStringFormat="X {0}"/>
-                            <Label Content="{Binding Nombre}"/>
-                            <Label Content="{Binding Precio}"/>
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </WrapPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                    <Label Content="Carrito de compra" VerticalContentAlignment="Center" VerticalAlignment="Top" FontSize="30" Margin="20 20 0 0" Height="61"/>
+                    <Label HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Name="CantidadItems" Content="5" ContentStringFormat="{} {0} Item(s)" FontSize="15" Margin="20 20 0 0" Width="520" Height="76"/>
+                </StackPanel>
+                <Grid Grid.Row="1">
+                    <ListView Style="{StaticResource MaterialDesignListView}" Grid.Row="1" Margin="0,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="lvCarrito" d:ItemsSource="{d:SampleData ItemCount=15}" Height="442" Width="780">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False">
+                                <GridViewColumn Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Margin="5" Source="{Binding Imagen}" Width="60" Height="60"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                    <GridViewColumn.Header>
+                                        <Label Content="Item" HorizontalContentAlignment="Center" Width="90"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn Width="150" DisplayMemberBinding="{Binding Nombre}"/>
+                                <GridViewColumn Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <xctk:IntegerUpDown x:Name="CantidadSpinner"  Value="{Binding Cantidad}" Width="60" Foreground="Black" Height="30"  ValueChanged="CantidadSpinner_ValueChanged" AllowSpin="True" CultureInfo="es-CL" Maximum="100" Minimum="0"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                    <GridViewColumn.Header>
+                                        <Label Content="Cantidad" HorizontalContentAlignment="Center" Width="90"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Precio}" Language="es-CL" ContentStringFormat="{}${0:N0}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                    <GridViewColumn.Header>
+                                        <Label Content="Precio" HorizontalContentAlignment="Center" Width="83"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="{materialDesign:PackIcon Kind=CartRemove}" Style="{StaticResource MaterialDesignIconButton}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+            </Grid>
+            
+            
+            <Grid Background="#FF383838" Grid.Column="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Resumen" Margin="20" FontWeight="Bold" HorizontalAlignment="Left" FontSize="20"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="15">
+                        <Label Content="Subtotal"/>
+                        <Label Content="IVA"/>
+                    </StackPanel>
+                    <StackPanel x:Name="spValoresSTandIVA" Grid.Column="1" Margin="15">
+                        <Label Name="valorSubtotal" Language="es-CL" ContentStringFormat="{} ${0:N0}" HorizontalAlignment="Right" FontWeight="Bold"/>
+                        <Label Name="valorIVA"  Language="es-CL" ContentStringFormat="{} ${0:N0}" HorizontalAlignment="Right" FontWeight="Bold"/>
+                    </StackPanel>
+                    
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="15"> 
+                        <Label Content="Total"/>
+                    </StackPanel>
+                    <StackPanel Name="spValoresTotal" Grid.Column="1" Margin="15">
+                        <Label Name="TotalPrecio"  Language="es-CL" ContentStringFormat="{} ${0:N0}" HorizontalAlignment="Right" FontWeight="Bold"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Margin="30" Grid.Row="3">
+                    <Button Content="Pagar"/>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
