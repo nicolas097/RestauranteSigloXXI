@@ -130,8 +130,8 @@
                         <Label Name="TotalPrecio"  Language="es-CL" ContentStringFormat="{} ${0:N0}" HorizontalAlignment="Right" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
-                <Grid Margin="30" Grid.Row="3">
-                    <Button Content="Pagar"/>
+                <Grid Margin="30" Grid.Row="3" Cursor="Hand">
+                    <Button x:Name="btnPedir" Content="Pedir" Click="btnPedir_Click" />
                 </Grid>
             </Grid>
         </Grid>

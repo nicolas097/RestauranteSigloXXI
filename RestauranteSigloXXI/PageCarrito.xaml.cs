@@ -113,5 +113,15 @@ namespace RestauranteInterfaz
 
         }
 
+        private void btnPedir_Click(object sender, RoutedEventArgs e)
+        {
+            if (System.Windows.MessageBox.Show("¿Está seguro que quiere realizar el pedido ?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                CurrentCarrito.GetCarritos().Clear();
+                lvCarrrito.ItemsSource = null;
+                UpdateRC();
+                refresh();
+            }
+        }
     }
 }
