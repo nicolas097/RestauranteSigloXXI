@@ -18,8 +18,7 @@ namespace Restaurant.Core
 
         public void AddPlato(PlatoCarrito pla)
         {
-
-            bool isAmigo = platos.Exists(x=> x.Nombre == pla.Nombre);
+            bool isAmigo = platos.Exists(x => x.Nombre == pla.Nombre);
             if (platos.Count != 0)
             {
                 if (isAmigo)
@@ -36,16 +35,12 @@ namespace Restaurant.Core
                 {
                     platos.Add(pla);
                 }
-            if (platos.Exists(x => x.IdPlatoCarrito == pla.IdPlatoCarrito))
-            {
-                pla.Cantidad++;
             }
             else
             {
                 platos.Add(pla);
             }
 
-            }
 
         }
 
@@ -57,8 +52,22 @@ namespace Restaurant.Core
 
         public void DeletePlato(PlatoCarrito pla)
         {
-            platos.Remove(pla); 
+            platos.Remove(pla);
         }
+
+        //public bool DeletePlato(PlatoCarrito pla, List<PlatoCarrito> listaEliminacion)
+        //{
+        //    foreach (var platoCarrito in listaEliminacion)
+        //    {
+        //        if (pla.Nombre == pla.Nombre)
+        //        {
+        //            listaEliminacion.Remove(platoCarrito);
+        //            return true;
+        //        }
+        //    }
+
+        //    return false;   
+        //}
 
         public int GetPCCount()
         {
@@ -76,14 +85,6 @@ namespace Restaurant.Core
 
 
             return CountPla;
-            int Cantidad = 0;
-
-            foreach (var item in platos)
-            {
-                Cantidad =+ item.Cantidad;
-            }
-
-            return Cantidad;    
         }
 
     }

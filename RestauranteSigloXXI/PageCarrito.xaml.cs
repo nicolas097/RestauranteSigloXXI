@@ -25,16 +25,16 @@ namespace RestauranteInterfaz
 
         public Carrito CurrentCarrito;
         public ResumenCarrito CurrentResumen = new();
-        public PageCarrito(Carrito ca)
-        {
+
+
+
 
         public PageCarrito(Carrito ca)
         {
             InitializeComponent();
             CurrentCarrito = ca;
             CurrentResumen._carrito = CurrentCarrito;
-            lvCarrito.ItemsSource = ca.GetCarritos();
-            lvCarrito.ItemsSource = CurrentCarrito.GetCarritos();
+            lvCarrrito.ItemsSource = CurrentCarrito.GetCarritos();
 
 
             UpdateRC();
@@ -42,28 +42,39 @@ namespace RestauranteInterfaz
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+           
         }
 
         private void CantidadSpinner_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             PlatoCarrito PlatoCambiado = (sender as IntegerUpDown).DataContext as PlatoCarrito;
 
-            bool IsThere = CurrentCarrito.platos.Exists(x => x == PlatoCambiado);
-
-            if (IsThere)
+            if ((sender as IntegerUpDown).Value != 0)
             {
-                CurrentCarrito.platos = CurrentCarrito.platos.Select(x =>
+                bool IsThere = CurrentCarrito.platos.Exists(x => x == PlatoCambiado);
+
+                if (IsThere)
                 {
-                    if (x.IdPlatoCarrito == PlatoCambiado.IdPlatoCarrito)
+                    CurrentCarrito.platos = CurrentCarrito.platos.Select(x =>
                     {
-                        x.Cantidad = PlatoCambiado.Cantidad;
+                        if (x.IdPlatoCarrito == PlatoCambiado.IdPlatoCarrito)
+                        {
+                            x.Cantidad = PlatoCambiado.Cantidad;
+                        }
+                        return x;
                     }
-                    return x;
+                    ).ToList();
+                    UpdateRC();
                 }
-                ).ToList();
-                UpdateRC();
+            }
+            else
+            {
+                EliminarItemCarrito(PlatoCambiado);
             }
         }
+
+
+        //método que actualiza lo items en el carrito
 
         private void UpdateRC()
         {
@@ -72,5 +83,35 @@ namespace RestauranteInterfaz
             valorSubtotal.Content = CurrentResumen.Subtotal;
             valorIVA.Content = CurrentResumen.SubtotalIVA;
         }
+
+        private void BtnBorrarItem_Click(object sender, RoutedEventArgs e)
+        {
+            PlatoCarrito papu = (sender as Button).DataContext as PlatoCarrito;
+            EliminarItemCarrito(papu);
+
+
+
+        }
+
+
+        public void EliminarItemCarrito(PlatoCarrito pa)
+        {
+
+            CurrentCarrito.platos.Remove(pa);
+
+            refresh();
+
+            UpdateRC();
+
+
+        }
+
+        public void refresh()
+        {
+            lvCarrrito.ItemsSource = null;
+            lvCarrrito.ItemsSource = CurrentCarrito.GetCarritos();
+
+        }
+
     }
 }
