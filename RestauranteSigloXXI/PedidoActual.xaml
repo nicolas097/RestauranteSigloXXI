@@ -1,0 +1,34 @@
+﻿<Page x:Class="RestauranteInterfaz.PedidoActual"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:RestauranteInterfaz"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="PedidoActual">
+
+    <Grid Background="{StaticResource MaterialDesignDarkBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button x:Name="btnVolver" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowBack}" Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Left" Margin="30" Cursor="Hand" Click="btnVolver_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <ListView x:Name="lvResumenCarrito" Height="400" Width="400" Margin="50" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Nombre}" FontFamily="Consolas" FontSize="20"/>
+                            <Label Content="{Binding Cantidad}" FontFamily="Consolas" ContentStringFormat="{}x{0}" FontSize="20"/>
+                            <Label Content="{Binding PrecioTotal}" FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}" FontSize="20"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

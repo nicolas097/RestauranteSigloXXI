@@ -32,5 +32,12 @@ namespace Restaurant.Core
 
         public double Subtotal => Total * 0.81;
 
+     
+
+
+
+
+        
+
     }
 }

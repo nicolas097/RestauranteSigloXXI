@@ -558,6 +558,60 @@ namespace Restaurant.Negocio
         }
 
 
+        public bool InsertarPedido( Pedido ped)
+        {
+            DateTime fecha = DateTime.Now;
+
+
+            ped.IdPedido = GenerateId("IDPEDIDO", "PEDIDO");
+            OracleCommand cmd = new("SP_INSERTARPEDIDO");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDPEDIDO", ped.IdPedido);
+            cmd.Parameters.Add("@P_IDMESA", ped.IdMesa);
+            cmd.Parameters.Add("@P_FECHA", ped.fecha.ToString("dd/MM/yy"));
+            cmd.Parameters.Add("@P_SUBTOTAL", ped.subtotal);
+            cmd.Parameters.Add("@P_TOTAL", ped.total);
+            cmd.Parameters.Add("@P_IDEESTADOPED", ped.IdEstadoPedido);
+            cmd.Parameters.Add("@P_IVA", ped.IVA);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
+            {
+
+                return false;
+            }
+
+        }
+
+
+        public bool InsertarDetPedido(DetallePedido detPed)
+        {
+            detPed.IdPedido = GenerateId("IDPEDIDO", "DETALLEPEDIDO");
+            OracleCommand cmd = new("SP_INSERTARDETPEDIDO");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDPEDIDO", detPed.IdPedido);
+            cmd.Parameters.Add("@P_IDPRODUCTO", detPed.IdProducto);
+            cmd.Parameters.Add("@P_CANTIDAD", detPed.Cantidad);
+            cmd.Parameters.Add("@P_ESTDETPED", detPed.EstadoPedido);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+
+        }
+
+
         public bool EliminarUsuario(Usuario usuario)
         {
             OracleCommand cmd = new("SP_ELIMINARUSUARIO", con.OracleConnection);
@@ -580,7 +634,7 @@ namespace Restaurant.Negocio
         {
             List<Plato> pla = new List<Plato>();
 
-            string sqlCommnad = "SELECT * FROM PLATO";
+            string sqlCommnad = "SELECT * FROM PRODUCTO";
             foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
             {
                 Plato plato = new Plato();
@@ -603,20 +657,6 @@ namespace Restaurant.Negocio
         }
 
 
-        //public List<Receta> ListarReceta()
-        //{
-        //    List<Receta> re = new List<Receta>();
-
-        //    string sqlCommnad = "SELECT * FROM RECETA";
-
-        //    foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
-        //    {
-        //        Receta rec = new Receta();
-        //        rec.IdReceta = Convert.ToInt32(dr["IDRECETA"]);
-        //        rec.NombreReceta = dr["NOMBREPLATO"].ToString();
-                
-        //    }
-        //}
     }
 
 

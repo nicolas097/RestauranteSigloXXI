@@ -10,12 +10,10 @@ namespace Restaurant.Core
     {
         public int IdPedido { get; set; }   
 
-        public int IdPlato { get; set; }
+        public int IdProducto { get; set; }
 
-        public int IdCategoria { get; set; }
+        public int Cantidad { get; set; }
 
-        public int CantidadPlato { get; set; }
-
-        public int PrecioCantPedido { get; set; }
+        public int EstadoPedido { get; set; }
     }
 }

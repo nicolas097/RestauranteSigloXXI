@@ -19,6 +19,8 @@ namespace Restaurant.Core
 
         public int PrecioTotal => Precio * Cantidad;
 
+
+
     
     }
 }

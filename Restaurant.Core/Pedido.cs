@@ -12,15 +12,17 @@ namespace Restaurant.Core
 
         public int IdMesa { get; set; }
 
-        public string IdEstadoMesa { get; set; }
+        public string IdEstadoPedido { get; set; }
 
         public DateTime fecha { get; set; } 
 
         public int subtotal { get; set; }
 
-        public int propina { get; set; }
 
         public int total { get; set; }
+
+
+        public int IVA { get; set; }    
 
     }
 }
