@@ -35,7 +35,7 @@ namespace RestauranteInterfaz
             Plato listaCarrito = (Plato)(sender as Button).DataContext;
 
             car.AddPlato(p.ToPlatoCarrito(listaCarrito));
-            ClientPage.BadgeCarrito.Badge = car.GetPCCount();
+            ClientPage.BadgeCarrito.Badge = car.GetCarritoCount();
             //Plato p = (sender as Card) as Plato;
            
             //car.AddPlato(p.ToPlatoCarrito(p));

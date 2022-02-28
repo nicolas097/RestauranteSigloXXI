@@ -560,23 +560,14 @@ namespace Restaurant.Negocio
 
         public bool InsertarPedido( Pedido ped)
         {
-            DateTime fecha = DateTime.Now;
 
+            string sqlcommandpedido = $"INSERT INTO PEDIDO VALUES ({ped.IdPedido}, {ped.IdMesa}, TO_DATE('{ped.fecha}', 'DD-MM-YYYY HH24:MI:SS'), {ped.TotalBruto}, {ped.TotalNeto}, 'PED' , {ped.TotalIVA})";
 
-            ped.IdPedido = GenerateId("IDPEDIDO", "PEDIDO");
-            OracleCommand cmd = new("SP_INSERTARPEDIDO");
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@P_IDPEDIDO", ped.IdPedido);
-            cmd.Parameters.Add("@P_IDMESA", ped.IdMesa);
-            cmd.Parameters.Add("@P_FECHA", ped.fecha.ToString("dd/MM/yy"));
-            cmd.Parameters.Add("@P_SUBTOTAL", ped.subtotal);
-            cmd.Parameters.Add("@P_TOTAL", ped.total);
-            cmd.Parameters.Add("@P_IDEESTADOPED", ped.IdEstadoPedido);
-            cmd.Parameters.Add("@P_IVA", ped.IVA);
 
             try
             {
-                cmd.ExecuteNonQuery();
+                con.RunOracleNonQuery(sqlcommandpedido);
+
                 return true;
             }
             catch 
@@ -590,7 +581,6 @@ namespace Restaurant.Negocio
 
         public bool InsertarDetPedido(DetallePedido detPed)
         {
-            detPed.IdPedido = GenerateId("IDPEDIDO", "DETALLEPEDIDO");
             OracleCommand cmd = new("SP_INSERTARDETPEDIDO");
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@P_IDPEDIDO", detPed.IdPedido);
