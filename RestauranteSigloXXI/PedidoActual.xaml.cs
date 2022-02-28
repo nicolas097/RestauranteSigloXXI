@@ -22,17 +22,46 @@ namespace RestauranteInterfaz
     public partial class PedidoActual : Page
     {
         List<PlatoCarrito> platoCarritos = new List<PlatoCarrito>();    
+
+        Carrito actualCarrito;
+
+
         public PedidoActual(Carrito car)
         {
             InitializeComponent();
-            platoCarritos = car.GetCarritos();
-            lvResumenCarrito.ItemsSource = platoCarritos;   
+            actualCarrito = car;
+            platoCarritos = actualCarrito.GetCarritos();
+            lvResumenCarrito.ItemsSource = platoCarritos;
+            lbSubtotal.Content = actualCarrito.GetCarritoNeto();
             
         }
 
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void BtnConfirmarPedido_Click(object sender, RoutedEventArgs e)
+        {
+            if (System.Windows.Forms.MessageBox.Show("¿Está seguro de realizar el pedido?", "Información", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
+            {
+                //Realiza el pedido y mete datos en la base de datos
+                NegocioEspecifico ne = new(actualCarrito);
+                if (ne.IngresarCarritoDB())
+                {
+                    MessageBox.Show("Se ha ingresado el pedido exitosamente.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se ha podido ingresar el pedido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+
+
+
+
+
+            }
         }
     }
 }

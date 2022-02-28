@@ -47,7 +47,7 @@ namespace RestauranteInterfaz
 
             var ContenidoFrameMenu = PageCliente.FrameMenu.Content as MenuCliente;
 
-            if (ContenidoFrameMenu.car.GetPCCount() != 0)
+            if (ContenidoFrameMenu.car.GetCarritoCount() != 0)
             {
                 NavigationService.Navigate(new PageCarrito(ContenidoFrameMenu.car));
 

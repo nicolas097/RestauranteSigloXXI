@@ -16,13 +16,13 @@ namespace Restaurant.Core
 
         public DateTime fecha { get; set; } 
 
-        public int subtotal { get; set; }
+        public int TotalBruto { get; set; }
 
 
-        public int total { get; set; }
+        public int TotalNeto { get; set; }
 
 
-        public int IVA { get; set; }    
+        public int TotalIVA { get; set; }    
 
     }
 }

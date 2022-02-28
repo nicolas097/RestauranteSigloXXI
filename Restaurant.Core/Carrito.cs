@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Core
 {
-    public  class Carrito
+    public class Carrito
     {
         public List<PlatoCarrito> platos = new();
 
+
         public void VaciarCarrito()
         {
-            platos.Clear(); 
+            platos.Clear();
         }
 
 
@@ -55,21 +56,7 @@ namespace Restaurant.Core
             platos.Remove(pla);
         }
 
-        //public bool DeletePlato(PlatoCarrito pla, List<PlatoCarrito> listaEliminacion)
-        //{
-        //    foreach (var platoCarrito in listaEliminacion)
-        //    {
-        //        if (pla.Nombre == pla.Nombre)
-        //        {
-        //            listaEliminacion.Remove(platoCarrito);
-        //            return true;
-        //        }
-        //    }
-
-        //    return false;   
-        //}
-
-        public int GetPCCount()
+        public int GetCarritoCount()
         {
 
             int CountPla = 0;
@@ -86,6 +73,52 @@ namespace Restaurant.Core
 
             return CountPla;
         }
+
+        public double GetCarritoNeto()
+        {
+            double Total = 0;
+
+            if (platos.Count != 0)
+            {
+                for (int i = 0; i < platos.Count; i++)
+                {
+                    Total += platos[i].PrecioSubtotal;
+                }
+            }
+
+            return Total;
+        }
+
+        public double GetCarritoIVA()
+        {
+            double IVA = 0;
+
+            if (platos.Count != 0)
+            {
+                for (int i = 0; i < platos.Count; i++)
+                {
+                    IVA += platos[i].PrecioSubtotal * 0.19;
+                }
+            }
+
+            return IVA;
+        }
+
+        public double GetCarritoBruto()
+        {
+            double Neto = 0;
+
+            if (platos.Count != 0)
+            {
+                for (int i = 0; i < platos.Count; i++)
+                {
+                    Neto += platos[i].PrecioSubtotal * 0.81;
+                }
+            }
+
+            return Neto;
+        }
+
 
     }
 }

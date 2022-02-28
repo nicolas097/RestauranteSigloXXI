@@ -21,7 +21,7 @@ namespace Restaurant.Core
 
                 foreach (var item in _carrito.platos)
                 {
-                    SubTotal += (item.PrecioTotal);
+                    SubTotal += (item.PrecioSubtotal);
                 }
 
                 return SubTotal;

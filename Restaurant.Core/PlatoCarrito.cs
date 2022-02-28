@@ -17,7 +17,7 @@ namespace Restaurant.Core
 
         public int Precio { get; set; }
 
-        public int PrecioTotal => Precio * Cantidad;
+        public int PrecioSubtotal => Precio * Cantidad;
 
 
 

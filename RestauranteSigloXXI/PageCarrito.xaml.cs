@@ -79,7 +79,7 @@ namespace RestauranteInterfaz
         private void UpdateRC()
         {
             TotalPrecio.Content = CurrentResumen.Total;
-            CantidadItems.Content = CurrentCarrito.GetPCCount();
+            CantidadItems.Content = CurrentCarrito.GetCarritoCount();
             valorSubtotal.Content = CurrentResumen.Subtotal;
             valorIVA.Content = CurrentResumen.SubtotalIVA;
         }

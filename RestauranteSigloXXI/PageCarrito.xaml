@@ -18,13 +18,8 @@
         <WrapPanel Orientation="Horizontal">
             <Button x:Name="btnVolver" Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Kind=ArrowBack}" Foreground="{StaticResource MaterialDesignDarkForeground}" Click="btnVolver_Click" />
             <Label Content="Volver a la tienda" VerticalAlignment="Center"/>
-            <Label Content="Mesa :" VerticalAlignment="Center" Margin="800,0,0,0" FontSize="25"/>
-            <Label x:Name="lbNumMesa" Content="7" VerticalAlignment="Center" FontSize="25"/>
+            <Label x:Name="lbNumMesa" ContentStringFormat="{} Mesa:{0}" VerticalAlignment="Center" Margin="800,0,0,0" FontSize="25"/>
 
-        </WrapPanel>
-        <WrapPanel Grid.Row="1">
-            
-            
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -134,7 +129,7 @@
                     </StackPanel>
                 </Grid>
                 <Grid Margin="30" Grid.Row="3" Cursor="Hand">
-                    <Button x:Name="btnContinuar" Content="Continuar" Click="btnContinuar_Click" />
+                    <Button x:Name="btnContinuar" Content="Continuar" Click="btnContinuar_Click" Cursor="Hand" />
                 </Grid>
             </Grid>
         </Grid>
