@@ -40,32 +40,24 @@ namespace RestauranteInterfaz
 
             if (mn.InsertarPedido(ped))
             {
-                //foreach (var item in Carrito.GetCarritos())
-                //{
-                //    DetallePedido dp = new()
-                //    {
-                //        Cantidad = item.Cantidad,
-                //        EstadoPedido = 0,
-                //        IdPedido = IdPedido,
-                //        IdProducto = item.IdPlatoCarrito
-                //    };
+                foreach (var item in Carrito.GetCarritos())
+                {
+                    DetallePedido dp = new()
+                    {
+                        Cantidad = item.Cantidad,
+                        EstadoPedido = 0,
+                        IdPedido = IdPedido,
+                        IdProducto = item.IdPlatoCarrito
+                    };
 
-                //    if (mn.InsertarDetPedido(dp))
-                //    {
-                //        return true;
-                //    }
-                //    else
-                //    {
-                //        return false;
-                //    }
-                //}
-            }
-            else
-            {
-                return false;
+                    if (!mn.InsertarDetPedido(dp))
+                    {
+                        return false;
+                    }
+                }
             }
 
-            return false;
+            return true;
         }
     }
 }
