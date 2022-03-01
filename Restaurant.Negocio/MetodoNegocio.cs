@@ -579,23 +579,17 @@ namespace Restaurant.Negocio
         }
 
 
-        public bool InsertarDetPedido(DetallePedido detPed)
+        public bool InsertarDetPedido(DetallePedido detp)
         {
-            OracleCommand cmd = new("SP_INSERTARDETPEDIDO");
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@P_IDPEDIDO", detPed.IdPedido);
-            cmd.Parameters.Add("@P_IDPRODUCTO", detPed.IdProducto);
-            cmd.Parameters.Add("@P_CANTIDAD", detPed.Cantidad);
-            cmd.Parameters.Add("@P_ESTDETPED", detPed.EstadoPedido);
 
+            string sqlCommand = $"INSERT INTO DETALLEPEDIDO VALUES ({detp.IdPedido},{detp.IdProducto},{detp.Cantidad},0 )";
             try
             {
-                cmd.ExecuteNonQuery();
+                con.RunOracleNonQuery(sqlCommand);
                 return true;
             }
             catch
             {
-
                 return false;
             }
 
