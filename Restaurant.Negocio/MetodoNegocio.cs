@@ -581,9 +581,8 @@ namespace Restaurant.Negocio
 
         public bool InsertarDetPedido(DetallePedido detp)
         {
+
             string sqlCommand = $"INSERT INTO DETALLEPEDIDO VALUES ({detp.IdPedido},{detp.IdProducto},{detp.Cantidad},0 )";
-
-
             try
             {
                 con.RunOracleNonQuery(sqlCommand);

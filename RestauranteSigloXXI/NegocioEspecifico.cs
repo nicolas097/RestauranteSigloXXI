@@ -1,4 +1,4 @@
-﻿using Restaurant.Core;
+using Restaurant.Core;
 using Restaurant.Negocio;
 using System;
 using System.Collections.Generic;
