@@ -561,7 +561,7 @@ namespace Restaurant.Negocio
         public bool InsertarPedido( Pedido ped)
         {
 
-            string sqlcommandpedido = $"INSERT INTO PEDIDO VALUES ({ped.IdPedido}, {ped.IdMesa}, TO_DATE('{ped.fecha}', 'DD-MM-YYYY HH24:MI:SS'), {ped.TotalBruto}, {ped.TotalNeto}, 'PED' , {ped.TotalIVA})";
+            string sqlcommandpedido = $"INSERT INTO PEDIDO VALUES ({ped.IdPedido}, {ped.IdMesa}, TO_DATE('{ped.fecha}', 'DD-MM-YYYY HH24:MI:SS'), {ped.TotalBruto}, {ped.TotalNeto}, 'PEN' , {ped.TotalIVA})";
 
 
             try
@@ -641,9 +641,99 @@ namespace Restaurant.Negocio
         }
 
 
+        public List<Pedido> GetPedido()
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+
+            string sqlCommand = "SELECT * FROM PEDIDO";
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Pedido ped = new();
+                ped.IdPedido = Convert.ToInt32(dr["IDPEDIDO"]);
+                ped.IdMesa = Convert.ToInt32(dr["IDMESA"]);
+                ped.ListaDetallePedido = GetDetallePedido(ped.IdPedido);
+                pedidos.Add(ped);   
+                
+            }
+
+            return pedidos;
+        }
+
+
+        private List<DetallePedido> GetDetallePedido(int id_)
+        {
+            List<DetallePedido> detPed = new List<DetallePedido>();
+
+            string sqlCommand = $"SELECT * FROM DETALLEPEDIDO WHERE IDPEDIDO = {id_}";
+
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                DetallePedido det = new()
+                {
+                    IdPedido = Convert.ToInt32(dr["IDPEDIDO"]),
+                    Cantidad = Convert.ToInt32(dr["CANTIDAD"]),
+                    plato = GetProductoFromID(Convert.ToInt32(dr["IDPRODUCTO"]))
+                    
+                };
+                detPed.Add(det);    
+            }
+
+            return detPed;
+        }
+
+
+        public Plato GetProductoFromID(int id)
+        {
+            Plato pla = new Plato();
+
+            string sqlCommnad = $"SELECT P.IDPLATO,P.DESCRIPCION,P.PRECIO FROM detallepedido DETPED INNER JOIN producto P ON p.idplato = detped.idproducto WHERE detped.idproducto = {id}";
+
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
+            {
+                Plato plato1 = new()
+                {
+                    IdPlato = Convert.ToInt32(dr["IDPLATO"]),
+                    Descripcion = dr["DESCRIPCION"].ToString(),
+                    Precio = Convert.ToInt32(dr["PRECIO"])
+
+
+                };
+
+                pla = plato1;
+
+            }
+
+            return pla;
+        }
+
+
+        //public List<DetallePedido> ListarPedido()
+        //{
+        //    List<DetallePedido> detallePedidos = new List<DetallePedido>();
+
+        //    string sqlCommnad = "select  ped.idMesa as numeroMesa, detp.cantidad as Cantidad, p.descripcion as Nombre from detallepedido detP inner join pedido ped on ped.idpedido = detP.idpedido inner join producto p on p.idplato = detp.idproducto where ped.idestadoPedido = 'PEN'";
+
+        //    foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
+        //    {
+        //        DetallePedido det = new DetallePedido();
+        //        det.IdPedido = Convert.ToInt32(dr["numeroMesa"]);
+        //        det.Cantidad = Convert.ToInt32(dr["Cantidad"]);
+               
+        //        detallePedidos.Add(det);
+        //    }
+
+            
+        //    return detallePedidos;  
+
+        //}
+
+
+        
+
+
     }
 
 
-
+    
    
 }

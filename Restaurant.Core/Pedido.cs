@@ -24,5 +24,8 @@ namespace Restaurant.Core
 
         public int TotalIVA { get; set; }    
 
+
+        public List<DetallePedido> ListaDetallePedido{ get; set; }  
+
     }
 }

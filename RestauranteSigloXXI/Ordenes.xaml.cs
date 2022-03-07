@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Restaurant.Negocio;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RestauranteInterfaz
 {
@@ -20,9 +8,27 @@ namespace RestauranteInterfaz
     /// </summary>
     public partial class Oredenes : Page
     {
+        MetodoNegocio metN = new MetodoNegocio();
         public Oredenes()
         {
             InitializeComponent();
+            lvTablero.ItemsSource = metN.GetPedido();
+
+
+
         }
+
+        private void lvDetalle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void lvHola_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+       
+        
     }
 }
