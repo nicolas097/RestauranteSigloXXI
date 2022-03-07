@@ -313,6 +313,24 @@ namespace Restaurant.Negocio
         }
 
 
+        public bool CambioEsstadoPedidoTablero(Pedido ped)
+        {
+            OracleCommand cmd = new("sp_estadoPedidoTablero", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDPEDIDO", ped.IdPedido);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
+            {
+
+                return false;
+            }
+        }
+
 
 
 
@@ -641,11 +659,13 @@ namespace Restaurant.Negocio
         }
 
 
+        
+
         public List<Pedido> GetPedido()
         {
             List<Pedido> pedidos = new List<Pedido>();
 
-            string sqlCommand = "SELECT * FROM PEDIDO";
+            string sqlCommand = "SELECT * FROM PEDIDO WHERE IDESTADOPEDIDO = 'PEN'";
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
                 Pedido ped = new();
@@ -658,6 +678,7 @@ namespace Restaurant.Negocio
 
             return pedidos;
         }
+
 
 
         private List<DetallePedido> GetDetallePedido(int id_)

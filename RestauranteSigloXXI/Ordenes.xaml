@@ -16,10 +16,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-           
+            <Button x:Name="btnSalio" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Click="btnSalio_Click"/>
         </StackPanel>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="30">
             <ListBox x:Name="lvTablero" d:ItemsSource="{d:SampleData ItemCount=10}" Width="1000">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
