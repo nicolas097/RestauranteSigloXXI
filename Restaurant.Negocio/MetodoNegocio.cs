@@ -415,6 +415,13 @@ namespace Restaurant.Negocio
         }
 
 
+        public int EstadoPedido (int idOrden)
+        {
+            string sqlCommand = $"SELECT IDESTADOPEDIDO FROM PEDIDO WHERE = {idOrden}";
+            return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
+        }
+
+
 
         public List<Usuario> GetUsuariosList()
         {
