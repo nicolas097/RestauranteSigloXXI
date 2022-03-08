@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestauranteSigloXXI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,14 @@ namespace RestauranteInterfaz
         private void btnReservas_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new TotemReserva());
+        }
+
+        private void btnVolver_Click(object sender, RoutedEventArgs e)
+        {
+            RestaLauncher rl = new RestaLauncher();
+            rl.Show();
+            var VentanaActual = Window.GetWindow(this);
+            VentanaActual.Close();
         }
     }
 }

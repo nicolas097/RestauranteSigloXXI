@@ -313,70 +313,26 @@ namespace Restaurant.Negocio
         }
 
 
+        public bool CambioEsstadoPedidoTablero(Pedido ped)
+        {
+            OracleCommand cmd = new("sp_estadoPedidoTablero", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDPEDIDO", ped.IdPedido);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
+            {
+
+                return false;
+            }
+        }
 
 
 
-        //public bool CrearMesa(Mesa mes)
-        //{
-        //    mes.IdMesa = GenerateId("IDMESA", "MESA");
-        //    OracleCommand cmd = new("SP_CREARMESA", con.OracleConnection);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.Parameters.Add("@P_IDMESA", mes.IdMesa);
-        //    cmd.Parameters.Add("@P_CANTIDADSILLA", mes.CantSilla);
-        //    cmd.Parameters.Add("@P_IDESTADO", mes.idEstado);
-
-
-        //    try
-        //    {
-        //        cmd.ExecuteNonQuery();
-        //        return true;
-
-        //    }
-        //    catch 
-        //    {
-
-        //        return false;
-        //    }
-        //}
-
-
-        //public bool EliminarMesa(int idMesa)
-        //{
-        //    string sqlCommand = ($"DELETE FROM MESA WHERE IDMESA = {idMesa}");
-
-        //    try
-        //    {
-        //        con.RunOracleNonQuery(sqlCommand);
-        //        return true;
-        //    }
-        //    catch
-        //    {
-
-        //        return false;
-        //    }
-
-        //}
-
-
-        //public bool ActualizarMesa(Mesa mesa)
-        //{
-        //    OracleCommand cmd = new ("SP_ACTUALIZARMESA", con.OracleConnection);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.Parameters.Add("@P_IDMESA", mesa.IdMesa);
-        //    cmd.Parameters.Add("@P_CANTIDADSILLA", mesa.CantSilla);
-        //    cmd.Parameters.Add("@P_IDESTADO", mesa.idEstado);
-
-        //    try
-        //    {
-        //        cmd.ExecuteNonQuery();
-        //        return true;
-        //    }
-        //    catch 
-        //    {
-
-        //        return false;
-        //    }
-        //}
 
 
         public bool CrearCompraInsumo(CompraInsumo compraInsumo)
@@ -456,6 +412,13 @@ namespace Restaurant.Negocio
             string sqlCommand = $"SELECT PRECIOUNITARIO FROM insumo WHERE  NOMBREINSUMO = '{nombreInsumo}'";
             return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
 
+        }
+
+
+        public int EstadoPedido (int idOrden)
+        {
+            string sqlCommand = $"SELECT IDESTADOPEDIDO FROM PEDIDO WHERE = {idOrden}";
+            return Convert.ToInt32(con.RunOracleExecuteScalar(sqlCommand));
         }
 
 
@@ -561,7 +524,7 @@ namespace Restaurant.Negocio
         public bool InsertarPedido( Pedido ped)
         {
 
-            string sqlcommandpedido = $"INSERT INTO PEDIDO VALUES ({ped.IdPedido}, {ped.IdMesa}, TO_DATE('{ped.fecha}', 'DD-MM-YYYY HH24:MI:SS'), {ped.TotalBruto}, {ped.TotalNeto}, 'PED' , {ped.TotalIVA})";
+            string sqlcommandpedido = $"INSERT INTO PEDIDO VALUES ({ped.IdPedido}, {ped.IdMesa}, TO_DATE('{ped.fecha}', 'DD-MM-YYYY HH24:MI:SS'), {ped.TotalBruto}, {ped.TotalNeto}, 'PEN' , {ped.TotalIVA})";
 
 
             try
@@ -641,9 +604,125 @@ namespace Restaurant.Negocio
         }
 
 
+        public List<Pedido> GetPedidoCuenta()
+        {
+            List<Pedido> ListaCuenta = new List<Pedido>();
+
+            string sqlCommand = "SELECT * FROM PEDIDO WHERE IDESTADOPEDIDO = 'DEU'";
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Pedido ped = new();
+                ped.IdPedido = Convert.ToInt32(dr["IDPEDIDO"]);
+                ped.IdMesa = Convert.ToInt32(dr["IDMESA"]);
+                ped.TotalBruto = Convert.ToInt32(dr["SUBTOTAL"]);
+                ped.TotalIVA = Convert.ToInt32(dr["IVA"]);
+                ped.TotalNeto = Convert.ToInt32(dr["TOTAL"]);
+                ped.ListaDetallePedido = GetDetallePedido(ped.IdPedido);
+                ListaCuenta.Add(ped);
+
+            }
+
+            return ListaCuenta; 
+        }
+
+
+        
+
+        public List<Pedido> GetPedido()
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+
+            string sqlCommand = "SELECT * FROM PEDIDO WHERE IDESTADOPEDIDO = 'PEN'";
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Pedido ped = new();
+                ped.IdPedido = Convert.ToInt32(dr["IDPEDIDO"]);
+                ped.IdMesa = Convert.ToInt32(dr["IDMESA"]);
+                ped.ListaDetallePedido = GetDetallePedido(ped.IdPedido);
+                pedidos.Add(ped);   
+                
+            }
+
+            return pedidos;
+        }
+
+
+
+        private List<DetallePedido> GetDetallePedido(int id_)
+        {
+            List<DetallePedido> detPed = new List<DetallePedido>();
+
+            string sqlCommand = $"SELECT * FROM DETALLEPEDIDO WHERE IDPEDIDO = {id_}";
+
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                DetallePedido det = new()
+                {
+                    IdPedido = Convert.ToInt32(dr["IDPEDIDO"]),
+                    Cantidad = Convert.ToInt32(dr["CANTIDAD"]),
+                    plato = GetProductoFromID(Convert.ToInt32(dr["IDPRODUCTO"])),
+
+                };
+                detPed.Add(det);    
+            }
+
+            return detPed;
+        }
+
+
+        public Plato GetProductoFromID(int id)
+        {
+            Plato pla = new Plato();
+
+            string sqlCommnad = $"SELECT P.IDPLATO,P.DESCRIPCION,P.PRECIO, P.PRECIO * DETPED.CANTIDAD AS SUBTOTAL FROM detallepedido DETPED INNER JOIN producto P ON p.idplato = detped.idproducto WHERE detped.idproducto = {id}";
+
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
+            {
+                Plato plato1 = new()
+                {
+                    IdPlato = Convert.ToInt32(dr["IDPLATO"]),
+                    Descripcion = dr["DESCRIPCION"].ToString(),
+                    Precio = Convert.ToInt32(dr["PRECIO"]),
+                    Subtotal = Convert.ToInt32(dr["SUBTOTAL"])
+
+
+                };
+
+                pla = plato1;
+
+            }
+
+            return pla;
+        }
+
+
+        //public List<DetallePedido> ListarPedido()
+        //{
+        //    List<DetallePedido> detallePedidos = new List<DetallePedido>();
+
+        //    string sqlCommnad = "select  ped.idMesa as numeroMesa, detp.cantidad as Cantidad, p.descripcion as Nombre from detallepedido detP inner join pedido ped on ped.idpedido = detP.idpedido inner join producto p on p.idplato = detp.idproducto where ped.idestadoPedido = 'PEN'";
+
+        //    foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
+        //    {
+        //        DetallePedido det = new DetallePedido();
+        //        det.IdPedido = Convert.ToInt32(dr["numeroMesa"]);
+        //        det.Cantidad = Convert.ToInt32(dr["Cantidad"]);
+               
+        //        detallePedidos.Add(det);
+        //    }
+
+            
+        //    return detallePedidos;  
+
+        //}
+
+
+        
+
+
     }
 
 
-
+    
    
 }

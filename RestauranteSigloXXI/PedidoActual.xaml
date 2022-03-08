@@ -26,7 +26,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding Nombre}" FontFamily="Consolas" FontSize="20"/>
                             <Label Content="{Binding Cantidad}" FontFamily="Consolas" ContentStringFormat="{}x{0}" FontSize="20"/>
-                            <Label Content="{Binding PrecioTotal}" FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}" FontSize="20"/>
+                            <Label Content="{Binding PrecioSubtotal}" FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}" FontSize="20"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -36,7 +36,8 @@
             <Label VerticalAlignment="Center" Name="lbSubtotal" FontSize="30" Language="es-CL" ContentStringFormat="{} Total: ${0:N0}" FontFamily="Consolas" Foreground="White" HorizontalAlignment="Center" />
         </Grid>
         <Grid Grid.Row="3">
-            <Button HorizontalAlignment="Center" Content="Confirmar pedido" Name="BtnConfirmarPedido" Cursor="Hand" Click="BtnConfirmarPedido_Click"/>
+            <Button HorizontalAlignment="Center" Content="Confirmar pedido" Name="BtnConfirmarPedido" Cursor="Hand" Click="BtnConfirmarPedido_Click" />
+            <Button HorizontalAlignment="Center" Content="Pagar" x:Name="BtnPago" Margin="0,90,0,0" Width="145" Height="30" Click="BtnPago_Click"/>
         </Grid>
     </Grid>
 </Page>

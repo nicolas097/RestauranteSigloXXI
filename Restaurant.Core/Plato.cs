@@ -37,5 +37,7 @@ namespace Restaurant.Core
         }
         
 
+        public int Subtotal { get; set; }
+
     }
 }

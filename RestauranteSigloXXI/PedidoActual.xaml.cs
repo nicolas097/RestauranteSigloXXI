@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Restaurant.Negocio;
 
 namespace RestauranteInterfaz
 {
@@ -25,6 +26,8 @@ namespace RestauranteInterfaz
 
         Carrito actualCarrito;
 
+        MetodoNegocio metNeg = new();
+        
 
         public PedidoActual(Carrito car)
         {
@@ -33,6 +36,7 @@ namespace RestauranteInterfaz
             platoCarritos = actualCarrito.GetCarritos();
             lvResumenCarrito.ItemsSource = platoCarritos;
             lbSubtotal.Content = actualCarrito.GetCarritoNeto();
+            BtnPago.IsEnabled = false;
             
         }
 
@@ -56,12 +60,30 @@ namespace RestauranteInterfaz
                     MessageBox.Show("No se ha podido ingresar el pedido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
-
-
-
-
-
             }
+        }
+
+        private void BtnPago_Click(object sender, RoutedEventArgs e)
+        {
+            EstadoPedido();
+        }
+
+
+
+
+
+        private void EstadoPedido()
+        {
+            Pedido p = new Pedido();
+
+            if (metNeg.EstadoPedido(Convert.ToInt32(p.IdPedido)) == p.IdPedido)
+            {
+               btnVolver.IsEnabled = true;
+            }
+            else
+            {
+
+            }  
         }
     }
 }
