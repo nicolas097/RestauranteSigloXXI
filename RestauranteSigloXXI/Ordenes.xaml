@@ -47,6 +47,10 @@
                                     </ListView>
 
                                 </StackPanel>
+                                <StackPanel>
+                                    
+                                </StackPanel>
+                                
                             </StackPanel>
                         </materialDesign:Card>
                         
