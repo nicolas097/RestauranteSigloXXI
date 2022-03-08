@@ -18,6 +18,14 @@ namespace Restaurant.Core
 
         public int EstadoPedido { get; set; }
 
+        public int subTotal => Cantidad * PrecioProducto;
+
+        public int PrecioProducto { get; set; }
+
+
+        public int precioProducto => Convert.ToInt32(con.RunOracleExecuteScalar($"SELECT PRECIO FROM PRODUCTO WHERE IDPRODUCTO = {PrecioProducto}"));
+        
+      
 
         public int IdMesa { get; set; }
 
@@ -27,6 +35,7 @@ namespace Restaurant.Core
 
         public int idProducto => Convert.ToInt32(con.RunOracleExecuteScalar($"SELECT DESCRIPCION FROM PRODUCTO WHERE IDPLATO = {IdProducto}"));
 
+      
 
         public Plato plato { get; set; }   
     }

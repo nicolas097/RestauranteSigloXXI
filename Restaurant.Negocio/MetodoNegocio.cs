@@ -334,68 +334,6 @@ namespace Restaurant.Negocio
 
 
 
-        //public bool CrearMesa(Mesa mes)
-        //{
-        //    mes.IdMesa = GenerateId("IDMESA", "MESA");
-        //    OracleCommand cmd = new("SP_CREARMESA", con.OracleConnection);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.Parameters.Add("@P_IDMESA", mes.IdMesa);
-        //    cmd.Parameters.Add("@P_CANTIDADSILLA", mes.CantSilla);
-        //    cmd.Parameters.Add("@P_IDESTADO", mes.idEstado);
-
-
-        //    try
-        //    {
-        //        cmd.ExecuteNonQuery();
-        //        return true;
-
-        //    }
-        //    catch 
-        //    {
-
-        //        return false;
-        //    }
-        //}
-
-
-        //public bool EliminarMesa(int idMesa)
-        //{
-        //    string sqlCommand = ($"DELETE FROM MESA WHERE IDMESA = {idMesa}");
-
-        //    try
-        //    {
-        //        con.RunOracleNonQuery(sqlCommand);
-        //        return true;
-        //    }
-        //    catch
-        //    {
-
-        //        return false;
-        //    }
-
-        //}
-
-
-        //public bool ActualizarMesa(Mesa mesa)
-        //{
-        //    OracleCommand cmd = new ("SP_ACTUALIZARMESA", con.OracleConnection);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.Parameters.Add("@P_IDMESA", mesa.IdMesa);
-        //    cmd.Parameters.Add("@P_CANTIDADSILLA", mesa.CantSilla);
-        //    cmd.Parameters.Add("@P_IDESTADO", mesa.idEstado);
-
-        //    try
-        //    {
-        //        cmd.ExecuteNonQuery();
-        //        return true;
-        //    }
-        //    catch 
-        //    {
-
-        //        return false;
-        //    }
-        //}
-
 
         public bool CrearCompraInsumo(CompraInsumo compraInsumo)
         {
@@ -659,6 +597,28 @@ namespace Restaurant.Negocio
         }
 
 
+        public List<Pedido> GetPedidoCuenta()
+        {
+            List<Pedido> ListaCuenta = new List<Pedido>();
+
+            string sqlCommand = "SELECT * FROM PEDIDO WHERE IDESTADOPEDIDO = 'DEU'";
+            foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
+            {
+                Pedido ped = new();
+                ped.IdPedido = Convert.ToInt32(dr["IDPEDIDO"]);
+                ped.IdMesa = Convert.ToInt32(dr["IDMESA"]);
+                ped.TotalBruto = Convert.ToInt32(dr["SUBTOTAL"]);
+                ped.TotalIVA = Convert.ToInt32(dr["IVA"]);
+                ped.TotalNeto = Convert.ToInt32(dr["TOTAL"]);
+                ped.ListaDetallePedido = GetDetallePedido(ped.IdPedido);
+                ListaCuenta.Add(ped);
+
+            }
+
+            return ListaCuenta; 
+        }
+
+
         
 
         public List<Pedido> GetPedido()
@@ -693,8 +653,8 @@ namespace Restaurant.Negocio
                 {
                     IdPedido = Convert.ToInt32(dr["IDPEDIDO"]),
                     Cantidad = Convert.ToInt32(dr["CANTIDAD"]),
-                    plato = GetProductoFromID(Convert.ToInt32(dr["IDPRODUCTO"]))
-                    
+                    plato = GetProductoFromID(Convert.ToInt32(dr["IDPRODUCTO"])),
+
                 };
                 detPed.Add(det);    
             }
@@ -707,7 +667,7 @@ namespace Restaurant.Negocio
         {
             Plato pla = new Plato();
 
-            string sqlCommnad = $"SELECT P.IDPLATO,P.DESCRIPCION,P.PRECIO FROM detallepedido DETPED INNER JOIN producto P ON p.idplato = detped.idproducto WHERE detped.idproducto = {id}";
+            string sqlCommnad = $"SELECT P.IDPLATO,P.DESCRIPCION,P.PRECIO, P.PRECIO * DETPED.CANTIDAD AS SUBTOTAL FROM detallepedido DETPED INNER JOIN producto P ON p.idplato = detped.idproducto WHERE detped.idproducto = {id}";
 
             foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
             {
@@ -715,7 +675,8 @@ namespace Restaurant.Negocio
                 {
                     IdPlato = Convert.ToInt32(dr["IDPLATO"]),
                     Descripcion = dr["DESCRIPCION"].ToString(),
-                    Precio = Convert.ToInt32(dr["PRECIO"])
+                    Precio = Convert.ToInt32(dr["PRECIO"]),
+                    Subtotal = Convert.ToInt32(dr["SUBTOTAL"])
 
 
                 };

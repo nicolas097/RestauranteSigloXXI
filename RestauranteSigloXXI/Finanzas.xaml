@@ -10,7 +10,39 @@
       Title="Finanzas">
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
-        <Label Content="Finanzas" FontSize="100" HorizontalContentAlignment="Center"/>
+        <Label x:Name="LbType" Content="Modo :" FontSize="12" Panel.ZIndex="1" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00000000" Visibility="Hidden"/>
+        <Button x:Name="btnCerrarSesion" Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" FontSize="10" Style="{DynamicResource MaterialDesignIconButton}" Content="{materialDesign:PackIcon Kind=Logout}" Click="btnCerrarSesion_Click"/>
+
+        <TabControl TabStripPlacement="Left" x:Name="TabFinanza" Background="{x:Null}" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
+            <TabItem Height="60" Width="120" x:Name="TabItemInicio" Loaded="TabItemInicio_Loaded">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Inicio" FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>
+                        <Label Content="{materialDesign:PackIcon Kind=Home}"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="InicioFrame"/>
+            </TabItem>
+            <TabItem Height="60" Width="120" x:Name="tabCuentas" Loaded="tabCuentas_Loaded">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Cuentas" FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>
+                        <Label Content="{materialDesign:PackIcon Kind=Calculator}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="CuentaFrame"/>
+
+            </TabItem>
+            <TabItem Height="60" Width="120" x:Name="tabContabilidad" Loaded="tabContabilidad_Loaded">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Contabilidad" FontSize="11" FontStyle="Normal" FontFamily="Monserrat ExtraLight" VerticalAlignment="Center"/>
+                        <Label Content="{materialDesign:PackIcon Kind=ChartBox}"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="ContabilidadFrame"/>
+            </TabItem>
+        </TabControl>
         <Frame x:Name="MainFinanza" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
    

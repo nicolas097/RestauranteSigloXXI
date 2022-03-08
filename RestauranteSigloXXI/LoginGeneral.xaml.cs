@@ -95,5 +95,10 @@ namespace RestauranteInterfaz
         {
           
         }
+
+        private void btnVolver_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

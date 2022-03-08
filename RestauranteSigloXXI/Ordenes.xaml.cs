@@ -49,7 +49,7 @@ namespace RestauranteInterfaz
                 pe.IdPedido = Convert.ToInt32(TableroCambio.IdPedido);
 
 
-                if (MessageBox.Show("¿Está seguro que el pedido está listo?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                if (MessageBox.Show("¿Está seguro que el pedido está listo, verifiqué si está todo entregado por favor ?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     if (metN.CambioEsstadoPedidoTablero(pe))
                     {
@@ -64,7 +64,7 @@ namespace RestauranteInterfaz
             }
             else
             {
-                MessageBox.Show("Seleccione alguna ordenx");
+                MessageBox.Show("Seleccione alguna ordenes");
             }
         }
 

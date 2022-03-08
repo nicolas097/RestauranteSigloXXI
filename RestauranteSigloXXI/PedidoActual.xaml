@@ -26,7 +26,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding Nombre}" FontFamily="Consolas" FontSize="20"/>
                             <Label Content="{Binding Cantidad}" FontFamily="Consolas" ContentStringFormat="{}x{0}" FontSize="20"/>
-                            <Label Content="{Binding PrecioTotal}" FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}" FontSize="20"/>
+                            <Label Content="{Binding PrecioSubtotal}" FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}" FontSize="20"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
