@@ -23,17 +23,22 @@ namespace RestauranteInterfaz
     public partial class Cliente : Page
     {
 
-        private Carrito car = new ();
+        private Carrito car = new();
+        public Mesa Mesa_ = new();
 
-        public Cliente()
+        public Cliente(Mesa mes)
         {
             InitializeComponent();
+            Mesa_ = mes;
             FrameMenu.Navigate(new MenuCliente());
+            lbNumeroMesa.Content = mes.IdMesa;
             
         }
 
         private void btnCarrito_Click(object sender, RoutedEventArgs e)
         {
+
+            
 
             var CurrentWindow = Window.GetWindow(VisualParent);
             var CurrentPageGrid = CurrentWindow.Content as Grid;
@@ -49,7 +54,9 @@ namespace RestauranteInterfaz
 
             if (ContenidoFrameMenu.car.GetCarritoCount() != 0)
             {
-                NavigationService.Navigate(new PageCarrito(ContenidoFrameMenu.car));
+                int IdMesa_ = Convert.ToInt32(lbNumeroMesa.Content);
+                ContenidoFrameMenu.car.MesaID = IdMesa_;
+                NavigationService.Navigate(new PageCarrito(ContenidoFrameMenu.car, Mesa_));
 
             }
             else
@@ -64,10 +71,8 @@ namespace RestauranteInterfaz
 
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
-            RestaLauncher rl = new RestaLauncher();
-            rl.Show();
-            var VentanaActual = Window.GetWindow(this);
-            VentanaActual.Close();
+            NavigationService.Navigate(new SeleccionMesas());
+
 
         }
     }

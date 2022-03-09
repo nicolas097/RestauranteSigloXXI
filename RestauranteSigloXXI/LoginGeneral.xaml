@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:RestauranteInterfaz"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"  
-      Title="LoginGeneral">
+      Title="LoginGeneral" Loaded="Page_Loaded">
 
     <Grid Background="{StaticResource MaterialDesignDarkBackground}">
         <Grid.ColumnDefinitions>
@@ -20,24 +20,32 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" Margin="20">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Margin="20">
             <Label Content="Restaurant Siglo XXI" Foreground="White" VerticalAlignment="Top" Margin="0,0,0,0" FontSize="30" FontFamily="{StaticResource MaterialDesignFont}" HorizontalAlignment="Center"/>
-            <Label Content="{materialDesign:PackIcon Kind=Restaurant,Size=30}" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="White"/>
+            <Label Content="{materialDesign:PackIcon Kind=Restaurant,Size=30}" VerticalAlignment="Top" Margin="3,2,0,0" Foreground="White"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="0">
             <Button x:Name="btnVolver" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowBackCircle, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,20,300,0" Click="btnVolver_Click"/>
         </StackPanel>
-        <Border BorderBrush="Gray" BorderThickness="1" Background="#FF1F1F1F" Grid.Column="1" Grid.Row="1" Margin="20" CornerRadius="10" Height="350">
+        <Border BorderBrush="Gray" BorderThickness="2" Background="#FF1F1F1F" Grid.Column="1" Grid.Row="1" Margin="20" CornerRadius="10" Height="350">
             <StackPanel Orientation="Vertical">
                 <Label  Content="Bienvenido" HorizontalAlignment="Center" FontSize="30" Margin="0,20,0,0"/>
-                <TextBox x:Name="txtUsuaio" Width="205" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" materialDesign:HintAssist.Hint="Usuario" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="25" KeyDown="txtUsuaio_KeyDown"/>
-                <PasswordBox x:Name="txtPassword" Width="205" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="15" materialDesign:HintAssist.Hint="Contraseña" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="25"/>
-                <Button x:Name="btnIngresar" Width="150" FontSize="15" Content="Ingresar" Margin="20" Click="btnIngresar_Click"/>
+                <Label Name="lbBienvenida" FontWeight="Bold"  Content="hola" HorizontalAlignment="Center" FontSize="15" Margin="0,5,0,0"/>
+                <TextBox x:Name="txtUsuaio" Width="205" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="15" materialDesign:HintAssist.Hint="Usuario" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20" KeyDown="txtUsuaio_KeyDown"/>
+                <PasswordBox x:Name="txtPassword" Width="205" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="15" materialDesign:HintAssist.Hint="Contraseña" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="20"/>
+                <Button x:Name="btnIngresar" Width="205" FontSize="15" Margin="20" Click="btnIngresar_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Ingresar" FontWeight="Bold" Foreground="Black" Margin="0 -4 0 0"/>
+                            <Label Foreground="Black" Content="{materialDesign:PackIcon Kind=LoginVariant}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Border>
-        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="btnConexion" Width="150" Content="Probar Conexión" FontSize="15" Click="btnConexion_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Margin="20" Style="{DynamicResource MaterialDesignIconButton}" x:Name="btnConexion" Content="{materialDesign:PackIcon Kind=DatabaseAlert}" Click="btnConexion_Click" Cursor="Hand"/>
 
         </StackPanel>
     </Grid>

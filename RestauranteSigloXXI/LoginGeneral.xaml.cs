@@ -105,5 +105,10 @@ namespace RestauranteInterfaz
             VentanaActual.Close();
             
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            lbBienvenida.Content = $"De vuelta, {Environment.UserName}!!";
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace RestauranteInterfaz
         public Oredenes()
         {
             InitializeComponent();
-            lvTablero.ItemsSource = metN.GetPedido();
+            Refresh();
 
 
 
@@ -49,7 +49,7 @@ namespace RestauranteInterfaz
         private void Refresh()
         {
             lvTablero.ItemsSource = null;
-            lvTablero.ItemsSource = metN.GetPedido();
+            lvTablero.ItemsSource = metN.GetPedido().OrderBy(x => x.IdPedido).ToList();
 
         }
 

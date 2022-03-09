@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
+using MessageBox = System.Windows.MessageBox;
 
 namespace RestauranteInterfaz
 {
@@ -24,15 +25,17 @@ namespace RestauranteInterfaz
     {
 
         public Carrito CurrentCarrito;
+        public Mesa CurrentMesa;
         public ResumenCarrito CurrentResumen = new();
 
 
 
 
-        public PageCarrito(Carrito ca)
+        public PageCarrito(Carrito ca, Mesa mes)
         {
             InitializeComponent();
             CurrentCarrito = ca;
+            CurrentMesa = mes;
             CurrentResumen._carrito = CurrentCarrito;
             lvCarrrito.ItemsSource = CurrentCarrito.GetCarritos();
 
@@ -82,6 +85,13 @@ namespace RestauranteInterfaz
             CantidadItems.Content = CurrentCarrito.GetCarritoCount();
             valorSubtotal.Content = CurrentResumen.Subtotal;
             valorIVA.Content = CurrentResumen.SubtotalIVA;
+
+            if (Convert.ToInt32(CantidadItems.Content) < 1)
+            {
+                MessageBox.Show("El carrito está vacío, se volverá a la pantalla de selección de platos.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                NavigationService.Navigate(new Cliente(CurrentMesa));
+            }
         }
 
         private void BtnBorrarItem_Click(object sender, RoutedEventArgs e)
