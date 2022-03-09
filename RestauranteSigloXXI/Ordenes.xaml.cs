@@ -43,6 +43,7 @@ namespace RestauranteInterfaz
         private void btnSalio_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
+
         }
 
 
@@ -51,6 +52,35 @@ namespace RestauranteInterfaz
             lvTablero.ItemsSource = null;
             lvTablero.ItemsSource = metN.GetPedido().OrderBy(x => x.IdPedido).ToList();
 
+        }
+
+        private void CambiarEstadoPedido(Pedido papapa)
+        {
+            var TableroCambio = papapa;
+            Pedido pe = new();
+            pe.IdPedido = Convert.ToInt32(TableroCambio.IdPedido);
+
+
+            if (MessageBox.Show("¿Está seguro que el pedido está listo? Verifique si está todo preparado.", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                if (metN.CambioEsstadoPedidoTablero(pe))
+                {
+                    MessageBox.Show("Se ha cambiado el estado del pedido.");
+                    Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("No se ha realizado ningún cambio.");
+                }
+            }
+
+        }
+
+        private void btnSalidaPedido_Click(object sender, RoutedEventArgs e)
+        {
+
+            Pedido pe = (Pedido)(sender as Button).DataContext; 
+            CambiarEstadoPedido(pe);
         }
 
         private void CambiarEstadoPedido(Pedido papapa)
