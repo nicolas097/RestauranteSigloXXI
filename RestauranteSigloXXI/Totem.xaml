@@ -24,8 +24,8 @@
             <Button x:Name="btnVolver" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowBackCircle, Size=30}" Style="{StaticResource MaterialDesignIconButton}" Margin="0,20,300,0" Click="btnVolver_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <Button x:Name="btnMesas" Content="Mesas" Margin="20" Click="btnMesas_Click"/>
-            <Button x:Name="btnReservas" Content="Reservas de mesa" Margin="20" Click="btnReservas_Click" />
+            <Button x:Name="btnMesas" Content="Mesas" Margin="20" Click="btnMesas_Click" Cursor="Hand"/>
+            <Button x:Name="btnReservas" Content="Reservas de mesa" Margin="20" Click="btnReservas_Click" Cursor="Hand" />
         </StackPanel>
     </Grid>
 </Page>

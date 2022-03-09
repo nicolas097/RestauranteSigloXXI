@@ -42,30 +42,7 @@ namespace RestauranteInterfaz
 
         private void btnSalio_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (lvTablero.SelectedItem != null)
-            {
-                var TableroCambio = (Pedido)lvTablero.SelectedItem;
-                Pedido pe = new();
-                pe.IdPedido = Convert.ToInt32(TableroCambio.IdPedido);
 
-
-                if (MessageBox.Show("¿Está seguro que el pedido está listo, verifiqué si está todo entregado por favor ?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                {
-                    if (metN.CambioEsstadoPedidoTablero(pe))
-                    {
-                        MessageBox.Show("Se ha cambiado el estado del pedido");
-                        Refresh();  
-                    }
-                    else
-                    {
-                        MessageBox.Show("No ha pasado nada");
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione alguna ordenes");
-            }
         }
 
 
@@ -74,6 +51,34 @@ namespace RestauranteInterfaz
             lvTablero.ItemsSource = null;
             lvTablero.ItemsSource = metN.GetPedido();
 
+        }
+
+        private void CambiarEstadoPedido(Pedido papapa)
+        {
+            var TableroCambio = papapa;
+            Pedido pe = new();
+            pe.IdPedido = Convert.ToInt32(TableroCambio.IdPedido);
+
+
+            if (MessageBox.Show("¿Está seguro que el pedido está listo? Verifique si está todo preparado.", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                if (metN.CambioEsstadoPedidoTablero(pe))
+                {
+                    MessageBox.Show("Se ha cambiado el estado del pedido.");
+                    Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("No se ha realizado ningún cambio.");
+                }
+            }
+        }
+
+        private void btnSalidaPedido_Click(object sender, RoutedEventArgs e)
+        {
+
+            Pedido pe = (Pedido)(sender as Button).DataContext; 
+            CambiarEstadoPedido(pe);
         }
     }
 }

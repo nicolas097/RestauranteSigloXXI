@@ -79,7 +79,7 @@ namespace RestauranteInterfaz
         private void btnActualizar_Click(object sender, RoutedEventArgs e)
         {
             int idMesa = ((Mesa)ListMesa.SelectedItem).IdMesa;
-            Mesa mesa = new Mesa();
+            Mesa mesa = new();
             mesa.IdMesa = idMesa;
             mesa.CantSilla = Convert.ToInt32(txtCantSillaUpdate.Text);
             mesa.idEstado = comoBoxChar(cbEstadoActualizar.SelectedIndex + 1);
@@ -96,7 +96,7 @@ namespace RestauranteInterfaz
 
         private void btnCancelarPopBoxActualizar_Click(object sender, RoutedEventArgs e)
         {
-
+            popBoxActualizarEst.IsPopupOpen = false;
         }
 
 
@@ -121,6 +121,13 @@ namespace RestauranteInterfaz
         private void btnVolverTotem_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void popBoxActualizarEst_Closed(object sender, RoutedEventArgs e)
+        {
+            ListMesa.SelectedItem = null;
+            popBoxActualizarEst.IsEnabled = false;
+
         }
 
 

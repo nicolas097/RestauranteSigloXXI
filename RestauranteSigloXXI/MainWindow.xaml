@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280" Background="{x:Null}" Foreground="{x:Null}" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Restaurant Siglo XXI" Height="720" Width="1280" Background="{x:Null}" Foreground="{x:Null}" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Frame x:Name="ContenedorPrincipal" NavigationUIVisibility="Hidden"/>
     </Grid>

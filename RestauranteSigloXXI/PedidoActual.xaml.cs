@@ -36,7 +36,6 @@ namespace RestauranteInterfaz
             platoCarritos = actualCarrito.GetCarritos();
             lvResumenCarrito.ItemsSource = platoCarritos;
             lbSubtotal.Content = actualCarrito.GetCarritoNeto();
-            BtnPago.IsEnabled = false;
             
         }
 
@@ -65,25 +64,7 @@ namespace RestauranteInterfaz
 
         private void BtnPago_Click(object sender, RoutedEventArgs e)
         {
-            EstadoPedido();
-        }
 
-
-
-
-
-        private void EstadoPedido()
-        {
-            Pedido p = new Pedido();
-
-            if (metNeg.EstadoPedido(Convert.ToInt32(p.IdPedido)) == p.IdPedido)
-            {
-               btnVolver.IsEnabled = true;
-            }
-            else
-            {
-
-            }  
         }
     }
 }
