@@ -15,9 +15,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" x:Name="sp_barra" VerticalAlignment="Center">
-            <Button x:Name="btnVolverTotem" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowBackCircle,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Click="btnVolverTotem_Click"/>
             <Button x:Name="btnRemoverRes" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=Delete,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Margin="10"/>
-            <Button x:Name="btnMesas" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=TableChair,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Click="btnMesas_Click"/>
+            <!--<Button x:Name="btnMesas" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=TableChair,Size=30}" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Click="btnMesas_Click"/>-->
         </StackPanel>
         <StackPanel Grid.Row="1">
             <ListView x:Name="lvReserva" d:ItemsSource="{d:SampleData ItemCount=50}" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="500" Margin="50">

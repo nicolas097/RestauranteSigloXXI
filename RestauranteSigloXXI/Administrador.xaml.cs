@@ -64,5 +64,10 @@ namespace RestauranteInterfaz
                 NavigationService.Navigate(lg);
             }
         }
+
+        private void tabReservaMesa_Loaded(object sender, RoutedEventArgs e)
+        {
+            ReservaMesaFrame.NavigationService.Navigate(new TotemReserva());
+        }
     }
 }

@@ -98,10 +98,12 @@ namespace RestauranteInterfaz
 
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
-            RestaLauncher rl = new RestaLauncher();
+            RestaLauncher rl = new();
             rl.Show();
+
             var VentanaActual = Window.GetWindow(this);
             VentanaActual.Close();
+            
         }
     }
 }

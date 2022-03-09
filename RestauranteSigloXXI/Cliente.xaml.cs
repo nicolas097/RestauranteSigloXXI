@@ -54,7 +54,7 @@ namespace RestauranteInterfaz
             }
             else
             {
-                NavigationService.Navigate(new PageCarrito(new Carrito()));
+                MessageBox.Show("El carrito está vacío.", "Información.", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
 

@@ -36,8 +36,7 @@
             <Label VerticalAlignment="Center" Name="lbSubtotal" FontSize="30" Language="es-CL" ContentStringFormat="{} Total: ${0:N0}" FontFamily="Consolas" Foreground="White" HorizontalAlignment="Center" />
         </Grid>
         <Grid Grid.Row="3">
-            <Button HorizontalAlignment="Center" Content="Confirmar pedido" Name="BtnConfirmarPedido" Cursor="Hand" Click="BtnConfirmarPedido_Click" />
-            <Button HorizontalAlignment="Center" Content="Pagar" x:Name="BtnPago" Margin="0,90,0,0" Width="145" Height="30" Click="BtnPago_Click"/>
+            <Button HorizontalAlignment="Center" Content="Hacer pedido" Name="BtnConfirmarPedido" Cursor="Hand" Click="BtnConfirmarPedido_Click" />
         </Grid>
     </Grid>
 </Page>

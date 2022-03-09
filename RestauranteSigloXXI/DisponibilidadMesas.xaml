@@ -17,7 +17,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnVolverTotem" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowBackCircle}" Style="{StaticResource MaterialDesignIconButton}" Click="btnVolverTotem_Click"/>
             <Label Content="Mesas" HorizontalAlignment="Center" Margin="10" FontSize="25"/>
-            <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxActualizarEst">
+            <materialDesign:PopupBox StaysOpen="True" x:Name="popBoxActualizarEst" Closed="popBoxActualizarEst_Closed">
                 <materialDesign:PopupBox.ToggleContent>
                     <materialDesign:PackIcon Kind="Pencil" Height="30" Width="30" Foreground="{StaticResource MaterialDesignLightBackground}" Margin="10"/>
                 </materialDesign:PopupBox.ToggleContent>
