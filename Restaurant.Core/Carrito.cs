@@ -10,6 +10,7 @@ namespace Restaurant.Core
     {
         public List<PlatoCarrito> platos = new();
 
+        public int MesaID { get; set; } 
 
         public void VaciarCarrito()
         {

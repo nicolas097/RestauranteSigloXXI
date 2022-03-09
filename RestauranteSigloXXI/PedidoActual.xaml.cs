@@ -26,6 +26,7 @@ namespace RestauranteInterfaz
 
         Carrito actualCarrito;
 
+
         MetodoNegocio metNeg = new();
         
 
@@ -52,7 +53,8 @@ namespace RestauranteInterfaz
                 NegocioEspecifico ne = new(actualCarrito);
                 if (ne.IngresarCarritoDB())
                 {
-                    MessageBox.Show("Se ha ingresado el pedido exitosamente.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Se ha ingresado el pedido exitosamente, se volverá a la selección de platos.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.Navigate(new Cliente(new Mesa() { IdMesa = actualCarrito.MesaID}));
                 }
                 else
                 {

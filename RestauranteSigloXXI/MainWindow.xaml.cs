@@ -68,7 +68,8 @@ namespace RestauranteSigloXXI
             switch (modo)
             {
                 case 0:
-                    ContenedorPrincipal.Navigate(new Cliente());
+                    //ContenedorPrincipal.Navigate(new Cliente());
+                    ContenedorPrincipal.Navigate(new SeleccionMesas());
                     break;
                 case 1:
                     ContenedorPrincipal.Navigate(new Cocina());

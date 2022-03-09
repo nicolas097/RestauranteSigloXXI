@@ -26,8 +26,7 @@
             </materialDesign:Badged>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Width="300">
-            <Label Content="Número de mesa :" FontSize="25"/>
-            <Label x:Name="lbNroMesa" Content="7" FontSize="25"/>
+            <Label Name="lbNumeroMesa" Content="Nada" ContentStringFormat="{} Número de mesa {0}" FontSize="25"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Frame x:Name="FrameMenu"/>

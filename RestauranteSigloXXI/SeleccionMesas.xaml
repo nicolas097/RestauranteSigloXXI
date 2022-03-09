@@ -1,0 +1,40 @@
+﻿<Page x:Class="RestauranteInterfaz.SeleccionMesas"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RestauranteInterfaz"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1120"
+      Title="SeleccionMesas">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel  HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="RightToLeft" >
+            <Label Content="Selección de mesas" FontSize="40"/>
+            <Button Name="btnBack" Style="{DynamicResource MaterialDesignIconButton}" Content="{materialDesign:PackIcon Kind=ArrowBackCircle}" Cursor="Hand" Click="btnBack_Click"/>
+        </WrapPanel>
+        <Grid Grid.Row="1">
+            <ListBox Name="lbMesasCirculo" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1000" Height="550" d:ItemsSource="{d:SampleData ItemCount=50}" Foreground="{x:Null}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Name="gMesa" MouseLeftButtonDown="gMesa_MouseLeftButtonDown">
+                            <Ellipse Name="MesaCirculo" Stroke="White" StrokeThickness="5" Fill="{Binding EstadoColor}" Margin="30" Height="200" Width="200"/>
+                            <Label Foreground="Black" FontWeight="Bold" Content="{Binding IdMesa}" FontSize="20" ContentStringFormat="{} Mesa {0}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Label Foreground="Black" FontWeight="Bold" Content="{Binding CantSilla}" FontSize="15" ContentStringFormat="{} Sillas: {0}" HorizontalAlignment="Center" Margin="0 80 0 0" VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</Page>

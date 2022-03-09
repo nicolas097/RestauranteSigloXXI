@@ -30,9 +30,9 @@ namespace RestauranteInterfaz
             Pedido ped = new()
             {
                 fecha = DateTime.Now,
-                IdEstadoPedido = "SEXO",
+                IdEstadoPedido = "ABCD",
                 TotalIVA = (int)Carrito.GetCarritoIVA(),
-                IdMesa = 7,
+                IdMesa = Carrito.MesaID,
                 IdPedido = IdPedido,
                 TotalBruto = (int)Carrito.GetCarritoBruto(),
                 TotalNeto = (int)Carrito.GetCarritoNeto(),
