@@ -24,13 +24,19 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:Card Width="300" Height="300" Background="White">
-                            <StackPanel>
+                        <materialDesign:Card Width="300" Height="400" Background="White">
+                            
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.2*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="0.3*"/>
+                                </Grid.RowDefinitions>
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                                     <Label Content="{Binding IdPedido}" ContentStringFormat="{}N° de pedido: {0}"  Foreground="#1e1614" FontFamily="Consolas" />
                                     <Label Content="{Binding IdMesa}" ContentStringFormat="{}N° de mesa: {0}"  Foreground="#1e1614" FontFamily="Consolas" />
                                 </StackPanel>
-                                <StackPanel>
+                                <Grid Grid.Row="1">
                                     <ListView x:Name="lvDetallePedido" ItemsSource="{Binding ListaDetallePedido}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
@@ -43,27 +49,46 @@
                                         </ListView.ItemTemplate>
                                     </ListView>
 
-                                    <StackPanel Orientation="Vertical" Margin="30" HorizontalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Content="SubTotal :" Foreground="#1e1614"  FontFamily="Consolas"/>
-                                            <Label Content="{Binding TotalBruto}" Foreground="#1e1614"  FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}"/>
+                                 
 
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Content="IVA :" Foreground="#1e1614"  FontFamily="Consolas"/>
-                                            <Label Content="{Binding TotalIVA}" Foreground="#1e1614"  FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}"/>
+                                    
 
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Content="Total" Foreground="#1e1614"  FontFamily="Consolas"/>
-                                            <Label Content="{Binding TotalNeto}" Foreground="#1e1614"  FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}"/>
 
-                                        </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                                        <Label Content="SubTotal :" Foreground="#1e1614"  FontFamily="Consolas"/>
+                                        <Label Content="{Binding TotalBruto}" Foreground="#1e1614"  FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}"/>
                                     </StackPanel>
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Label Content="IVA :" Foreground="#1e1614"  FontFamily="Consolas"/>
+                                        <Label Content="{Binding TotalIVA}" Foreground="#1e1614"  FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                        <Label Content="Total" Foreground="#1e1614"  FontFamily="Consolas"/>
+                                        <Label Content="{Binding TotalNeto}" Foreground="#1e1614"  FontFamily="Consolas" Language="es-CL" ContentStringFormat="{} ${0:N0}"/>
+                                    </StackPanel>
+                                    
+                                      
+                                            
+
+                                           
+                                            
 
 
-                                </StackPanel>
-                            </StackPanel>
+                                        
+                             
+                                </Grid>
+
+                            </Grid>
                         </materialDesign:Card>
 
                     </DataTemplate>

@@ -24,8 +24,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel >
-                <Button x:Name="btnVolver" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowBackCircle, Size=30}" Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Left" Click="btnVolver_Click"/>
-
+                <Button x:Name="btnVolver" Foreground="{StaticResource MaterialDesignLightBackground}" Content="{materialDesign:PackIcon Kind=ArrowBackCircle, Size=30}" Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Left"  Click="btnVolver_Click"/>
+                <Button x:Name="btnModoPago" Content="{materialDesign:PackIcon Kind=Payment}" Style="{StaticResource MaterialDesignIconButton}" Click="btnModoPago_Click" />
             </StackPanel>
                       
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1">

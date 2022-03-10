@@ -81,7 +81,7 @@ namespace RestauranteInterfaz
 
             if (metodoMesa.CambioEstadoMesa(mes))
             {
-                MessageBox.Show("Se cambio el estado");
+                
             }
             else
             {

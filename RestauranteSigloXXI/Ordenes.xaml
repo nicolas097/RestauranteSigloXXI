@@ -38,10 +38,12 @@
                                         <Label Content="{Binding IdMesa}" ContentStringFormat="{}N° de mesa: {0}"  Foreground="#1e1614" FontFamily="Consolas" />
                                     </StackPanel>
                                 </Grid>
-                                <StackPanel Grid.Row="1">
-                                    <ListView x:Name="lvDetallePedido" ItemsSource="{Binding ListaDetallePedido}" Height="285,714285714286">
+                                
+                                <Grid Grid.Row="1">
+                                   
+                                        <ListView x:Name="lvDetallePedido" ItemsSource="{Binding ListaDetallePedido}"  d:ItemsSource="{d:SampleData ItemCount=15}" >
                                         <ListView.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate >
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="{Binding plato.Descripcion}"  Foreground="#1e1614" FontFamily="Consolas"/>
                                                     <Label Content="{Binding Cantidad}" ContentStringFormat="{}x{0}"  Foreground="#1e1614" FontFamily="Consolas"/>
@@ -49,8 +51,8 @@
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
-
-                                </StackPanel>
+                                   
+                                </Grid>
                                 <StackPanel Grid.Row="2">
                                     <Button Style="{StaticResource MaterialDesignIconButton}" Foreground="Black" Content="{materialDesign:PackIcon Kind=CubeSend}" x:Name="btnSalidaPedido" Click="btnSalidaPedido_Click"/>
                                 </StackPanel>

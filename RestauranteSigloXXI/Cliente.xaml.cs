@@ -32,6 +32,7 @@ namespace RestauranteInterfaz
             Mesa_ = mes;
             FrameMenu.Navigate(new MenuCliente());
             lbNumeroMesa.Content = mes.IdMesa;
+            btnModoPago.IsEnabled = false;
             
         }
 
@@ -73,6 +74,11 @@ namespace RestauranteInterfaz
         {
             NavigationService.Navigate(new SeleccionMesas());
 
+
+        }
+
+        private void btnModoPago_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
