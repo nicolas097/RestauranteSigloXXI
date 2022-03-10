@@ -426,7 +426,7 @@ namespace Restaurant.Negocio
         public List<Usuario> GetUsuariosList()
         {
             List<Usuario> listaUsuario = new();
-            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO,TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRES AS NOMBRES, USUARIO.APELLIDOS AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.RUN AS RUN ,USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
+            string sqlCommand = "SELECT USUARIO.IDUSUARIO AS IDUSUARIO,TU.DESCRIPCION AS TIPOUSUARIO, USUARIO.CORREO AS CORREO, USUARIO.CONTRASENA AS CONTRASENA, USUARIO.NOMBRE AS NOMBRES, USUARIO.APELLIDO AS APELLIDOS, USUARIO.DIRECCION AS DIRECCION, USUARIO.RUN AS RUN ,USUARIO.NOMBREUSUARIO AS NOMBREUSUARIO FROM USUARIO usuario INNER JOIN TIPOUSUARIO TU ON TU.IDTIPOUSUARIO = usuario.IDTIPOUSUARIO ORDER BY 1 ASC";
             foreach (DataRow dr in con.OracleToDataTable(sqlCommand).Rows)
             {
                 Usuario usuario = new Usuario
@@ -581,7 +581,7 @@ namespace Restaurant.Negocio
         {
             List<Plato> pla = new List<Plato>();
 
-            string sqlCommnad = "SELECT * FROM PRODUCTO";
+            string sqlCommnad = "SELECT * FROM PLATO";
             foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
             {
                 Plato plato = new Plato();
@@ -660,7 +660,7 @@ namespace Restaurant.Negocio
                 {
                     IdPedido = Convert.ToInt32(dr["IDPEDIDO"]),
                     Cantidad = Convert.ToInt32(dr["CANTIDAD"]),
-                    plato = GetProductoFromID(Convert.ToInt32(dr["IDPRODUCTO"])),
+                    plato = GetProductoFromID(Convert.ToInt32(dr["IDPLATO"])),
 
                 };
                 detPed.Add(det);    
@@ -674,7 +674,7 @@ namespace Restaurant.Negocio
         {
             Plato pla = new Plato();
 
-            string sqlCommnad = $"SELECT P.IDPLATO,P.DESCRIPCION,P.PRECIO, P.PRECIO * DETPED.CANTIDAD AS SUBTOTAL FROM detallepedido DETPED INNER JOIN producto P ON p.idplato = detped.idproducto WHERE detped.idproducto = {id}";
+            string sqlCommnad = $"SELECT P.IDPLATO,P.DESCRIPCION,P.PRECIO, P.PRECIO * DETPED.CANTIDAD AS SUBTOTAL FROM detallepedido DETPED INNER JOIN PLATO P ON p.idplato = detped.idplato WHERE detped.idplato = {id}";
 
             foreach (DataRow dr in con.OracleToDataTable(sqlCommnad).Rows)
             {

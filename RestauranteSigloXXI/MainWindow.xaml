@@ -16,9 +16,11 @@
 
     <Grid Background="{DynamicResource MaterialDesignDarkBackground}">
 
-    <Grid>
+        
 
-        <Frame x:Name="ContenedorPrincipal" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="ContenedorPrincipal" NavigationUIVisibility="Hidden"/>
+        
     </Grid>
-    
+
+
 </Window>

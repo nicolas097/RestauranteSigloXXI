@@ -64,9 +64,6 @@ namespace RestauranteInterfaz
             }
         }
 
-        private void BtnPago_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }
