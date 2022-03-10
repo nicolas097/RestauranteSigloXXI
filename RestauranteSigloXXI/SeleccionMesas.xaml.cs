@@ -28,6 +28,7 @@ namespace RestauranteInterfaz
             InitializeComponent();
             lbMesasCirculo.ItemsSource = metodoMesa.GetMesaList();
 
+
         }
 
         private void gMesa_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -38,11 +39,37 @@ namespace RestauranteInterfaz
                 if (MesaSeleccionada.idEstado == 'D')
                 {
                     NavigationService.Navigate(new Cliente(MesaSeleccionada));
+                    CambioEstadoMesa(MesaSeleccionada);
+                   
                 }
                 else
                 {
                     MessageBox.Show("La mesa ya está ocupada, seleccione otra.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+            }
+        }
+
+
+        private void Refresh()
+        {
+            lbMesasCirculo.ItemsSource = null;
+            lbMesasCirculo.ItemsSource = metodoMesa.GetMesaList(); 
+        }
+
+
+        private void CambioEstadoMesa(Mesa me)
+        {
+            var seleccionMessa = me;
+            Mesa mes = new Mesa();
+            mes.IdMesa = Convert.ToInt32(seleccionMessa.IdMesa);
+
+            if (metodoMesa.CambioEstadoMesa(mes))
+            {
+                MessageBox.Show("Se cambio el estado");
+            }
+            else
+            {
+                MessageBox.Show("No se ha cambiado ningun estado");
             }
         }
 
@@ -53,5 +80,7 @@ namespace RestauranteInterfaz
             rl.Show();
             asdjkh.Close();
         }
+
+    
     }
 }

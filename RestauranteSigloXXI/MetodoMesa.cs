@@ -133,5 +133,24 @@ namespace RestauranteInterfaz
             return listaEstado;
         }
 
+
+
+        public bool CambioEstadoMesa(Mesa mes)
+        {
+            OracleCommand cmd = new("sp_CambioEstadoMesa", con.OracleConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@P_IDMESA", mes.IdMesa);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch 
+            {
+
+                return false;
+            }
+        }
     }
 }
